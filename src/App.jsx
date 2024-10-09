@@ -1,13 +1,9 @@
-import { useState } from 'react';
+import ProductCard from './components/ProductCard/ProductCard';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-      </div>
+      <ProductCard product={{ title: 'titulo', price: 85 }} />
     </>
   );
 }
