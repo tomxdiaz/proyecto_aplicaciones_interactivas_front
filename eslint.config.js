@@ -36,6 +36,9 @@ export default [
 
       // Disable prop-types validation
       'react/prop-types': 'off',
+
+      // Disable warnings/errors for unused variables
+      'no-unused-vars': 'off',
     },
   },
 ];

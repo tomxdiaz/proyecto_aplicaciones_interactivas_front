@@ -7,5 +7,4 @@ export const CustomProductCard = styled(Card)(() => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '200px',
-  padding: '1rem',
 }));

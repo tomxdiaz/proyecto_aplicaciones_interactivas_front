@@ -1,9 +1,24 @@
-import ProductCard from './components/ProductCard/ProductCard';
+import { useEffect, useState } from 'react';
+import api from './api/api';
+import { Button } from '@mui/material';
+import ProductGrid from './components/Product/ProductGrid';
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  const refreshProducts = () => {
+    api.getAllProducts().then((data) => {
+      setProducts(data);
+    });
+  };
+
+  useEffect(() => {
+    refreshProducts();
+  }, []);
+
   return (
     <>
-      <ProductCard product={{ title: 'titulo', price: 85 }} />
+      <ProductGrid products={products} />
     </>
   );
 }
