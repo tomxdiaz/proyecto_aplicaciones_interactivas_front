@@ -1,5 +1,9 @@
-import { NavBarContainer } from './NavBar.styles';
+import { Avatar, NavBarContainer } from './NavBar.styles';
 
 export const NavBar = () => {
-  return <NavBarContainer></NavBarContainer>;
+  return (
+    <NavBarContainer>
+      <Avatar></Avatar>
+    </NavBarContainer>
+  );
 };
