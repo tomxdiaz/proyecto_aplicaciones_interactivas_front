@@ -1,9 +1,13 @@
 import { styled } from '@mui/material/styles';
-import { CardActionArea, CardMedia } from '@mui/material';
+import { Card, CardActionArea, CardMedia } from '@mui/material';
+
+export const CustomCard = styled(Card)({
+  width: '100%',
+  maxWidth: '300px',
+  display: 'flex'
+});
 
 export const CustomCardContent = styled(CardActionArea)({
-  width: 300,
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

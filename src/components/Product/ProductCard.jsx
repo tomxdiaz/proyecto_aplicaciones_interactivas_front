@@ -1,16 +1,19 @@
 import { Badge, ButtonBase } from '@mui/material';
-import { CustomCardContent, CustomCardImage } from './ProductCard.styles';
+import {
+  CustomCard,
+  CustomCardContent,
+  CustomCardImage
+} from './ProductCard.styles';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import * as React from 'react';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 const ProductCard = ({ product }) => {
   return (
-    <Card>
+    <CustomCard>
       <CustomCardContent>
         <CustomCardImage image={product.images[0]} />
         <CardContent>
@@ -34,7 +37,7 @@ const ProductCard = ({ product }) => {
           <Badge badgeContent={2} color='primary' />
         </ButtonBase>
       </CustomCardContent>
-    </Card>
+    </CustomCard>
   );
 };
 

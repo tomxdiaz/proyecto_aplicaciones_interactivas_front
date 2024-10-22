@@ -3,8 +3,6 @@ import { NAVBAR_HEIGHT } from '../../utils/constants';
 
 export const Main = styled('main')({
   display: 'flex',
-  width: '100%',
-  height: '100vh',
   flexDirection: 'column',
   position: 'relative'
 });
