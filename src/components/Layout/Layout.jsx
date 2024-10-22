@@ -4,7 +4,7 @@ import { Main, Section } from './Layout.styles';
 export const Layout = ({ children }) => {
   return (
     <Main>
-      <NavBar></NavBar>
+      <NavBar />
       <Section>{children}</Section>
     </Main>
   );

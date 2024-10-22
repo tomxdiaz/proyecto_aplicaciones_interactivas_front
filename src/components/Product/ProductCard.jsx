@@ -1,34 +1,40 @@
-import { ButtonBase, CardActionArea } from '@mui/material';
-import { CustomProductCard } from './ProductCard.styles';
+import { Badge, ButtonBase } from '@mui/material';
+import { CustomCardContent, CustomCardImage } from './ProductCard.styles';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 const ProductCard = ({ product }) => {
   return (
-    <CustomProductCard
-      style={{
-        position: 'relative',
-      }}>
-      <CardActionArea onClick={() => console.log(product)} style={{ width: '100%', height: '100%', padding: '10px 20px' }}>
-        <div>{product.featured ? <StarIcon /> : <StarBorderIcon />}</div>
-        <h2>{product.title}</h2>
-        <h4>${product.price}</h4>
-      </CardActionArea>
-      <ButtonBase
-        onMouseDown={(e) => e.stopPropagation()}
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 0,
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        variant='outlined'>
-        <ShoppingCartIcon />
-      </ButtonBase>
-    </CustomProductCard>
+    <Card>
+      <CustomCardContent>
+        <CustomCardImage image={product.images[0]} />
+        <CardContent>
+          <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
+            {product.title}
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            {product.description}
+          </Typography>
+        </CardContent>
+        <ButtonBase
+          onMouseDown={e => e.stopPropagation()}
+          style={{
+            padding: '10px'
+          }}
+          onClick={e => {
+            // add to wishlist
+          }}
+          variant='outlined'>
+          <ShoppingCartIcon fontSize='large' />
+          <Badge badgeContent={2} color='primary' />
+        </ButtonBase>
+      </CustomCardContent>
+    </Card>
   );
 };
 

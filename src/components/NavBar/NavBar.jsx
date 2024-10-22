@@ -3,7 +3,8 @@ import { Avatar, NavBarContainer } from './NavBar.styles';
 export const NavBar = () => {
   return (
     <NavBarContainer>
-      <Avatar></Avatar>
+      <div />
+      <Avatar />
     </NavBarContainer>
   );
 };
