@@ -9,7 +9,7 @@ import {
 } from './NavBar.styles';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import ROUTES from '../../pages/routes/Routes';
+import ROUTES from '../../pages/routes';
 
 const NavBar = () => {
   const loggedIn = false;
