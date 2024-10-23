@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { NAVBAR_HEIGHT } from '../../utils/constants';
+import { NAVBAR_HEIGHT, COLORS } from '../../utils/constants';
 
 export const Main = styled('main')({
   display: 'flex',
@@ -10,5 +10,6 @@ export const Main = styled('main')({
 export const Section = styled('section')({
   width: '100%',
   display: 'flex',
-  minHeight: `calc(100% - ${NAVBAR_HEIGHT})`
+  minHeight: `calc(100% - ${NAVBAR_HEIGHT})`,
+  backgroundColor: COLORS.grey
 });
