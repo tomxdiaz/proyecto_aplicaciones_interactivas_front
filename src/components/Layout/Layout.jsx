@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavBar } from '../NavBar';
 import { Main, Section } from './Layout.styles';
+import NavBar from '../NavBar/NavBar';
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <Main>
       <NavBar />
@@ -10,3 +10,5 @@ export const Layout = ({ children }) => {
     </Main>
   );
 };
+
+export default Layout;

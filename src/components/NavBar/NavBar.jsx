@@ -1,6 +1,6 @@
 import { Avatar, NavBarContainer } from './NavBar.styles';
 
-export const NavBar = () => {
+const NavBar = () => {
   return (
     <NavBarContainer>
       <img style={{ height: '100%' }} src={'../../../public/logo.jpg'} />
@@ -8,3 +8,5 @@ export const NavBar = () => {
     </NavBarContainer>
   );
 };
+
+export default NavBar;

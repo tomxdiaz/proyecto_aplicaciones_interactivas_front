@@ -1,8 +1,10 @@
-import axios from 'axios';
+import { publicApi } from './api';
 
-export const productService = {
+const productService = {
   getAllProducts: async () => {
-    const response = await axios.get(`/product`);
+    const response = await publicApi.get(`/product`);
     return response.data.data;
   }
 };
+
+export default productService;

@@ -1,3 +1,5 @@
-export const EditProduct = () => {
+const EditProduct = () => {
   return <></>;
 };
+
+export default EditProduct;
