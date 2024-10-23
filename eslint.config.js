@@ -14,14 +14,14 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
+        sourceType: 'module'
+      }
     },
     settings: { react: { version: '18.3' } },
     plugins: {
       react,
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefresh
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -29,13 +29,16 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': 'off',
 
       // New rule to throw an error for undefined variables (not imported)
       'no-undef': 'error',
 
       // Disable prop-types validation
       'react/prop-types': 'off',
-    },
-  },
+
+      // Disable warnings/errors for unused variables
+      'no-unused-vars': 'off'
+    }
+  }
 ];
