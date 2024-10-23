@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import api from './api/api';
+import productService from './services/productService';
 import ProductGrid from './components/Product/ProductGrid';
 
 function App() {
   const [products, setProducts] = useState([]);
 
   const refreshProducts = () => {
-    api.getAllProducts().then(data => {
+    productService.getAllProducts().then(data => {
       setProducts(data);
     });
   };
