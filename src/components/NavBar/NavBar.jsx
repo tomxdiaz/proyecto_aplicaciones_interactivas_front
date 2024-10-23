@@ -21,11 +21,11 @@ const NavBar = () => {
         <CustomToolbar>
           <CustomLogo src={'../../../public/logo.jpg'} />
           <CustomNavBarMenu>
-            <CustomNavBarButton>
-              <Link to={ROUTES.HOME.path}>
+            <Link to={ROUTES.HOME.path}>
+              <CustomNavBarButton>
                 <Typography>Home</Typography>
-              </Link>
-            </CustomNavBarButton>
+              </CustomNavBarButton>
+            </Link>
           </CustomNavBarMenu>
           {loggedIn ? (
             <CustomNavBarButton>
@@ -33,16 +33,16 @@ const NavBar = () => {
             </CustomNavBarButton>
           ) : (
             <Box>
-              <CustomNavBarButton>
-                <Link to={ROUTES.LOGIN.path}>
+              <Link to={ROUTES.LOGIN.path}>
+                <CustomNavBarButton>
                   <Typography>Login</Typography>
-                </Link>
-              </CustomNavBarButton>
-              <CustomNavBarButton>
-                <Link to={ROUTES.REGISTER.path}>
+                </CustomNavBarButton>
+              </Link>
+              <Link to={ROUTES.REGISTER.path}>
+                <CustomNavBarButton>
                   <Typography>Register</Typography>
-                </Link>
-              </CustomNavBarButton>
+                </CustomNavBarButton>
+              </Link>
             </Box>
           )}
         </CustomToolbar>

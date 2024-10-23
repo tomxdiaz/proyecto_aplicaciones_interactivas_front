@@ -1,5 +1,4 @@
 {
-  // imports quick fix
   "compilerOptions": {
     "jsx": "react",
     "checkJs": true

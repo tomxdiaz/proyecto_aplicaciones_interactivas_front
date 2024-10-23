@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
             {product.description}
           </Typography>
         </CardContent>
-        <IconButton
+        {/* <IconButton
           onMouseDown={e => e.stopPropagation()}
           style={{
             padding: '10px'
@@ -66,7 +66,7 @@ const ProductCard = ({ product }) => {
             badgeContent={quantityInWishlist && quantityInWishlist}
             color='primary'
           />
-        </IconButton>
+        </IconButton> */}
       </CustomCardContent>
     </CustomCard>
   );

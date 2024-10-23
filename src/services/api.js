@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const api_host_url = import.meta.env.VITE_API_HOST_URL;
+const api_host_url = 'http://localhost:8080';
 
 export const privateApi = axios.create({
   baseURL: api_host_url,
