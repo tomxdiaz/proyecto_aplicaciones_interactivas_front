@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Badge, IconButton } from '@mui/material';
+import { Badge, Box, CardActions, IconButton } from '@mui/material';
 import {
   CustomCard,
-  CustomCardContent,
+  CustomCardActionArea,
   CustomCardImage,
   CustomCardIconsSection,
-  CustomWishListIconButton
+  CustomCardIconButton
 } from './ProductCard.styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
@@ -19,31 +19,20 @@ import { COLORS } from '../../utils/constants';
 const ProductCard = ({ product }) => {
   const quantityInWishlist = 2;
 
-  const isInWishList = true;
+  const [isInWishList, setIsInWishList] = React.useState(false);
+  const [amountInCart, setAmountInCart] = React.useState(0);
+
+  const handleAddToWishList = () => {
+    setIsInWishList(isInWishList => !isInWishList);
+  };
+
+  const handleAddToCart = () => {
+    setAmountInCart(amountInCart => amountInCart + 1);
+  };
 
   return (
     <CustomCard>
-      <CustomCardContent>
-        <CustomCardIconsSection>
-          {product.featured ? (
-            <StarIcon style={{ fill: COLORS.yellow }} fontSize='large' />
-          ) : (
-            <StarBorderIcon fontSize='large' />
-          )}
-
-          <CustomWishListIconButton
-            onMouseDown={e => e.stopPropagation()}
-            onClick={() => {
-              // add/remove to/from wishlist
-            }}>
-            {isInWishList ? (
-              <FavoriteIcon style={{ fill: COLORS.red }} fontSize='large' />
-            ) : (
-              <FavoriteBorderIcon fontSize='large' />
-            )}
-          </CustomWishListIconButton>
-        </CustomCardIconsSection>
-
+      <CustomCardActionArea>
         <CustomCardImage image={product.images[0]} />
         <CardContent>
           <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
@@ -53,21 +42,35 @@ const ProductCard = ({ product }) => {
             {product.description}
           </Typography>
         </CardContent>
-        {/* <IconButton
-          onMouseDown={e => e.stopPropagation()}
-          style={{
-            padding: '10px'
-          }}
-          onClick={e => {
-            // add to cart
-          }}>
-          <ShoppingCartIcon fontSize='large' />
-          <Badge
-            badgeContent={quantityInWishlist && quantityInWishlist}
-            color='primary'
-          />
-        </IconButton> */}
-      </CustomCardContent>
+      </CustomCardActionArea>
+      <CustomCardIconsSection>
+        {product.featured ? (
+          <StarIcon style={{ fill: COLORS.yellow }} fontSize='large' />
+        ) : (
+          <StarBorderIcon fontSize='large' />
+        )}
+
+        <Box>
+          <CustomCardIconButton
+            onMouseDown={e => e.stopPropagation()}
+            onClick={handleAddToWishList}>
+            {isInWishList ? (
+              <FavoriteIcon style={{ fill: COLORS.red }} fontSize='large' />
+            ) : (
+              <FavoriteBorderIcon fontSize='large' />
+            )}
+          </CustomCardIconButton>
+          <CustomCardIconButton
+            onMouseDown={e => e.stopPropagation()}
+            style={{
+              padding: '10px'
+            }}
+            onClick={handleAddToCart}>
+            <ShoppingCartIcon fontSize='large' />
+            <Badge badgeContent={amountInCart} color='primary' />
+          </CustomCardIconButton>
+        </Box>
+      </CustomCardIconsSection>
     </CustomCard>
   );
 };

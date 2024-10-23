@@ -1,18 +1,27 @@
 import { styled } from '@mui/material/styles';
-import { Box, Card, CardActionArea, CardMedia, IconButton } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardMedia,
+  IconButton
+} from '@mui/material';
 
 export const CustomCard = styled(Card)({
   width: '100%',
   maxWidth: '300px',
-  display: 'flex'
-});
-
-export const CustomCardContent = styled(CardActionArea)({
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'space-between',
-  alignItems: 'center',
   position: 'relative'
+});
+
+export const CustomCardActionArea = styled(CardActionArea)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  position: 'relative',
+  flex: 1
 });
 
 export const CustomCardImage = styled(CardMedia)({
@@ -21,15 +30,15 @@ export const CustomCardImage = styled(CardMedia)({
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)'
 });
 
-export const CustomCardIconsSection = styled(Box)({
-  position: 'absolute',
-  top: 0,
+export const CustomCardIconsSection = styled(CardActions)({
   width: '100%',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: '0.2rem'
+  margin: 0
 });
 
-export const CustomWishListIconButton = styled(IconButton)({});
+export const CustomCardIconButton = styled(IconButton)({
+  backgroundColor: 'white'
+});
