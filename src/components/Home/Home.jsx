@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import productService from '../../services/productService';
-import ProductGrid from '../Product/ProductGrid';
 import React from 'react';
+import { useEffect, useState } from 'react';
+import ProductGrid from '../Product/ProductGrid';
+import productService from '../../services/productService';
 
 const Home = () => {
   const [products, setProducts] = useState([]);

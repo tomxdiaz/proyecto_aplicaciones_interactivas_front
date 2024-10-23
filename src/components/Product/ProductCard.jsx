@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Badge, IconButton } from '@mui/material';
 import {
   CustomCard,
@@ -11,7 +12,6 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import * as React from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';

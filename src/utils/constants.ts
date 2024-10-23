@@ -1,3 +1,5 @@
+// CSS
+
 export const NAVBAR_HEIGHT = '6rem';
 
 export const COLORS = {
