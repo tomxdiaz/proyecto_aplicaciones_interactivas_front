@@ -6,8 +6,17 @@ export const CustomNavBarContainer = styled(Box)({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
   border: '1px solid black'
+});
+
+export const CustomLogo = styled('img')({
+  height: '100%'
+});
+
+export const CustomNavBarMenu = styled(Box)({
+  flex: 1,
+  display: 'flex',
+  alignItems: 'center'
 });
 
 export const CustomAppBar = styled(AppBar)({

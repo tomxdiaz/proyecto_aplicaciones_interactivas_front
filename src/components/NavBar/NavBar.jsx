@@ -3,9 +3,11 @@ import {
   CustomNavBarContainer,
   CustomAppBar,
   CustomToolbar,
-  CustomNavBarButton
+  CustomNavBarButton,
+  CustomLogo,
+  CustomNavBarMenu
 } from './NavBar.styles';
-import { Box, Toolbar, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes/Routes';
 
@@ -14,19 +16,17 @@ const NavBar = () => {
   const username = 'Tomas';
 
   return (
-    // <NavBarContainer>
-    //   <img style={{ height: '100%' }} src={'../../../public/logo.jpg'} />
-    //   <div>
-    //     <a href='/'>Home</a>
-    //     <a href='/create-product'>Create Product</a>
-    //   </div>
-    //   <Avatar />
-    // </NavBarContainer>
-
     <CustomNavBarContainer>
       <CustomAppBar position='static' sx={{}}>
         <CustomToolbar>
-          <img style={{ height: '100%' }} src={'../../../public/logo.jpg'} />
+          <CustomLogo src={'../../../public/logo.jpg'} />
+          <CustomNavBarMenu>
+            <CustomNavBarButton>
+              <Link to={ROUTES.HOME.path}>
+                <Typography>Home</Typography>
+              </Link>
+            </CustomNavBarButton>
+          </CustomNavBarMenu>
           {loggedIn ? (
             <CustomNavBarButton>
               <Typography>Hi, {username}!</Typography>
