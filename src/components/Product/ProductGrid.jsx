@@ -5,7 +5,7 @@ import { CustomProductGrid } from './ProductGrid.styles';
 const ProductGrid = ({ products }) => {
   return (
     <CustomProductGrid>
-      {products.map((product) => (
+      {products.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}
     </CustomProductGrid>
