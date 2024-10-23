@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import api from './api/api';
-import { Button } from '@mui/material';
 import ProductGrid from './components/Product/ProductGrid';
 
 function App() {
   const [products, setProducts] = useState([]);
 
   const refreshProducts = () => {
-    api.getAllProducts().then((data) => {
+    api.getAllProducts().then(data => {
       setProducts(data);
     });
   };
