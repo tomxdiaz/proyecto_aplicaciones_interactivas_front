@@ -1,3 +1,4 @@
+import React from 'react';
 import { Avatar, NavBarContainer } from './NavBar.styles';
 
 const NavBar = () => {

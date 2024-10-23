@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import productService from './services/productService';
-import ProductGrid from './components/Product/ProductGrid';
+import productService from '../../services/productService';
+import ProductGrid from '../Product/ProductGrid';
+import React from 'react';
 
-function App() {
+const Home = () => {
   const [products, setProducts] = useState([]);
 
   const refreshProducts = () => {
@@ -15,11 +16,7 @@ function App() {
     refreshProducts();
   }, []);
 
-  return (
-    <>
-      <ProductGrid products={products} />
-    </>
-  );
-}
+  return <ProductGrid products={products} />;
+};
 
-export default App;
+export default Home;

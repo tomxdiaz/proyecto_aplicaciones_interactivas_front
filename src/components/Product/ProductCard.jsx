@@ -60,8 +60,7 @@ const ProductCard = ({ product }) => {
           }}
           onClick={e => {
             // add to cart
-          }}
-          variant='outlined'>
+          }}>
           <ShoppingCartIcon fontSize='large' />
           <Badge
             badgeContent={quantityInWishlist && quantityInWishlist}
