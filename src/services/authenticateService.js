@@ -1,18 +1,20 @@
-import { publicApi } from './api';
+import { api } from './api';
 
 const authService = {
   // Método para autenticar al usuario (login)
-  login: async (credentials) => {
-    const response = await publicApi.post(`/auth/authenticate`, credentials);
-    sessionStorage.setItem('token' , response.data);
-    return response.data;
+  login: async (username, password) => {
+    const response = await api.post(`/auth/authenticate`, {
+      username,
+      password
+    });
+    return response.data.data;
   },
 
   // Método para registrar un nuevo usuario
-  register: async (userData) => {
-    const response = await publicApi.post(`/auth/register`, userData);
-    return response.data;
-  },
+  register: async userData => {
+    const response = await api.post(`/auth/register`, userData);
+    return response.data.data;
+  }
 };
 
 export default authService;

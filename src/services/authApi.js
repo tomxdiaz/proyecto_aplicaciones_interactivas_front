@@ -11,7 +11,7 @@ export const authApi = axios.create({
 });
 
 authApi.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${sessionStorage.accessToken}`;
+  config.headers.Authorization = `Bearer ${sessionStorage.token}`;
   return config;
 });
 
@@ -19,6 +19,7 @@ authApi.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 404) {
+      // ver este error - cual/cuales tendria/tendrian que ser?
       // Token expirado, redirigir al login
       window.location.href = ROUTES.LOGIN.path;
     }
