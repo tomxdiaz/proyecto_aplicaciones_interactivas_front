@@ -40,7 +40,7 @@ const LoginCard = () => {
           value={username}
           onChange={e => setUsername(e.target.value)}
           margin='normal'
-          autoComplete='off'
+          autoComplete='new-password'
         />
         <TextField
           label='Password'
@@ -49,7 +49,7 @@ const LoginCard = () => {
           value={password}
           onChange={e => setPassword(e.target.value)}
           margin='normal'
-          autoComplete='off'
+          autoComplete='new-password'
         />
         <Button type='submit' variant='contained' color='primary'>
           Login
