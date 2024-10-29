@@ -6,6 +6,7 @@ import {
   CreateProductPage,
   EditProductPage
 } from './index';
+import { ProductDetailPage } from './ProductDetailPage';
 
 const ROUTES = {
   HOME: {
@@ -20,12 +21,17 @@ const ROUTES = {
     path: '/register',
     element: <RegisterPage />
   },
+  PRODUCTDETAIL: {
+    path: '/product/:id',
+    element: <ProductDetailPage />
+  },
   CREATEPRODUCT: {
     path: '/create-product',
     element: <CreateProductPage />
   },
+
   EDITPRODUCT: {
-    path: '/edit-product',
+    path: '/edit-product/:id',
     element: <EditProductPage />
   }
 };
