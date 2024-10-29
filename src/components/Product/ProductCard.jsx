@@ -17,8 +17,6 @@ import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
 
 const ProductCard = ({ product }) => {
-  const quantityInWishlist = 2;
-
   const [isInWishList, setIsInWishList] = React.useState(false);
   const [amountInCart, setAmountInCart] = React.useState(0);
 
