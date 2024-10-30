@@ -4,9 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import { CustomContainer } from './Login.styles';
+import userService from '../../services/userService';
+import { useUser } from '../../context/UserContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useUser();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +19,9 @@ const Login = () => {
     try {
       await authService.login(username, password);
 
-      window.alert('Logueado correctamente');
+      userService.getUserData().then(userData => {
+        setUser(userData);
+      });
 
       navigate(ROUTES.HOME.path);
     } catch (error) {

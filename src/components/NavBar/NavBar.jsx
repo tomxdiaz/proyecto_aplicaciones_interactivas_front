@@ -10,9 +10,15 @@ import {
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
+import { useUser } from '../../context/UserContext';
 
 const NavBar = () => {
-  const loggedIn = true;
+  const { user, setUser } = useUser();
+
+  const logout = () => {
+    setUser(null);
+    sessionStorage.setItem('token', null);
+  };
 
   return (
     <CustomNavBarContainer>
@@ -26,10 +32,15 @@ const NavBar = () => {
               </CustomNavBarButton>
             </Link>
           </CustomNavBarMenu>
-          {loggedIn ? (
-            <CustomNavBarButton>
-              <Typography>Hi!</Typography>
-            </CustomNavBarButton>
+          {user ? (
+            <>
+              <CustomNavBarButton>
+                <Typography>{`Hi ${user.name} ${user.lastName}`}</Typography>
+              </CustomNavBarButton>
+              <CustomNavBarButton onClick={logout}>
+                <Typography>Logout</Typography>
+              </CustomNavBarButton>
+            </>
           ) : (
             <Box>
               <Link to={ROUTES.LOGIN.path}>
