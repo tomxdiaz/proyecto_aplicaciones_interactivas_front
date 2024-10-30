@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import { CustomContainer } from './Login.styles';
-import userService from '../../services/userService';
 
 const Login = () => {
   const navigate = useNavigate();

@@ -10,7 +10,6 @@ import {
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
-import userService from '../../services/userService';
 
 const NavBar = () => {
   const loggedIn = true;
