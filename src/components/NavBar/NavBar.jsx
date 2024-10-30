@@ -1,15 +1,16 @@
+import { Box, Divider, Typography } from '@mui/material';
 import React from 'react';
-import {
-  CustomNavBarContainer,
-  CustomAppBar,
-  CustomToolbar,
-  CustomNavBarButton,
-  CustomLogo,
-  CustomNavBarMenu
-} from './NavBar.styles';
-import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
+import {
+  CustomAppBar,
+  CustomLogo,
+  CustomNavBarButton,
+  CustomNavBarContainer,
+  CustomToolbar,
+  NavBarMenu
+} from './NavBar.styles';
+import { NavRoutes } from './NavRoute/NavRoutes';
 
 const NavBar = () => {
   const loggedIn = false;
@@ -20,13 +21,10 @@ const NavBar = () => {
       <CustomAppBar position='static' sx={{}}>
         <CustomToolbar>
           <CustomLogo src={'../../../public/logo.jpg'} />
-          <CustomNavBarMenu>
-            <Link to={ROUTES.HOME.path}>
-              <CustomNavBarButton>
-                <Typography>Home</Typography>
-              </CustomNavBarButton>
-            </Link>
-          </CustomNavBarMenu>
+          <NavBarMenu>
+            <NavRoutes />
+          </NavBarMenu>
+          <Divider orientation='vertical' variant='middle' flexItem />
           {loggedIn ? (
             <CustomNavBarButton>
               <Typography>Hi, {username}!</Typography>

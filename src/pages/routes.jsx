@@ -10,23 +10,28 @@ import {
 const ROUTES = {
   HOME: {
     path: '/',
-    element: <HomePage />
+    element: <HomePage />,
+    title: 'Home'
   },
   LOGIN: {
     path: '/login',
-    element: <LoginPage />
+    element: <LoginPage />,
+    title: 'Login'
   },
   REGISTER: {
     path: '/register',
-    element: <RegisterPage />
+    element: <RegisterPage />,
+    title: 'Registro'
   },
   CREATEPRODUCT: {
     path: '/create-product',
-    element: <CreateProductPage />
+    element: <CreateProductPage />,
+    title: 'Crear producto'
   },
   EDITPRODUCT: {
     path: '/edit-product',
-    element: <EditProductPage />
+    element: <EditProductPage />,
+    title: 'Editar producto'
   }
 };
 
