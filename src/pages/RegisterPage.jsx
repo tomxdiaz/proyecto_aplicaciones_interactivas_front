@@ -1,5 +1,6 @@
 import React from 'react';
+import Register from '../components/Authenticate/Register';
 
 export const RegisterPage = () => {
-  return <></>;
+  return <Register onRegister={undefined}/>;
 };
