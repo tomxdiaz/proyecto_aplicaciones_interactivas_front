@@ -6,10 +6,13 @@ import authService from '../../services/authenticateService';
 import { CustomContainer } from './Login.styles';
 import userService from '../../services/userService';
 import { useUser } from '../../context/UserContext';
+import { useWishList } from '../../context/WishListContext';
+import wishListService from '../../services/wishListService';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
+  const { setWishList } = useWishList();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +24,10 @@ const Login = () => {
 
       userService.getUserData().then(userData => {
         setUser(userData);
+      });
+
+      wishListService.getUserWishList().then(userWishList => {
+        setWishList(userWishList);
       });
 
       navigate(ROUTES.HOME.path);
