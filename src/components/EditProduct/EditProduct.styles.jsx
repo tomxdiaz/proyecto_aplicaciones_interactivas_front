@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material';
 
-export const EditProductContainer = styled(Box)({
+export const ManageProductContainer = styled(Box)({
   padding: '1rem',
   margin: 'auto',
   height: '100%'

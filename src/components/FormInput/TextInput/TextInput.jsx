@@ -1,12 +1,17 @@
 import React from 'react';
-import { FormLabel } from '@mui/material';
-import { Input, InputContainer, Label } from './TextInput.styles';
+import { InputContainer, Label } from '../FormInput.styles';
+import { Input } from './TextInput.styles';
 
-export const TextInput = ({ label }) => {
+export const TextInput = ({ label, state, handleChange }) => {
   return (
     <InputContainer>
       <Label>{label}</Label>
-      <Input disableUnderline />
+      <Input
+        disableUnderline
+        onChange={event => {
+          handleChange(state, event.target.value);
+        }}
+      />
     </InputContainer>
   );
 };
