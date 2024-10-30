@@ -2,13 +2,9 @@ import axios from 'axios';
 
 const api_host_url = 'http://localhost:8080';
 
-export const privateApi = axios.create({
+export const api = axios.create({
   baseURL: api_host_url,
   headers: {
-    Authorization: `Bearer TOKEN`
+    'Content-Type': 'application/json'
   }
-});
-
-export const publicApi = axios.create({
-  baseURL: api_host_url
 });

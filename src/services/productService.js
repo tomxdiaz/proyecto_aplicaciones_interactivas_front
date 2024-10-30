@@ -1,8 +1,8 @@
-import { publicApi } from './api';
+import { api } from './api';
 
 const productService = {
   getAllProducts: async () => {
-    const response = await publicApi.get(`/product`);
+    const response = await api.get(`/product`);
     return response.data.data;
   }
 };
