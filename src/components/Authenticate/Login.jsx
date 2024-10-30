@@ -14,18 +14,9 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const loginResponse = await authService.login(username, password);
+      await authService.login(username, password);
 
-      // Aca viene el token, guardar en useContext y redirigir a donde haga falta
-      const { access_token } = loginResponse;
-
-      sessionStorage.setItem('token', access_token);
-
-      // useContext setToken()
-
-      const user = await userService.getUserData();
-
-      window.alert(user.lastName);
+      window.alert('Logueado correctamente');
 
       navigate(ROUTES.HOME.path);
     } catch (error) {

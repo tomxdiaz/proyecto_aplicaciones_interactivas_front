@@ -8,6 +8,10 @@ const authService = {
       password
     });
 
+    const { access_token } = response.data.data;
+
+    sessionStorage.setItem('token', access_token);
+
     return response.data.data;
   },
 

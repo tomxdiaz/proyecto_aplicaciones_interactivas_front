@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CustomNavBarContainer,
   CustomAppBar,
@@ -10,10 +10,10 @@ import {
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
+import userService from '../../services/userService';
 
 const NavBar = () => {
-  const loggedIn = false;
-  const username = 'Tomas';
+  const loggedIn = true;
 
   return (
     <CustomNavBarContainer>
@@ -29,7 +29,7 @@ const NavBar = () => {
           </CustomNavBarMenu>
           {loggedIn ? (
             <CustomNavBarButton>
-              <Typography>Hi, {username}!</Typography>
+              <Typography>Hi!</Typography>
             </CustomNavBarButton>
           ) : (
             <Box>
