@@ -10,11 +10,6 @@ const authService = {
 
     const { access_token } = response.data.data;
 
-    //
-    console.log('access_token', access_token);
-    console.log('access_token TYPE', typeof access_token);
-    //
-
     sessionStorage.setItem('token', access_token);
 
     console.log(sessionStorage.getItem, 'token');
