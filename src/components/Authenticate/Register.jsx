@@ -3,8 +3,8 @@ import { Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
 import authService from '../../services/authenticateService';
-import { CustomContainer } from './Register.styles';
 import userService from '../../services/userService';
+import { CustomContainer } from './Authenticate.styles';
 
 const Register = ({ onRegister }) => {
   const navigate = useNavigate();
