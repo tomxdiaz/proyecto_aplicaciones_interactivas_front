@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-  CustomNavBarContainer,
   CustomAppBar,
   CustomToolbar,
   CustomNavBarButton,
   CustomLogo,
-  CustomNavBarMenu
+  CustomNavBarMenu,
+  CustomProfileMenuContainer,
+  CustomLink
 } from './NavBar.styles';
-import { Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import ROUTES from '../../pages/routes';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
+import ProfileMenu from './ProfileMenu';
 
 const NavBar = () => {
   const { user, setUser } = useUser();
@@ -24,43 +25,39 @@ const NavBar = () => {
   };
 
   return (
-    <CustomNavBarContainer>
-      <CustomAppBar position='static' sx={{}}>
-        <CustomToolbar>
-          <CustomLogo src={'../../../public/logo.jpg'} />
-          <CustomNavBarMenu>
-            <Link to={ROUTES.HOME.path}>
+    <CustomAppBar>
+      <CustomToolbar>
+        <CustomLogo src={'../../../public/logo.jpg'} />
+        <CustomNavBarMenu>
+          <CustomLink to={ROUTES.HOME.path}>
+            <CustomNavBarButton>
+              <Typography>Home</Typography>
+            </CustomNavBarButton>
+          </CustomLink>
+        </CustomNavBarMenu>
+        {user ? (
+          <>
+            <ProfileMenu />
+            <CustomNavBarButton onClick={logout}>
+              <Typography>Logout</Typography>
+            </CustomNavBarButton>
+          </>
+        ) : (
+          <CustomProfileMenuContainer>
+            <CustomLink to={ROUTES.LOGIN.path}>
               <CustomNavBarButton>
-                <Typography>Home</Typography>
+                <Typography>Login</Typography>
               </CustomNavBarButton>
-            </Link>
-          </CustomNavBarMenu>
-          {user ? (
-            <>
+            </CustomLink>
+            <CustomLink to={ROUTES.REGISTER.path}>
               <CustomNavBarButton>
-                <Typography>{`Hi ${user.name} ${user.lastName}`}</Typography>
+                <Typography>Register</Typography>
               </CustomNavBarButton>
-              <CustomNavBarButton onClick={logout}>
-                <Typography>Logout</Typography>
-              </CustomNavBarButton>
-            </>
-          ) : (
-            <Box>
-              <Link to={ROUTES.LOGIN.path}>
-                <CustomNavBarButton>
-                  <Typography>Login</Typography>
-                </CustomNavBarButton>
-              </Link>
-              <Link to={ROUTES.REGISTER.path}>
-                <CustomNavBarButton>
-                  <Typography>Register</Typography>
-                </CustomNavBarButton>
-              </Link>
-            </Box>
-          )}
-        </CustomToolbar>
-      </CustomAppBar>
-    </CustomNavBarContainer>
+            </CustomLink>
+          </CustomProfileMenuContainer>
+        )}
+      </CustomToolbar>
+    </CustomAppBar>
   );
 };
 
