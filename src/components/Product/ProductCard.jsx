@@ -28,6 +28,9 @@ const ProductCard = ({ product }) => {
   );
 
   const handleToggleWishList = () => {
+    const token = sessionStorage.getItem('token');
+    console.log(token);
+
     if (!isInWishList) {
       wishListService.addProductToWishList(product).then(res => {
         refreshWishList();

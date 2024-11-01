@@ -11,13 +11,16 @@ import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
 import { useUser } from '../../context/UserContext';
+import { useWishList } from '../../context/WishListContext';
 
 const NavBar = () => {
   const { user, setUser } = useUser();
+  const { wishList, setWishList } = useWishList();
 
   const logout = () => {
     setUser(null);
-    sessionStorage.setItem('token', null);
+    setWishList([]);
+    sessionStorage.removeItem('token');
   };
 
   return (
