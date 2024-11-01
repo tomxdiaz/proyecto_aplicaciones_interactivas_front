@@ -18,9 +18,7 @@ authApi.interceptors.request.use(config => {
 authApi.interceptors.response.use(
   response => response,
   error => {
-    if (error.response.status === 404) {
-      // ver este error - cual/cuales tendria/tendrian que ser?
-      // Token expirado, redirigir al login
+    if (error.response.status === 403) {
       window.location.href = ROUTES.LOGIN.path;
     }
     return Promise.reject(error);
