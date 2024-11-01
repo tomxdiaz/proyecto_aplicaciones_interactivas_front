@@ -1,12 +1,20 @@
 import React from 'react';
-import { Button, Menu, MenuItem, Typography } from '@mui/material';
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { CustomAvatar, CustomNavBarButton } from './NavBar.styles';
 
 const ProfileMenu = () => {
   const { user, setUser } = useUser();
-  const { wishList, setWishList } = useWishList();
+  //   const { wishList, setWishList } = useWishList();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -18,23 +26,24 @@ const ProfileMenu = () => {
     setAnchorEl(null);
   };
 
-  console.log('USER FROM ProfileMenu', user);
+  const theme = useTheme();
+
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
-    <div>
-      <Button
+    <>
+      <CustomNavBarButton
         aria-controls='profile-menu'
         aria-haspopup='true'
-        onClick={handleMenu}
-        color='inherit'>
-        <AccountCircleIcon />
-        <Typography>{`Hi ${user.name} ${user.lastName}!`}</Typography>
-      </Button>
+        onClick={handleMenu}>
+        <CustomAvatar />
+        {desktop && <Typography>{`Hi ${user.name} ${user.lastName}!`}</Typography>}
+      </CustomNavBarButton>
       <Menu
         id='profile-menu'
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'right'
         }}
         keepMounted
@@ -48,7 +57,7 @@ const ProfileMenu = () => {
         <MenuItem onClick={handleClose}>My WishList</MenuItem>
         <MenuItem onClick={handleClose}>Create Product</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 

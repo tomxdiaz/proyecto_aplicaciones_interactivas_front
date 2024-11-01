@@ -5,13 +5,18 @@ import App from './App.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import { WishListProvider } from './context/WishListContext.jsx';
 import UserCheckWrapper from './components/UserCheckWrapper/UserCheckWrapper.jsx';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({});
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <UserProvider>
       <WishListProvider>
         <UserCheckWrapper>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </UserCheckWrapper>
       </WishListProvider>
     </UserProvider>
