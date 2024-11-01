@@ -4,7 +4,8 @@ import {
   LoginPage,
   RegisterPage,
   CreateProductPage,
-  EditProductPage
+  EditProductPage,
+  CartPage
 } from './index';
 import { ProductDetailPage } from './ProductDetailPage';
 
@@ -33,6 +34,11 @@ const ROUTES = {
   EDITPRODUCT: {
     path: '/edit-product/:id',
     element: <EditProductPage />
+  },
+
+  CART: {
+    path: '/cart',
+    element: <CartPage />
   }
 };
 
