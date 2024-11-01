@@ -12,8 +12,6 @@ const authService = {
 
     sessionStorage.setItem('token', access_token);
 
-    console.log(sessionStorage.getItem, 'token');
-
     return response.data.data;
   },
 

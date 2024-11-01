@@ -20,7 +20,7 @@ const NavBar = () => {
   const logout = () => {
     setUser(null);
     setWishList([]);
-    sessionStorage.setItem('token', null);
+    sessionStorage.removeItem('token');
   };
 
   return (

@@ -11,7 +11,7 @@ export const authApi = axios.create({
 });
 
 authApi.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${sessionStorage.token}`;
+  config.headers.Authorization = `Bearer ${sessionStorage.getItem('token')}`;
   return config;
 });
 

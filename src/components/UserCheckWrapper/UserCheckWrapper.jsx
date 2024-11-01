@@ -14,7 +14,9 @@ const UserCheckWrapper = ({ children }) => {
   const { setWishList } = useWishList();
 
   useEffect(() => {
-    if (sessionStorage.getItem('token') != 'null') {
+    const token = sessionStorage.getItem('token');
+
+    if (token) {
       try {
         userService.getUserData().then(userData => {
           setUser(userData);
@@ -26,7 +28,7 @@ const UserCheckWrapper = ({ children }) => {
       } catch (error) {
         setUser(null);
         setWishList([]);
-        localStorage.setItem('token', null);
+        sessionStorage.removeItem('token');
       }
     }
   }, [setUser, setWishList]);
