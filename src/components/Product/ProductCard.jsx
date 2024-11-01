@@ -15,13 +15,34 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
+import wishListService from '../../services/wishListService';
+import { useWishList } from '../../context/WishListContext';
 
 const ProductCard = ({ product }) => {
-  const [isInWishList, setIsInWishList] = React.useState(false);
+  const { wishList, setWishList } = useWishList();
+
   const [amountInCart, setAmountInCart] = React.useState(0);
 
-  const handleAddToWishList = () => {
-    setIsInWishList(isInWishList => !isInWishList);
+  const isInWishList = wishList.some(
+    wishListItem => wishListItem.product.id === product.id
+  );
+
+  const handleToggleWishList = () => {
+    if (!isInWishList) {
+      wishListService.addProductToWishList(product).then(res => {
+        refreshWishList();
+      });
+    } else {
+      wishListService.removeProductFromWishList(product).then(res => {
+        refreshWishList();
+      });
+    }
+  };
+
+  const refreshWishList = () => {
+    wishListService.getUserWishList().then(userWishList => {
+      setWishList(userWishList);
+    });
   };
 
   const handleAddToCart = () => {
@@ -51,7 +72,7 @@ const ProductCard = ({ product }) => {
         <Box>
           <CustomCardIconButton
             onMouseDown={e => e.stopPropagation()}
-            onClick={handleAddToWishList}>
+            onClick={handleToggleWishList}>
             {isInWishList ? (
               <FavoriteIcon style={{ fill: COLORS.red }} fontSize='large' />
             ) : (

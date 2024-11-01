@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { CustomProductGrid } from './ProductGrid.styles';
+import { useWishList } from '../../context/WishListContext';
 
 const ProductGrid = ({ products }) => {
   return (
