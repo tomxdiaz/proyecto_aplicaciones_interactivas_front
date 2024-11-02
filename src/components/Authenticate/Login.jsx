@@ -43,7 +43,7 @@ const Login = () => {
   return (
     <>
       <CustomContainer>
-        <Typography variant='h4'>Login</Typography>
+        <Typography variant='h4'>Iniciar sesion</Typography>
         <CustomForm onSubmit={handleSubmit}>
           <TextField
             label='Username'
@@ -65,11 +65,11 @@ const Login = () => {
 
           <CustomFormActions>
             <Link to={ROUTES.REGISTER.path}>
-              <Typography>Are you new?</Typography>
+              <Typography>Todavia no tienes cuenta?</Typography>
             </Link>
 
             <Button type='submit' variant='contained' color='primary'>
-              Login
+              Iniciar sesion
             </Button>
           </CustomFormActions>
         </CustomForm>

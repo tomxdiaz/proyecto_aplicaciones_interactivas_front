@@ -55,13 +55,13 @@ const ProfileMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}>
         <CustomLink to={ROUTES.PROFILE.path}>
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>Perfil</MenuItem>
         </CustomLink>
         <CustomLink to={ROUTES.MYWISHLIST.path}>
-          <MenuItem onClick={handleClose}>My WishList</MenuItem>
+          <MenuItem onClick={handleClose}>Mis favoritos</MenuItem>
         </CustomLink>
         <CustomLink to={ROUTES.CREATEPRODUCT.path}>
-          <MenuItem onClick={handleClose}>Create Product</MenuItem>
+          <MenuItem onClick={handleClose}>Crear producto</MenuItem>
         </CustomLink>
       </Menu>
     </>

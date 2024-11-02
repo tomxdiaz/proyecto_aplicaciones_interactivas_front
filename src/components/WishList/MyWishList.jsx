@@ -9,7 +9,7 @@ const MyWishList = () => {
 
   return (
     <CustomContainer>
-      <Typography variant='h4'>My Wishlist</Typography>
+      <Typography variant='h4'>Mis favoritos</Typography>
       <WishListContainer>
         {wishList.map(wishListItem => (
           <WishListItem key={wishListItem.id} item={wishListItem} />

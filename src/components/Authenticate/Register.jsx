@@ -44,7 +44,7 @@ const Register = () => {
 
   return (
     <CustomContainer>
-      <Typography variant='h4'>Register</Typography>
+      <Typography variant='h4'>Registrarse</Typography>
       <CustomForm onSubmit={handleSubmit}>
         <TextField
           label='Name'
@@ -100,11 +100,11 @@ const Register = () => {
 
         <CustomFormActions>
           <Link to={ROUTES.LOGIN.path}>
-            <Typography>Already have an account?</Typography>
+            <Typography>Ya tienes una cuenta?</Typography>
           </Link>
 
           <Button type='submit' variant='contained' color='primary'>
-            Login
+            Crear cuenta
           </Button>
         </CustomFormActions>
       </CustomForm>
