@@ -10,10 +10,12 @@ import { useWishList } from '../../context/WishListContext';
 // }
 
 const UserCheckWrapper = ({ children }) => {
-  const { setUser } = useUser();
+  const { setUser, setLoadingUser } = useUser();
   const { setWishList } = useWishList();
 
   useEffect(() => {
+    setLoadingUser(true);
+
     const token = sessionStorage.getItem('token');
 
     if (token) {
@@ -25,13 +27,19 @@ const UserCheckWrapper = ({ children }) => {
         wishListService.getUserWishList().then(userWishList => {
           setWishList(userWishList);
         });
+
+        setLoadingUser(false);
       } catch (error) {
         setUser(null);
         setWishList([]);
         sessionStorage.removeItem('token');
+
+        setLoadingUser(false);
       }
     }
-  }, [setUser, setWishList]);
+
+    setLoadingUser(false);
+  }, [setUser, setWishList, setLoadingUser]);
 
   return <>{children}</>;
 };

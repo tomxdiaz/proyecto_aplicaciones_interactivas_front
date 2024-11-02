@@ -6,7 +6,7 @@ import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
 import { CustomContainer } from './Authenticate.styles';
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
