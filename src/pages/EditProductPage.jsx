@@ -7,8 +7,10 @@ export const EditProductPage = () => {
   const { id } = useParams();
   const { user } = useUser();
 
-  <MustLogin user={user}>
-    {/* <EditProduct /> */}
-    <>ID: {id}</>
-  </MustLogin>;
+  return (
+    <MustLogin user={user}>
+      {/* <EditProduct /> */}
+      <>ID: {id}</>
+    </MustLogin>
+  );
 };

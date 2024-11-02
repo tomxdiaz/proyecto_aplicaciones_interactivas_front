@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -74,3 +75,9 @@ export const CustomIconButton = styled(IconButton)(({ theme }) => ({
     alignSelf: 'flex-end'
   }
 }));
+
+export const CustomButton = styled(Button)(({ theme }) => ({
+  textTransform: 'none'
+}));
+
+CustomButton;

@@ -5,8 +5,10 @@ import MustLogin from '../components/Authenticate/MustLogin';
 export const CreateProductPage = () => {
   const { user } = useUser();
 
-  <MustLogin user={user}>
-    {/* <CreateProduct /> */}
-    <></>
-  </MustLogin>;
+  return (
+    <MustLogin user={user}>
+      {/* <CreateProduct /> */}
+      <></>
+    </MustLogin>
+  );
 };

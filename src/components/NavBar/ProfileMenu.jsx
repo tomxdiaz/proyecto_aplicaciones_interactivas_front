@@ -57,6 +57,9 @@ const ProfileMenu = () => {
         <CustomLink to={ROUTES.PROFILE.path}>
           <MenuItem onClick={handleClose}>Perfil</MenuItem>
         </CustomLink>
+        <CustomLink to={ROUTES.CART.path}>
+          <MenuItem onClick={handleClose}>Carrito</MenuItem>
+        </CustomLink>
         <CustomLink to={ROUTES.MYWISHLIST.path}>
           <MenuItem onClick={handleClose}>Mis favoritos</MenuItem>
         </CustomLink>

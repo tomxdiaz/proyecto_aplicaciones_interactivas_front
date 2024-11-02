@@ -27,6 +27,11 @@ const ROUTES = {
     path: '/profile',
     element: <ProfilePage />
   },
+  CART: {
+    path: '/cart',
+    // element: <CartPage />
+    element: <div></div>
+  },
   MYWISHLIST: {
     path: '/my-wishlist',
     element: <MyWishListPage />
