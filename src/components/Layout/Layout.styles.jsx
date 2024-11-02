@@ -18,5 +18,6 @@ export const Section = styled('main')(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     height: `calc(100% - ${NAVBAR_HEIGHT_MOBILE})`
   },
-  backgroundColor: COLORS.grey
+  backgroundColor: COLORS.grey,
+  display: 'flex'
 }));

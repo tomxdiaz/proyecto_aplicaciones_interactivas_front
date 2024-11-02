@@ -1,19 +1,18 @@
-import { Box, Divider, Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
+import { useWishList } from '../../context/WishListContext';
 import ROUTES from '../../pages/routes';
 import {
   CustomAppBar,
+  CustomLink,
   CustomLogo,
   CustomNavBarButton,
-  CustomToolbar,
-  NavBarMenu,
   CustomProfileMenuContainer,
-  CustomLink
+  CustomToolbar,
+  NavBarMenu
 } from './NavBar.styles';
 import { NavRoutes } from './NavRoute/NavRoutes';
-import { useUser } from '../../context/UserContext';
-import { useWishList } from '../../context/WishListContext';
 import ProfileMenu from './ProfileMenu';
 
 const NavBar = () => {
@@ -25,13 +24,13 @@ const NavBar = () => {
     setWishList([]);
     sessionStorage.removeItem('token');
   };
-  {
-  }
 
   return (
     <CustomAppBar>
       <CustomToolbar>
-        <CustomLogo src={'../../../public/logo.jpg'} />
+        <CustomLink to={ROUTES.HOME.path}>
+          <CustomLogo src={'../../../public/logo.jpg'} />
+        </CustomLink>
         <NavBarMenu>
           <NavRoutes />
         </NavBarMenu>

@@ -1,4 +1,5 @@
 import { Box, FormLabel, styled } from '@mui/material';
+import { COLORS } from '../../utils/constants';
 
 export const InputContainer = styled(Box)({
   display: 'flex',
@@ -9,6 +10,6 @@ export const InputContainer = styled(Box)({
 });
 
 export const Label = styled(FormLabel)({
-  color: '#b83c1d',
+  color: COLORS.primary,
   fontWeight: 'bold'
 });

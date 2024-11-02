@@ -12,32 +12,39 @@ const ROUTES = {
   HOME: {
     path: '/',
     element: <HomePage />,
-    title: 'Home'
+    title: 'Home',
+    inNavMenu: false
   },
   LOGIN: {
     path: '/login',
     element: <LoginPage />,
-    title: 'Login'
+    title: 'Login',
+    inNavMenu: false
   },
   REGISTER: {
     path: '/register',
     element: <RegisterPage />,
-    title: 'Registro'
+    title: 'Registro',
+    inNavMenu: false
   },
   PRODUCTDETAIL: {
     path: '/product/:id',
-    element: <ProductDetailPage />
+    element: <ProductDetailPage />,
+    title: 'Detalle de producto',
+    inNavMenu: false
   },
   CREATEPRODUCT: {
     path: '/create-product',
     element: <CreateProductPage />,
-    title: 'Crear producto'
+    title: 'Crear producto',
+    inNavMenu: true
   },
 
   EDITPRODUCT: {
     path: '/edit-product/:id',
     element: <EditProductPage />,
-    title: 'Editar producto'
+    title: 'Editar producto',
+    inNavMenu: true
   }
 };
 

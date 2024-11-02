@@ -31,7 +31,7 @@ export const NavBarMenu = styled(Box)({
   flex: 1,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  justifyContent: 'space-around'
 });
 
 export const CustomProfileMenuContainer = styled(Box)({
@@ -40,7 +40,8 @@ export const CustomProfileMenuContainer = styled(Box)({
 });
 
 export const CustomLink = styled(Link)({
-  textDecoration: 'none'
+  textDecoration: 'none',
+  height: '100%'
 });
 
 export const CustomNavBarButton = styled(Button)({

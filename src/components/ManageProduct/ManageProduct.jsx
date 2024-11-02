@@ -6,8 +6,10 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../pages/routes';
 
-export const ManageProduct = ({ id }) => {
+export const ManageProduct = ({ id = null }) => {
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -26,13 +28,13 @@ export const ManageProduct = ({ id }) => {
   };
 
   const titles = [
-    { label: 'Titulo', type: 'text', state: 'title' },
-    { label: 'Descripcion', type: 'text', state: 'description' },
+    { label: 'Titulo', state: 'title' },
+    { label: 'Descripcion', state: 'description' },
     { label: 'Precio', type: 'number', state: 'price' },
-    { label: 'Informacion adicional', type: 'text', state: 'aditionalInfo' },
+    { label: 'Informacion adicional', state: 'aditionalInfo' },
     { label: 'Stock', type: 'number', state: 'stock' },
     { label: 'Destacado', type: 'switch', state: 'featured' },
-    { label: 'Categoria', type: '', state: 'category' }
+    { label: 'Categoria', type: 'select', state: 'category' }
   ];
 
   return (
@@ -50,7 +52,9 @@ export const ManageProduct = ({ id }) => {
           );
         })}
         <ButtonContainer>
-          <FormButton text='Cancelar' />
+          <Link to={ROUTES.HOME.path}>
+            <FormButton text='Cancelar' />
+          </Link>
           <FormButton text='Guardar' />
         </ButtonContainer>
       </FormContainer>
