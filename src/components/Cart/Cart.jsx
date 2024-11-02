@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import cartService from '../../services/cartService';
 import ItemCard from './ItemCard';
+import ProductCard from '../Product/ProductCard';
+import ItemGrid from './ItemGrid.styles';
 
 const Cart = () => {
   const [items, setItems] = useState([]);
 
+  const refreshItems = () => {
+    cartService.getItems().then(data => {
+      setItems(data.items);
+    });
+  };
+
   useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const data = await cartService.getCart();
-        console.log(data);
-        setItems(data);
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
-      }
-    };
-    fetchCartItems();
+    refreshItems();
+      console.log(items);
   }, []);
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>Carrito de Compras</Typography>
-      console.log(items)
-      {items.map((item) => (
-        <ItemCard key={item.id} item={item} />
-      ))}
-    </Container>
+    <ItemGrid>
+        {items.map(item => (
+            <ItemCard key={item.id} item={item} />
+        ))}
+    </ItemGrid>
   );
 };
 
 export default Cart;
+

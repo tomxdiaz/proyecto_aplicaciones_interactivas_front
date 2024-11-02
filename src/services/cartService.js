@@ -1,7 +1,7 @@
 import { authApi } from './authApi.js';
 
 const cartService = {
-  getCart: async () => {
+  getItems: async () => {
     const response = await authApi.get(`/cart`);
     return response.data.data;
   }

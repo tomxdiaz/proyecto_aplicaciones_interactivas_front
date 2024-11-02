@@ -1,42 +1,39 @@
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography, IconButton, Button } from '@mui/material';
-import { Add, Remove, Delete } from '@mui/icons-material';
+import React, { useState } from 'react';
+import {
+  Typography,
+  Button,
+  Container,
+  Box,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardMedia,
+  IconButton,
+  CardContent
+} from '@mui/material';
+import { CustomCard , CustomCardImage , CustomCardContent} from './ItemCard.styles';
 
 const ItemCard = ({ item }) => {
+  console.log(item);
   return (
-    <Card sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-      {/* Imagen del producto */}
-      <CardMedia
-        component="img"
-        sx={{ width: 100, height: 100 }}
-        image={item.images.length ? item.images[0] : '/placeholder.jpg'} // Ruta de placeholder si no hay imagen
-        alt={item.title}
-      />
-      
-      <CardContent sx={{ flex: '1 0 auto' }}>
-        <Typography variant="h6">{item.title}</Typography>
-        <Typography variant="body2" color="text.secondary">{item.description}</Typography>
-        <Typography variant="body2" color="text.secondary">Precio: ${item.price}</Typography>
-        <Typography variant="body2" color="text.secondary">Stock: {item.stock}</Typography>
-      </CardContent>
-
-      {/* Controles de cantidad */}
-      <div>
-        <IconButton color="primary">
-          <Add />
-        </IconButton>
-        <Typography variant="body2" display="inline">{item.quantity}</Typography>
-        <IconButton color="primary">
-          <Remove />
-        </IconButton>
-      </div>
-
-      {/* Botón de eliminar */}
-      <IconButton color="secondary">
-        <Delete />
-      </IconButton>
-    </Card>
+    <CustomCard>
+      <CardActionArea>
+        <CustomCardContent>
+          <CustomCardImage image={item.product.images[0]} />
+          <div style={{ margin: '0 20px', minWidth: '600px' }}>
+            <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
+              {item.product.title}
+            </Typography>
+            <Typography sx={{ color: 'text.secondary' }}>
+              {item.product.description}
+            </Typography>
+          </div>
+          <Button>Agregar</Button>
+          <Button>Restar</Button>
+          <Button>Eliminar</Button>
+        </CustomCardContent>
+      </CardActionArea>
+    </CustomCard>
   );
 };
-
 export default ItemCard;
