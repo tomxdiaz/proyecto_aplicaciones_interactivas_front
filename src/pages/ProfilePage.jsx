@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useUser } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from './routes';
+import MustLogin from '../components/Authenticate/MustLogin';
 
 export const ProfilePage = () => {
   const { user } = useUser();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigate(ROUTES.LOGIN.path);
-    }
-  });
-
-  return <></>;
+  return (
+    <MustLogin user={user}>
+      <></>
+    </MustLogin>
+  );
 };

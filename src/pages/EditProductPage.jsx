@@ -1,25 +1,14 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
-import ROUTES from './routes';
+import MustLogin from '../components/Authenticate/MustLogin';
 
 export const EditProductPage = () => {
   const { id } = useParams();
-
   const { user } = useUser();
-  const navigate = useNavigate();
 
-  console.log(user);
-
-  useEffect(() => {
-    if (!user) {
-      navigate(ROUTES.LOGIN.path);
-    }
-  }, [user, navigate]);
-
-  return (
-    <>
-      <div>ID: {id}</div>
-    </>
-  );
+  <MustLogin user={user}>
+    {/* <EditProduct /> */}
+    <>ID: {id}</>
+  </MustLogin>;
 };

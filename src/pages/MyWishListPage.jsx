@@ -1,19 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MyWishList from '../components/WishList/MyWishList';
 import { useUser } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from './routes';
+import MustLogin from '../components/Authenticate/MustLogin';
 
 export const MyWishListPage = () => {
-  const { user, loadingUser } = useUser();
-  const navigate = useNavigate();
+  const { user } = useUser();
 
-  useEffect(() => {
-    console.log(loadingUser);
-    // if (!user && !loadingUser) {
-    //   navigate(ROUTES.LOGIN.path);
-    // }
-  });
-
-  return <MyWishList />;
+  return (
+    <MustLogin user={user}>
+      <MyWishList />
+    </MustLogin>
+  );
 };
