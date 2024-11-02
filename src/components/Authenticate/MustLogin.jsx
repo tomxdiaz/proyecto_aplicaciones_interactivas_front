@@ -17,9 +17,11 @@ const MustLogin = ({ user, children }) => {
     children
   ) : (
     <CustomContainer>
-      <Typography variant='h4'>You must be logged in to view this page.</Typography>
+      <Typography variant='h4'>
+        Tenes que iniciar sesion para ver esta pagina.
+      </Typography>
       <Button onClick={() => navigate('/login')} variant='contained'>
-        Login
+        Iniciar sesion
       </Button>
     </CustomContainer>
   );
