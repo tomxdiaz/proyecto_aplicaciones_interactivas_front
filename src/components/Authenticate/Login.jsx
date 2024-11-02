@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ROUTES from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
 import wishListService from '../../services/wishListService';
-import { CustomContainer } from './Authenticate.styles';
+import {
+  CustomContainer,
+  CustomForm,
+  CustomFormActions
+} from './Authenticate.styles';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,7 +44,7 @@ const Login = () => {
     <>
       <CustomContainer>
         <Typography variant='h4'>Login</Typography>
-        <form onSubmit={handleSubmit}>
+        <CustomForm onSubmit={handleSubmit}>
           <TextField
             label='Username'
             fullWidth
@@ -58,10 +62,17 @@ const Login = () => {
             margin='normal'
             autoComplete='new-password'
           />
-          <Button type='submit' variant='contained' color='primary'>
-            Login
-          </Button>
-        </form>
+
+          <CustomFormActions>
+            <Link to={ROUTES.REGISTER.path}>
+              <Typography>Are you new?</Typography>
+            </Link>
+
+            <Button type='submit' variant='contained' color='primary'>
+              Login
+            </Button>
+          </CustomFormActions>
+        </CustomForm>
       </CustomContainer>
     </>
   );
