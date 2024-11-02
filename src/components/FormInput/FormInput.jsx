@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextInput } from './TextInput/TextInput';
 import { NumericInput } from './NumericInput/NumericInput';
+import { FormSwitch } from './FormSwitch/FormSwitch';
 
 export const FormInput = ({ label, state, handleChange, type }) => {
   const FormTypes = {
@@ -14,6 +15,14 @@ export const FormInput = ({ label, state, handleChange, type }) => {
     ),
     number: (
       <NumericInput
+        key={`Manage-product-formInput-${label}`}
+        label={label}
+        state={state}
+        handleChange={handleChange}
+      />
+    ),
+    switch: (
+      <FormSwitch
         key={`Manage-product-formInput-${label}`}
         label={label}
         state={state}

@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { FormButton } from '../FormInput/FormButton/FormButton';
-import { TextInput } from '../FormInput/TextInput/TextInput';
+import { FormInput } from '../FormInput/FormInput';
 import {
   ButtonContainer,
   FormContainer,
   ManageProductContainer
-} from './EditProduct.styles';
-import { Key } from '@mui/icons-material';
-import { FormInput } from '../FormInput/FormInput';
+} from './ManageProduct.styles';
 
-export const ManageProduct = () => {
+export const ManageProduct = ({ id }) => {
   const [product, setProduct] = useState({
     title: '',
     description: '',
@@ -24,6 +22,7 @@ export const ManageProduct = () => {
     const newProd = { ...product };
     newProd[prop] = value;
     setProduct(newProd);
+    console.log('prod: ', newProd);
   };
 
   const titles = [
@@ -32,7 +31,7 @@ export const ManageProduct = () => {
     { label: 'Precio', type: 'number', state: 'price' },
     { label: 'Informacion adicional', type: 'text', state: 'aditionalInfo' },
     { label: 'Stock', type: 'number', state: 'stock' },
-    { label: 'Destacado', type: 'chip', state: 'featured' },
+    { label: 'Destacado', type: 'switch', state: 'featured' },
     { label: 'Categoria', type: '', state: 'category' }
   ];
 
