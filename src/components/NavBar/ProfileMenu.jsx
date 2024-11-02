@@ -10,11 +10,12 @@ import {
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { CustomAvatar, CustomNavBarButton } from './NavBar.styles';
+import { CustomAvatar, CustomLink, CustomNavBarButton } from './NavBar.styles';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../pages/routes';
 
 const ProfileMenu = () => {
-  const { user, setUser } = useUser();
-  //   const { wishList, setWishList } = useWishList();
+  const { user } = useUser();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -37,7 +38,7 @@ const ProfileMenu = () => {
         aria-haspopup='true'
         onClick={handleMenu}>
         <CustomAvatar />
-        {desktop && <Typography>{`Hi ${user.name} ${user.lastName}!`}</Typography>}
+        {desktop && <Typography>{`${user.name} ${user.lastName}`}</Typography>}
       </CustomNavBarButton>
       <Menu
         id='profile-menu'
@@ -53,9 +54,18 @@ const ProfileMenu = () => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My WishList</MenuItem>
-        <MenuItem onClick={handleClose}>Create Product</MenuItem>
+        <CustomLink to={ROUTES.PROFILE.path}>
+          <MenuItem onClick={handleClose}>Perfil</MenuItem>
+        </CustomLink>
+        <CustomLink to={ROUTES.CART.path}>
+          <MenuItem onClick={handleClose}>Carrito</MenuItem>
+        </CustomLink>
+        <CustomLink to={ROUTES.MYWISHLIST.path}>
+          <MenuItem onClick={handleClose}>Mis favoritos</MenuItem>
+        </CustomLink>
+        <CustomLink to={ROUTES.CREATEPRODUCT.path}>
+          <MenuItem onClick={handleClose}>Crear producto</MenuItem>
+        </CustomLink>
       </Menu>
     </>
   );

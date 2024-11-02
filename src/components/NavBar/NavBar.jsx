@@ -39,19 +39,19 @@ const NavBar = () => {
           <>
             <ProfileMenu />
             <CustomNavBarButton onClick={logout}>
-              <Typography>Logout</Typography>
+              <Typography>Cerrar sesion</Typography>
             </CustomNavBarButton>
           </>
         ) : (
           <CustomProfileMenuContainer>
             <CustomLink to={ROUTES.LOGIN.path}>
               <CustomNavBarButton>
-                <Typography>Login</Typography>
+                <Typography>Iniciar sesion</Typography>
               </CustomNavBarButton>
             </CustomLink>
             <CustomLink to={ROUTES.REGISTER.path}>
               <CustomNavBarButton>
-                <Typography>Register</Typography>
+                <Typography>Registrarse</Typography>
               </CustomNavBarButton>
             </CustomLink>
           </CustomProfileMenuContainer>
