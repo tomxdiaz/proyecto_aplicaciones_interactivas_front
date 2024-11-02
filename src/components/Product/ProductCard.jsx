@@ -5,23 +5,47 @@ import {
   CustomCardActionArea,
   CustomCardImage,
   CustomCardIconsSection,
-  CustomCardIconButton
+  CustomCardIconButton,
+  CustomCardContent
 } from './ProductCard.styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
+import wishListService from '../../services/wishListService';
+import { useWishList } from '../../context/WishListContext';
 
 const ProductCard = ({ product }) => {
-  const [isInWishList, setIsInWishList] = React.useState(false);
+  const { wishList, setWishList } = useWishList();
+
   const [amountInCart, setAmountInCart] = React.useState(0);
 
-  const handleAddToWishList = () => {
-    setIsInWishList(isInWishList => !isInWishList);
+  const isInWishList = wishList.some(
+    wishListItem => wishListItem.product.id === product.id
+  );
+
+  const handleToggleWishList = () => {
+    const token = sessionStorage.getItem('token');
+    console.log(token);
+
+    if (!isInWishList) {
+      wishListService.addProductToWishList(product).then(res => {
+        refreshWishList();
+      });
+    } else {
+      wishListService.removeProductFromWishList(product).then(res => {
+        refreshWishList();
+      });
+    }
+  };
+
+  const refreshWishList = () => {
+    wishListService.getUserWishList().then(userWishList => {
+      setWishList(userWishList);
+    });
   };
 
   const handleAddToCart = () => {
@@ -32,14 +56,14 @@ const ProductCard = ({ product }) => {
     <CustomCard>
       <CustomCardActionArea>
         <CustomCardImage image={product.images[0]} />
-        <CardContent>
+        <CustomCardContent>
           <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
             {product.title}
           </Typography>
           <Typography sx={{ color: 'text.secondary' }}>
             {product.description}
           </Typography>
-        </CardContent>
+        </CustomCardContent>
       </CustomCardActionArea>
       <CustomCardIconsSection>
         {product.featured ? (
@@ -51,7 +75,7 @@ const ProductCard = ({ product }) => {
         <Box>
           <CustomCardIconButton
             onMouseDown={e => e.stopPropagation()}
-            onClick={handleAddToWishList}>
+            onClick={handleToggleWishList}>
             {isInWishList ? (
               <FavoriteIcon style={{ fill: COLORS.red }} fontSize='large' />
             ) : (

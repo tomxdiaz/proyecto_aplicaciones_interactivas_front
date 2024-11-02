@@ -1,0 +1,64 @@
+import React from 'react';
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
+import { useUser } from '../../context/UserContext';
+import { useWishList } from '../../context/WishListContext';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { CustomAvatar, CustomNavBarButton } from './NavBar.styles';
+
+const ProfileMenu = () => {
+  const { user, setUser } = useUser();
+  //   const { wishList, setWishList } = useWishList();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const theme = useTheme();
+
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  return (
+    <>
+      <CustomNavBarButton
+        aria-controls='profile-menu'
+        aria-haspopup='true'
+        onClick={handleMenu}>
+        <CustomAvatar />
+        {desktop && <Typography>{`Hi ${user.name} ${user.lastName}!`}</Typography>}
+      </CustomNavBarButton>
+      <Menu
+        id='profile-menu'
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right'
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My WishList</MenuItem>
+        <MenuItem onClick={handleClose}>Create Product</MenuItem>
+      </Menu>
+    </>
+  );
+};
+
+export default ProfileMenu;

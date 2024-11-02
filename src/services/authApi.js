@@ -11,16 +11,14 @@ export const authApi = axios.create({
 });
 
 authApi.interceptors.request.use(config => {
-  config.headers.Authorization = `Bearer ${sessionStorage.token}`;
+  config.headers.Authorization = `Bearer ${sessionStorage.getItem('token')}`;
   return config;
 });
 
 authApi.interceptors.response.use(
   response => response,
   error => {
-    if (error.response.status === 404) {
-      // ver este error - cual/cuales tendria/tendrian que ser?
-      // Token expirado, redirigir al login
+    if (error.response.status === 403) {
       window.location.href = ROUTES.LOGIN.path;
     }
     return Promise.reject(error);

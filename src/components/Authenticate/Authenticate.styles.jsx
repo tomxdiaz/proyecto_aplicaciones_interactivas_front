@@ -2,8 +2,8 @@ import { styled } from '@mui/material/styles';
 import { Container } from '@mui/material';
 
 export const CustomContainer = styled(Container)({
-  width: '100%',
-  height: '100%',
+  width: '90%',
+  maxWidth: '600px',
   margin: '20px auto',
   padding: '20px',
   borderRadius: '5px',

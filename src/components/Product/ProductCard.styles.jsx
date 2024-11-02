@@ -5,7 +5,8 @@ import {
   CardActionArea,
   CardActions,
   CardMedia,
-  IconButton
+  IconButton,
+  CardContent
 } from '@mui/material';
 
 export const CustomCard = styled(Card)({
@@ -21,6 +22,10 @@ export const CustomCardActionArea = styled(CardActionArea)({
   flexDirection: 'column',
   alignItems: 'center',
   position: 'relative',
+  flex: 1
+});
+
+export const CustomCardContent = styled(CardContent)({
   flex: 1
 });
 
