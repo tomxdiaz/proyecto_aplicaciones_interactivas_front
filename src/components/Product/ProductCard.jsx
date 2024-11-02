@@ -28,9 +28,6 @@ const ProductCard = ({ product }) => {
   );
 
   const handleToggleWishList = () => {
-    const token = sessionStorage.getItem('token');
-    console.log(token);
-
     if (!isInWishList) {
       wishListService.addProductToWishList(product).then(res => {
         refreshWishList();
@@ -71,6 +68,8 @@ const ProductCard = ({ product }) => {
         ) : (
           <StarBorderIcon fontSize='large' />
         )}
+
+        <Typography variant='h5'>${product.price}</Typography>
 
         <Box>
           <CustomCardIconButton

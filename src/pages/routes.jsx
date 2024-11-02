@@ -7,6 +7,8 @@ import {
   EditProductPage
 } from './index';
 import { ProductDetailPage } from './ProductDetailPage';
+import { MyWishListPage } from './MyWishListPage';
+import { ProfilePage } from './ProfilePage';
 
 const ROUTES = {
   HOME: {
@@ -21,6 +23,19 @@ const ROUTES = {
     path: '/register',
     element: <RegisterPage />
   },
+  PROFILE: {
+    path: '/profile',
+    element: <ProfilePage />
+  },
+  CART: {
+    path: '/cart',
+    // element: <CartPage />
+    element: <div></div>
+  },
+  MYWISHLIST: {
+    path: '/my-wishlist',
+    element: <MyWishListPage />
+  },
   PRODUCTDETAIL: {
     path: '/product/:id',
     element: <ProductDetailPage />
@@ -29,7 +44,6 @@ const ROUTES = {
     path: '/create-product',
     element: <CreateProductPage />
   },
-
   EDITPRODUCT: {
     path: '/edit-product/:id',
     element: <EditProductPage />
