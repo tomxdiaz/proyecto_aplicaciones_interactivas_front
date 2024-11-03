@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import ROUTES, { getRoute } from '../../pages/routes';
 import { FormButton } from '../FormInput/FormButton/FormButton';
 import { FormInput } from '../FormInput/FormInput';
 import {
@@ -60,7 +60,7 @@ export const ManageProduct = ({ id = null }) => {
           );
         })}
         <ButtonContainer>
-          <Link to={ROUTES.HOME.path}>
+          <Link to={getRoute(ROUTES.HOME)}>
             <FormButton text='Cancelar' />
           </Link>
           <FormButton text='Guardar' />

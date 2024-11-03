@@ -3,19 +3,38 @@ import {
   CustomButton,
   CustomContainer,
   CustomLink,
+  CustomWishListBar,
   WishListContainer
 } from './MyWishList.styles';
 import { useWishList } from '../../context/WishListContext';
 import WishListItem from './WishListItem';
-import { Box, Typography } from '@mui/material';
-import ROUTES from '../../pages/routes';
+import { Box, Button, Typography } from '@mui/material';
+import ROUTES, { getRoute } from '../../pages/routes';
+import wishListService from '../../services/wishListService';
+import { useNavigate } from 'react-router-dom';
 
 const MyWishList = () => {
-  const { wishList } = useWishList();
+  const { wishList, setWishList } = useWishList();
+  const navigate = useNavigate();
+
+  const refreshWishList = () => {
+    wishListService.getUserWishList().then(userWishList => {
+      setWishList(userWishList);
+    });
+  };
+
+  const emptyWishList = () => {
+    wishListService.emptyWishList().then(res => {
+      refreshWishList();
+    });
+  };
 
   return (
     <CustomContainer>
-      <Typography variant='h4'>Mis favoritos</Typography>
+      <CustomWishListBar>
+        <Typography variant='h4'>Mis favoritos</Typography>
+        <CustomButton onClick={emptyWishList}>Vaciar</CustomButton>
+      </CustomWishListBar>
       <WishListContainer>
         {wishList.length ? (
           wishList.map(wishListItem => (
@@ -26,7 +45,7 @@ const MyWishList = () => {
             <Typography variant='h4'>
               Oops, parece que no tienes favoritos
             </Typography>
-            <CustomLink to={ROUTES.HOME.path}>
+            <CustomLink to={getRoute(ROUTES.HOME)}>
               <CustomButton>
                 <Typography>Explorar productos</Typography>
               </CustomButton>

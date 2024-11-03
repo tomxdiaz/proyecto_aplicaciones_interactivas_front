@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ROUTES from '../pages/routes';
+import ROUTES, { getRoute } from '../pages/routes';
 
 const api_host_url = 'http://localhost:8080';
 
@@ -19,7 +19,7 @@ authApi.interceptors.response.use(
   response => response,
   error => {
     if (error.response.status === 403) {
-      window.location.href = ROUTES.LOGIN.path;
+      window.location.href = getRoute(ROUTES.LOGIN);
     }
     return Promise.reject(error);
   }

@@ -27,6 +27,11 @@ export const WishListContainer = styled(Box)({
   margin: '1rem 0'
 });
 
+export const CustomWishListBar = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between'
+});
+
 export const CustomLink = styled(Link)({
   textDecoration: 'none'
 });

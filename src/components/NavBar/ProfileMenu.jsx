@@ -12,7 +12,7 @@ import { useWishList } from '../../context/WishListContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CustomAvatar, CustomLink, CustomNavBarButton } from './NavBar.styles';
 import { Link } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import ROUTES, { getRoute } from '../../pages/routes';
 
 const ProfileMenu = () => {
   const { user } = useUser();
@@ -54,16 +54,16 @@ const ProfileMenu = () => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}>
-        <CustomLink to={ROUTES.PROFILE.path}>
+        <CustomLink to={getRoute(ROUTES.PROFILE)}>
           <MenuItem onClick={handleClose}>Perfil</MenuItem>
         </CustomLink>
-        <CustomLink to={ROUTES.CART.path}>
+        <CustomLink to={getRoute(ROUTES.CART)}>
           <MenuItem onClick={handleClose}>Carrito</MenuItem>
         </CustomLink>
-        <CustomLink to={ROUTES.MYWISHLIST.path}>
+        <CustomLink to={getRoute(ROUTES.MYWISHLIST)}>
           <MenuItem onClick={handleClose}>Mis favoritos</MenuItem>
         </CustomLink>
-        <CustomLink to={ROUTES.CREATEPRODUCT.path}>
+        <CustomLink to={getRoute(ROUTES.CREATEPRODUCT)}>
           <MenuItem onClick={handleClose}>Crear producto</MenuItem>
         </CustomLink>
       </Menu>
