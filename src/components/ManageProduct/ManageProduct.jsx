@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import ROUTES from '../../pages/routes';
 import { FormButton } from '../FormInput/FormButton/FormButton';
 import { FormInput } from '../FormInput/FormInput';
 import {
@@ -6,8 +8,6 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
-import { Link } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
 
 export const ManageProduct = ({ id = null }) => {
   const [product, setProduct] = useState({
@@ -34,13 +34,19 @@ export const ManageProduct = ({ id = null }) => {
     { label: 'Informacion adicional', state: 'aditionalInfo' },
     { label: 'Stock', type: 'number', state: 'stock' },
     { label: 'Destacado', type: 'switch', state: 'featured' },
-    { label: 'Categoria', type: 'select', state: 'category' }
+    {
+      label: 'Categoria',
+      type: 'select',
+      state: 'category',
+      options: ['a', 'b', 'c'],
+      defaultMsg: 'No se encontraron categorías'
+    }
   ];
 
   return (
     <ManageProductContainer>
       <FormContainer>
-        {titles.map(({ label, state, type }) => {
+        {titles.map(({ label, state, type, defaultMsg, options }) => {
           return (
             <FormInput
               key={`Manage-product-formInput-${label}`}
@@ -48,6 +54,8 @@ export const ManageProduct = ({ id = null }) => {
               state={state}
               type={type}
               handleChange={handleChange}
+              defaultMsg={defaultMsg}
+              options={options}
             />
           );
         })}
