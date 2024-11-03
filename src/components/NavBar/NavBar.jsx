@@ -2,7 +2,7 @@ import { Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
-import ROUTES from '../../pages/routes';
+import ROUTES, { getRoute } from '../../pages/routes';
 import {
   CustomAppBar,
   CustomLink,
@@ -28,7 +28,7 @@ const NavBar = () => {
   return (
     <CustomAppBar>
       <CustomToolbar>
-        <CustomLink to={ROUTES.HOME.path}>
+        <CustomLink to={getRoute(ROUTES.HOME)}>
           <CustomLogo src={'../../../public/logo.jpg'} />
         </CustomLink>
         <CustomProfileMenuContainer>
@@ -41,12 +41,12 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              <CustomLink to={ROUTES.LOGIN.path}>
+              <CustomLink to={getRoute(ROUTES.LOGIN)}>
                 <CustomNavBarButton>
                   <Typography>Iniciar sesion</Typography>
                 </CustomNavBarButton>
               </CustomLink>
-              <CustomLink to={ROUTES.REGISTER.path}>
+              <CustomLink to={getRoute(ROUTES.REGISTER)}>
                 <CustomNavBarButton>
                   <Typography>Registrarse</Typography>
                 </CustomNavBarButton>

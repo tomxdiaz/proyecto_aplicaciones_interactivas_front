@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
 import { useUser } from '../../context/UserContext';
@@ -34,7 +34,7 @@ const Login = () => {
         setWishList(userWishList);
       });
 
-      navigate(ROUTES.HOME.path);
+      navigate(getRoute(ROUTES.HOME));
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +64,7 @@ const Login = () => {
           />
 
           <CustomFormActions>
-            <Link to={ROUTES.REGISTER.path}>
+            <Link to={getRoute(ROUTES.REGISTER)}>
               <Typography>Todavia no tienes cuenta?</Typography>
             </Link>
 

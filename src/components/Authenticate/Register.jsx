@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
 import {
@@ -36,7 +36,7 @@ const Register = () => {
 
       await authService.register(userData);
 
-      navigate(ROUTES.LOGIN.path);
+      navigate(getRoute(ROUTES.LOGIN));
     } catch (error) {
       console.log(error);
     }
@@ -99,7 +99,7 @@ const Register = () => {
         />
 
         <CustomFormActions>
-          <Link to={ROUTES.LOGIN.path}>
+          <Link to={getRoute(ROUTES.LOGIN)}>
             <Typography>Ya tienes una cuenta?</Typography>
           </Link>
 

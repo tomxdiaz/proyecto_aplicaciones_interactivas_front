@@ -10,6 +10,17 @@ import { ProductDetailPage } from './ProductDetailPage';
 import { MyWishListPage } from './MyWishListPage';
 import { ProfilePage } from './ProfilePage';
 
+export const getRoute = (route, params) => {
+  let path = route.path;
+  if (params) {
+    for (const [key, value] of Object.entries(params)) {
+      path = path.replace(`:${key}`, value);
+    }
+  }
+
+  return path;
+};
+
 const ROUTES = {
   HOME: {
     path: '/',
@@ -26,7 +37,7 @@ const ROUTES = {
     adminOnly: false
   },
   PRODUCTDETAIL: {
-    path: id => `/product/${id}`,
+    path: `/product/:id`,
     element: <ProductDetailPage />,
     title: 'Detalle de producto',
     inNavMenu: false,
@@ -40,7 +51,7 @@ const ROUTES = {
     adminOnly: true
   },
   EDITPRODUCT: {
-    path: id => `/edit-product/${id}`,
+    path: `/edit-product/:id`,
     element: <EditProductPage />,
     title: 'Editar producto',
     inNavMenu: true,

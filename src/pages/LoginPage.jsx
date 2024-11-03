@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Login from '../components/Authenticate/Login';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
-import ROUTES from './routes';
+import ROUTES, { getRoute } from './routes';
 
 export const LoginPage = () => {
   const { user } = useUser();
@@ -10,7 +10,7 @@ export const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate(ROUTES.HOME.path);
+      navigate(getRoute(ROUTES.HOME));
     }
   }, [user, navigate]);
 
