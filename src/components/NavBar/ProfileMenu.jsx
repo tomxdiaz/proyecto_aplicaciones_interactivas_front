@@ -13,6 +13,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CustomAvatar, CustomLink, CustomNavBarButton } from './NavBar.styles';
 import { Link } from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
+import { NavRoutes } from './NavRoute/NavRoutes';
 
 const ProfileMenu = () => {
   const { user } = useUser();
@@ -54,18 +55,15 @@ const ProfileMenu = () => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}>
-        <CustomLink to={getRoute(ROUTES.PROFILE)}>
-          <MenuItem onClick={handleClose}>Perfil</MenuItem>
-        </CustomLink>
-        <CustomLink to={getRoute(ROUTES.CART)}>
-          <MenuItem onClick={handleClose}>Carrito</MenuItem>
-        </CustomLink>
-        <CustomLink to={getRoute(ROUTES.MYWISHLIST)}>
-          <MenuItem onClick={handleClose}>Mis favoritos</MenuItem>
-        </CustomLink>
-        <CustomLink to={getRoute(ROUTES.CREATEPRODUCT)}>
-          <MenuItem onClick={handleClose}>Crear producto</MenuItem>
-        </CustomLink>
+        {Object.entries(ROUTES).map(([, value]) =>
+          value.inNavMenu ? (
+            <CustomLink to={getRoute(value)} key={`NavLink-${value.title}`}>
+              <MenuItem onClick={handleClose}>
+                <Typography>{value.title}</Typography>
+              </MenuItem>
+            </CustomLink>
+          ) : null
+        )}
       </Menu>
     </>
   );

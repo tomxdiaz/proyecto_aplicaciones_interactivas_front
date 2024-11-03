@@ -27,6 +27,7 @@ const Login = () => {
       await authService.login(username, password);
 
       userService.getUserData().then(userData => {
+        console.log('userData: ', userData);
         setUser(userData);
       });
 

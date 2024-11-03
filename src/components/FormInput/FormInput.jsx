@@ -3,6 +3,7 @@ import { TextInput } from './TextInput/TextInput';
 import { NumericInput } from './NumericInput/NumericInput';
 import { FormSwitch } from './FormSwitch/FormSwitch';
 import { FormSelect } from './FormSelect/FormSelect';
+import { ImageInput } from './ImageInput/ImageInput';
 
 export const FormInput = ({
   label,
@@ -10,7 +11,8 @@ export const FormInput = ({
   handleChange,
   type,
   defaultMsg = null,
-  options = []
+  options = [],
+  images = []
 }) => {
   const FormTypes = {
     text: (
@@ -45,6 +47,14 @@ export const FormInput = ({
         handleChange={handleChange}
         defaultMsg={defaultMsg}
         options={options}
+      />
+    ),
+    image: (
+      <ImageInput
+        key={`Manage-product-formInput-${label}`}
+        state={state}
+        handleChange={handleChange}
+        images={images}
       />
     )
   };

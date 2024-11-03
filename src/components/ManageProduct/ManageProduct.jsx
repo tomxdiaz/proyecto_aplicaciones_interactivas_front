@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
 import { FormButton } from '../FormInput/FormButton/FormButton';
@@ -8,6 +8,8 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
+import { CustomCardImage } from '../Product/ProductCard.styles';
+import { Box, Button } from '@mui/material';
 
 export const ManageProduct = ({ id = null }) => {
   const [product, setProduct] = useState({
@@ -17,17 +19,19 @@ export const ManageProduct = ({ id = null }) => {
     aditionalInfo: '',
     stock: 0,
     featured: false,
-    category: ''
+    category: '',
+    images: []
   });
 
   const handleChange = (prop, value) => {
     const newProd = { ...product };
     newProd[prop] = value;
     setProduct(newProd);
-    console.log('prod: ', newProd);
   };
+  useEffect(() => console.log('prod: ', product), [product]);
 
   const titles = [
+    { label: 'Imagen', type: 'image', state: 'image', images: product.images },
     { label: 'Titulo', state: 'title' },
     { label: 'Descripcion', state: 'description' },
     { label: 'Precio', type: 'number', state: 'price' },
@@ -46,7 +50,7 @@ export const ManageProduct = ({ id = null }) => {
   return (
     <ManageProductContainer>
       <FormContainer>
-        {titles.map(({ label, state, type, defaultMsg, options }) => {
+        {titles.map(({ label, state, type, defaultMsg, options, images }) => {
           return (
             <FormInput
               key={`Manage-product-formInput-${label}`}
@@ -56,6 +60,7 @@ export const ManageProduct = ({ id = null }) => {
               handleChange={handleChange}
               defaultMsg={defaultMsg}
               options={options}
+              images={images}
             />
           );
         })}
