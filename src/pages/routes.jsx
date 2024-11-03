@@ -15,56 +15,65 @@ const ROUTES = {
     path: '/',
     element: <HomePage />,
     title: 'Inicio',
-    inNavMenu: false
+    inNavMenu: false,
+    adminOnly: false
   },
   MYWISHLIST: {
     path: '/my-wishlist',
     element: <MyWishListPage />,
     title: 'Favoritos',
-    inNavMenu: true
+    inNavMenu: true,
+    adminOnly: false
   },
   PRODUCTDETAIL: {
-    path: '/product/:id',
+    path: id => `/product/${id}`,
     element: <ProductDetailPage />,
     title: 'Detalle de producto',
-    inNavMenu: false
+    inNavMenu: false,
+    adminOnly: false
   },
   CREATEPRODUCT: {
     path: '/create-product',
     element: <CreateProductPage />,
     title: 'Crear producto',
-    inNavMenu: true
+    inNavMenu: true,
+    adminOnly: true
   },
   EDITPRODUCT: {
-    path: '/edit-product/:id',
+    path: id => `/edit-product/${id}`,
     element: <EditProductPage />,
     title: 'Editar producto',
-    inNavMenu: true
+    inNavMenu: true,
+    adminOnly: true
   },
   CART: {
     path: '/cart',
     // element: <CartPage />
     element: <div></div>,
     title: 'Carrito',
-    inNavMenu: true
+    inNavMenu: true,
+    adminOnly: false
   },
   PROFILE: {
     path: '/profile',
     element: <ProfilePage />,
     title: 'Perfil',
-    inNavMenu: false
+    inNavMenu: false,
+    adminOnly: false
   },
   LOGIN: {
     path: '/login',
     element: <LoginPage />,
     title: 'Iniciar Sesion',
-    inNavMenu: false
+    inNavMenu: false,
+    adminOnly: false
   },
   REGISTER: {
     path: '/register',
     element: <RegisterPage />,
     title: 'Registrarse',
-    inNavMenu: false
+    inNavMenu: false,
+    adminOnly: false
   }
 };
 
