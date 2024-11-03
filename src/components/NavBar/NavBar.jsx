@@ -1,17 +1,18 @@
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
-import {
-  CustomAppBar,
-  CustomToolbar,
-  CustomNavBarButton,
-  CustomLogo,
-  CustomNavBarMenu,
-  CustomProfileMenuContainer,
-  CustomLink
-} from './NavBar.styles';
-import { Typography } from '@mui/material';
-import ROUTES from '../../pages/routes';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
+import ROUTES from '../../pages/routes';
+import {
+  CustomAppBar,
+  CustomLink,
+  CustomLogo,
+  CustomNavBarButton,
+  CustomProfileMenuContainer,
+  CustomToolbar,
+  NavBarMenu
+} from './NavBar.styles';
+import { NavRoutes } from './NavRoute/NavRoutes';
 import ProfileMenu from './ProfileMenu';
 
 const NavBar = () => {
@@ -27,35 +28,32 @@ const NavBar = () => {
   return (
     <CustomAppBar>
       <CustomToolbar>
-        <CustomLogo src={'../../../public/logo.jpg'} />
-        <CustomNavBarMenu>
-          <CustomLink to={ROUTES.HOME.path}>
-            <CustomNavBarButton>
-              <Typography>Inicio</Typography>
-            </CustomNavBarButton>
-          </CustomLink>
-        </CustomNavBarMenu>
-        {user ? (
-          <>
-            <ProfileMenu />
-            <CustomNavBarButton onClick={logout}>
-              <Typography>Cerrar sesion</Typography>
-            </CustomNavBarButton>
-          </>
-        ) : (
-          <CustomProfileMenuContainer>
-            <CustomLink to={ROUTES.LOGIN.path}>
-              <CustomNavBarButton>
-                <Typography>Iniciar sesion</Typography>
+        <CustomLink to={ROUTES.HOME.path}>
+          <CustomLogo src={'../../../public/logo.jpg'} />
+        </CustomLink>
+        <CustomProfileMenuContainer>
+          {user ? (
+            <>
+              <ProfileMenu />
+              <CustomNavBarButton onClick={logout}>
+                <Typography>Cerrar sesion</Typography>
               </CustomNavBarButton>
-            </CustomLink>
-            <CustomLink to={ROUTES.REGISTER.path}>
-              <CustomNavBarButton>
-                <Typography>Registrarse</Typography>
-              </CustomNavBarButton>
-            </CustomLink>
-          </CustomProfileMenuContainer>
-        )}
+            </>
+          ) : (
+            <>
+              <CustomLink to={ROUTES.LOGIN.path}>
+                <CustomNavBarButton>
+                  <Typography>Iniciar sesion</Typography>
+                </CustomNavBarButton>
+              </CustomLink>
+              <CustomLink to={ROUTES.REGISTER.path}>
+                <CustomNavBarButton>
+                  <Typography>Registrarse</Typography>
+                </CustomNavBarButton>
+              </CustomLink>
+            </>
+          )}
+        </CustomProfileMenuContainer>
       </CustomToolbar>
     </CustomAppBar>
   );

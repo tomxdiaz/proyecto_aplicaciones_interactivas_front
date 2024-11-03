@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import MustLogin from '../components/Authenticate/MustLogin';
+import { ManageProduct } from '../components/ManageProduct/ManageProduct';
 
 export const EditProductPage = () => {
   const { id } = useParams();
@@ -9,8 +10,7 @@ export const EditProductPage = () => {
 
   return (
     <MustLogin user={user}>
-      {/* <EditProduct /> */}
-      <>ID: {id}</>
+      <ManageProduct id={id} />
     </MustLogin>
   );
 };

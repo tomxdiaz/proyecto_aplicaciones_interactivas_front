@@ -13,40 +13,67 @@ import { ProfilePage } from './ProfilePage';
 const ROUTES = {
   HOME: {
     path: '/',
-    element: <HomePage />
+    element: <HomePage />,
+    title: 'Inicio',
+    inNavMenu: false,
+    adminOnly: false
   },
-  LOGIN: {
-    path: '/login',
-    element: <LoginPage />
+  MYWISHLIST: {
+    path: '/my-wishlist',
+    element: <MyWishListPage />,
+    title: 'Favoritos',
+    inNavMenu: true,
+    adminOnly: false
   },
-  REGISTER: {
-    path: '/register',
-    element: <RegisterPage />
+  PRODUCTDETAIL: {
+    path: id => `/product/${id}`,
+    element: <ProductDetailPage />,
+    title: 'Detalle de producto',
+    inNavMenu: false,
+    adminOnly: false
   },
-  PROFILE: {
-    path: '/profile',
-    element: <ProfilePage />
+  CREATEPRODUCT: {
+    path: '/create-product',
+    element: <CreateProductPage />,
+    title: 'Crear producto',
+    inNavMenu: true,
+    adminOnly: true
+  },
+  EDITPRODUCT: {
+    path: id => `/edit-product/${id}`,
+    element: <EditProductPage />,
+    title: 'Editar producto',
+    inNavMenu: true,
+    adminOnly: true
   },
   CART: {
     path: '/cart',
     // element: <CartPage />
-    element: <div></div>
+    element: <div></div>,
+    title: 'Carrito',
+    inNavMenu: true,
+    adminOnly: false
   },
-  MYWISHLIST: {
-    path: '/my-wishlist',
-    element: <MyWishListPage />
+  PROFILE: {
+    path: '/profile',
+    element: <ProfilePage />,
+    title: 'Perfil',
+    inNavMenu: false,
+    adminOnly: false
   },
-  PRODUCTDETAIL: {
-    path: '/product/:id',
-    element: <ProductDetailPage />
+  LOGIN: {
+    path: '/login',
+    element: <LoginPage />,
+    title: 'Iniciar Sesion',
+    inNavMenu: false,
+    adminOnly: false
   },
-  CREATEPRODUCT: {
-    path: '/create-product',
-    element: <CreateProductPage />
-  },
-  EDITPRODUCT: {
-    path: '/edit-product/:id',
-    element: <EditProductPage />
+  REGISTER: {
+    path: '/register',
+    element: <RegisterPage />,
+    title: 'Registrarse',
+    inNavMenu: false,
+    adminOnly: false
   }
 };
 

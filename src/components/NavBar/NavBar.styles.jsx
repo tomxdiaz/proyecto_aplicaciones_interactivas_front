@@ -27,10 +27,11 @@ export const CustomLogo = styled('img')({
   height: '100%'
 });
 
-export const CustomNavBarMenu = styled(Box)({
+export const NavBarMenu = styled(Box)({
   flex: 1,
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  justifyContent: 'space-around'
 });
 
 export const CustomProfileMenuContainer = styled(Box)({
@@ -39,7 +40,8 @@ export const CustomProfileMenuContainer = styled(Box)({
 });
 
 export const CustomLink = styled(Link)({
-  textDecoration: 'none'
+  textDecoration: 'none',
+  height: '100%'
 });
 
 export const CustomNavBarButton = styled(Button)({
