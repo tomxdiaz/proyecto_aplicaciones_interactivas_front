@@ -31,31 +31,29 @@ const NavBar = () => {
         <CustomLink to={ROUTES.HOME.path}>
           <CustomLogo src={'../../../public/logo.jpg'} />
         </CustomLink>
-        <NavBarMenu>
-          <NavRoutes />
-        </NavBarMenu>
-        <Divider orientation='vertical' variant='middle' flexItem />
-        {user ? (
-          <>
-            <ProfileMenu />
-            <CustomNavBarButton onClick={logout}>
-              <Typography>Cerrar sesion</Typography>
-            </CustomNavBarButton>
-          </>
-        ) : (
-          <CustomProfileMenuContainer>
-            <CustomLink to={ROUTES.LOGIN.path}>
-              <CustomNavBarButton>
-                <Typography>Iniciar sesion</Typography>
+        <CustomProfileMenuContainer>
+          {user ? (
+            <>
+              <ProfileMenu />
+              <CustomNavBarButton onClick={logout}>
+                <Typography>Cerrar sesion</Typography>
               </CustomNavBarButton>
-            </CustomLink>
-            <CustomLink to={ROUTES.REGISTER.path}>
-              <CustomNavBarButton>
-                <Typography>Registrarse</Typography>
-              </CustomNavBarButton>
-            </CustomLink>
-          </CustomProfileMenuContainer>
-        )}
+            </>
+          ) : (
+            <>
+              <CustomLink to={ROUTES.LOGIN.path}>
+                <CustomNavBarButton>
+                  <Typography>Iniciar sesion</Typography>
+                </CustomNavBarButton>
+              </CustomLink>
+              <CustomLink to={ROUTES.REGISTER.path}>
+                <CustomNavBarButton>
+                  <Typography>Registrarse</Typography>
+                </CustomNavBarButton>
+              </CustomLink>
+            </>
+          )}
+        </CustomProfileMenuContainer>
       </CustomToolbar>
     </CustomAppBar>
   );
