@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   ImageInputButton,
@@ -8,7 +8,7 @@ import {
 } from './ImageInput.styles';
 import { Box, Button, Grid, Grid2 } from '@mui/material';
 export const ImageInput = ({ state, handleChange, images = [] }) => {
-  const [inputImage, setInputImage] = useState([]);
+  const [inputImage, setInputImage] = useState(images);
 
   const handleImageChange = event => {
     const files = Array.from(event.target.files);
@@ -24,6 +24,8 @@ export const ImageInput = ({ state, handleChange, images = [] }) => {
   const handleClick = () => {
     document.getElementById('multi-image-upload').click();
   };
+
+  useEffect(() => setInputImage(images), [images]);
 
   return (
     <ImageInputContainer>
