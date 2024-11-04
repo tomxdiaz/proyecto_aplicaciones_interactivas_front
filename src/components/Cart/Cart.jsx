@@ -22,9 +22,10 @@ const Cart = () => {
   };
 
   const confirmCart = () => {
-    alert('Tanto no avance jajajaj');
+    cartService.confirmCart().then(res => {
+      refreshCart();
+    });
   };
-
   useEffect(() => {
     console.log(cart);
     refreshCart();
@@ -49,7 +50,7 @@ const Cart = () => {
           justifySelf: 'center'
         }}>
         <button onClick={emptyCart}>Empty Cart</button>
-        <h2 style={{ marginInline: '1px' }}>Total: ${cart.totalPrice}</h2>
+        <h2 style={{ marginInline: '1px' }}>Total: ${Number(cart.totalPrice).toFixed(2)}</h2>
         <button onClick={confirmCart}>Confirm Cart</button>
       </Card>
     </Box>

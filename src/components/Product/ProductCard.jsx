@@ -17,11 +17,22 @@ import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
 import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
+import cartService from '../../services/cartService';
+import { useCart } from '../../context/CartContext';
 
 const ProductCard = ({ product }) => {
   const { wishList, setWishList } = useWishList();
+  const { cart, setCart } = useCart();
 
-  const [amountInCart, setAmountInCart] = React.useState(0);
+  const refreshCart = () => {
+    cartService.getItems().then(data => {
+      setCart(data);
+    });
+  };
+
+  const [amountInCart, setAmountInCart] = React.useState(
+    cart.items.find(item => item.product.id === product.id)?.quantity || 0
+  );
 
   const isInWishList = wishList.some(
     wishListItem => wishListItem.product.id === product.id
@@ -47,6 +58,13 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = () => {
     setAmountInCart(amountInCart => amountInCart + 1);
+    const itemData = {
+      product: product,
+      quantity: amountInCart + 1
+    };
+    cartService.modifyItem(itemData).then(res => {
+      refreshCart();
+    });
   };
 
   return (

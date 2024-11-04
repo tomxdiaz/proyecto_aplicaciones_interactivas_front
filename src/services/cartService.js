@@ -22,6 +22,10 @@ const cartService = {
     const response = await authApi.put(`/cart/empty`);
     return response.data.data;
   },
+  confirmCart: async () => {
+    const response = await authApi.put(`/cart/confirm`);
+    return response.data.data;
+  },
 }
 
 export default cartService;

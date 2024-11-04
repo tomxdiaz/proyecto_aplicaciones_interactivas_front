@@ -48,7 +48,9 @@ const ItemCard = ({ item }) => {
       product: product,
       quantity: count
     };
-    cartService.modifyItem(itemData);
+    cartService.modifyItem(itemData).then(res => {
+      refreshCart();
+    });
   };
 
   console.log(item);
