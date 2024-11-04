@@ -1,5 +1,6 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import { COLORS } from '../../../utils/constants';
+import { CloseOutlined } from '@mui/icons-material';
 
 export const ImageInputContainer = styled(Box)({
   display: 'flex',
@@ -15,7 +16,7 @@ export const ImageInputButton = styled(Button)({
   borderRadius: '10px',
   border: '2px dashed black',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'center',
   cursor: 'pointer',
   backgroundColor: '#f0f0f0',
@@ -35,5 +36,10 @@ export const UploadInput = styled('input')({
 });
 
 export const NoImageMsg = styled(Typography)({
+  color: COLORS.primary
+});
+
+export const CloseIcon = styled(CloseOutlined)({
+  position: 'absolute',
   color: COLORS.primary
 });

@@ -12,7 +12,9 @@ export const FormContainer = styled(Box)({
   border: '1px solid black',
   borderRadius: '10px',
   width: '40rem',
-  padding: '1rem 15%'
+  padding: '1rem 15%',
+  maxHeight: '100%',
+  overflowY: 'auto'
 });
 
 export const ButtonContainer = styled(Box)({

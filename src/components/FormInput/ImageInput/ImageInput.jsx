@@ -1,12 +1,13 @@
+import { Grid2 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import {
+  CloseIcon,
   Image,
   ImageInputButton,
   ImageInputContainer,
   NoImageMsg,
   UploadInput
 } from './ImageInput.styles';
-import { Box, Button, Grid, Grid2 } from '@mui/material';
 export const ImageInput = ({ state, handleChange, images = [] }) => {
   const [inputImage, setInputImage] = useState(images);
 
@@ -21,20 +22,29 @@ export const ImageInput = ({ state, handleChange, images = [] }) => {
     handleChange(state, [...images, ...newImages]);
   };
 
-  const handleClick = () => {
+  const addImage = () => {
     document.getElementById('multi-image-upload').click();
+  };
+
+  const removeImage = (event, index) => {
+    event.stopPropagation();
+    const newImages = [...inputImage];
+    newImages.splice(index, 1);
+    setInputImage(newImages);
+    handleChange(state, newImages);
   };
 
   useEffect(() => setInputImage(images), [images]);
 
   return (
     <ImageInputContainer>
-      <ImageInputButton onClick={handleClick}>
+      <ImageInputButton disableRipple onClick={addImage}>
         {inputImage.length ? (
           <Grid2 container spacing={2}>
             {inputImage.map((src, index) => (
-              <Grid2 key={index}>
+              <Grid2 container key={index}>
                 <Image src={src} alt={`Uploaded ${index + 1}`} />
+                <CloseIcon onClick={event => removeImage(event, index)} />
               </Grid2>
             ))}
           </Grid2>
