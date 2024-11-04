@@ -4,6 +4,7 @@ import ROUTES, { getRoute } from '../../pages/routes';
 import categoryService from '../../services/categoryService';
 import productService from '../../services/productService';
 import { FormButton } from '../FormInput/FormButton/FormButton';
+import { FormDeleteButton } from '../FormInput/FormDeleteButton/FormDeleteButton';
 import { FormInput } from '../FormInput/FormInput';
 import {
   ButtonContainer,
@@ -106,9 +107,15 @@ export const ManageProduct = ({ id = null }) => {
     navigate(getRoute(ROUTES.HOME));
   };
 
+  const handleDelete = async () => {
+    await productService.delete(id);
+    navigate(getRoute(ROUTES.HOME));
+  };
+
   return (
     <ManageProductContainer>
       <FormContainer>
+        {id && <FormDeleteButton text='Dar de baja' handleClick={handleDelete} />}
         {titles.map(({ label, state, type, defaultMsg, options, value }) => {
           return (
             <FormInput

@@ -11,7 +11,8 @@ const productService = {
     return response.data.data;
   },
   add: async product => await authApi.post('/product', product),
-  update: async product => await authApi.put('/product', product)
+  update: async product => await authApi.put('/product', product),
+  delete: async id => await authApi.delete(`product/${id}`)
 };
 
 export default productService;
