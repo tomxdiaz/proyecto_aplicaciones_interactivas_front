@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import { Link, useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
-import { CustomContainer } from './Register.styles';
 import userService from '../../services/userService';
+import {
+  CustomContainer,
+  CustomForm,
+  CustomFormActions
+} from './Authenticate.styles';
 
-const Register = ({ onRegister }) => {
+const Register = () => {
+  const parsedDate = new Date(Date.now()).toISOString().split('T')[0];
+
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [birthDate, setBirthDate] = useState('13-05-2005');
+  const [birthDate, setBirthDate] = useState(parsedDate);
   const [emailAddress, setEmailAddress] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +36,7 @@ const Register = ({ onRegister }) => {
 
       await authService.register(userData);
 
-      navigate(ROUTES.LOGIN.path);
+      navigate(getRoute(ROUTES.LOGIN));
     } catch (error) {
       console.log(error);
     }
@@ -38,14 +44,15 @@ const Register = ({ onRegister }) => {
 
   return (
     <CustomContainer>
-      <Typography variant='h4'>Register</Typography>
-      <form onSubmit={handleSubmit}>
+      <Typography variant='h4'>Registrarse</Typography>
+      <CustomForm onSubmit={handleSubmit}>
         <TextField
           label='Name'
           value={name}
           onChange={e => setName(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
         <TextField
           label='LastName'
@@ -53,6 +60,7 @@ const Register = ({ onRegister }) => {
           onChange={e => setLastName(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
         <TextField
           label='Date of Birth'
@@ -61,6 +69,7 @@ const Register = ({ onRegister }) => {
           onChange={e => setBirthDate(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
         <TextField
           label='Username'
@@ -68,6 +77,7 @@ const Register = ({ onRegister }) => {
           onChange={e => setUsername(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
         <TextField
           label='Email'
@@ -76,6 +86,7 @@ const Register = ({ onRegister }) => {
           onChange={e => setEmailAddress(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
         <TextField
           label='Password'
@@ -84,12 +95,19 @@ const Register = ({ onRegister }) => {
           onChange={e => setPassword(e.target.value)}
           fullWidth
           margin='normal'
+          autoComplete='new-password'
         />
 
-        <Button type='submit' variant='contained' color='primary'>
-          Register
-        </Button>
-      </form>
+        <CustomFormActions>
+          <Link to={getRoute(ROUTES.LOGIN)}>
+            <Typography>Ya tienes una cuenta?</Typography>
+          </Link>
+
+          <Button type='submit' variant='contained' color='primary'>
+            Crear cuenta
+          </Button>
+        </CustomFormActions>
+      </CustomForm>
     </CustomContainer>
   );
 };

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import ROUTES from '../../pages/routes';
+import { Link, useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
-import { CustomContainer } from './Login.styles';
 import userService from '../../services/userService';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
 import wishListService from '../../services/wishListService';
+import {
+  CustomContainer,
+  CustomForm,
+  CustomFormActions
+} from './Authenticate.styles';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,38 +34,47 @@ const Login = () => {
         setWishList(userWishList);
       });
 
-      navigate(ROUTES.HOME.path);
+      navigate(getRoute(ROUTES.HOME));
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <CustomContainer>
-      <Typography variant='h4'>Login</Typography>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          label='Username'
-          fullWidth
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          margin='normal'
-          autoComplete='new-password'
-        />
-        <TextField
-          label='Password'
-          type='password'
-          fullWidth
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          margin='normal'
-          autoComplete='new-password'
-        />
-        <Button type='submit' variant='contained' color='primary'>
-          Login
-        </Button>
-      </form>
-    </CustomContainer>
+    <>
+      <CustomContainer>
+        <Typography variant='h4'>Iniciar sesion</Typography>
+        <CustomForm onSubmit={handleSubmit}>
+          <TextField
+            label='Username'
+            fullWidth
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            margin='normal'
+            autoComplete='new-password'
+          />
+          <TextField
+            label='Password'
+            type='password'
+            fullWidth
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            margin='normal'
+            autoComplete='new-password'
+          />
+
+          <CustomFormActions>
+            <Link to={getRoute(ROUTES.REGISTER)}>
+              <Typography>Todavia no tienes cuenta?</Typography>
+            </Link>
+
+            <Button type='submit' variant='contained' color='primary'>
+              Iniciar sesion
+            </Button>
+          </CustomFormActions>
+        </CustomForm>
+      </CustomContainer>
+    </>
   );
 };
 

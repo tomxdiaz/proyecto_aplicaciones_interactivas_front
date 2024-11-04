@@ -17,6 +17,12 @@ const wishListService = {
     const response = await authApi.put(`/wishlist/${product.id}`);
 
     return response.data.data;
+  },
+
+  emptyWishList: async () => {
+    const response = await authApi.put(`/wishlist/empty`);
+
+    return response.data.data;
   }
 };
 
