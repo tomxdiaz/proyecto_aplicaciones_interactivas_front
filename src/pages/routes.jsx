@@ -60,8 +60,7 @@ const ROUTES = {
   },
   CART: {
     path: '/cart',
-    // element: <CartPage />
-    element: <div></div>,
+  element: <CartPage />,
     title: 'Carrito',
     inNavMenu: true,
     adminOnly: false

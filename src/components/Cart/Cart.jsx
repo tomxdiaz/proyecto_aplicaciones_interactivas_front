@@ -16,7 +16,7 @@ const Cart = () => {
 
   useEffect(() => {
     refreshItems();
-      console.log(items);
+      
   }, []);
 
   return (

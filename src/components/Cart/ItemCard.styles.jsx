@@ -14,7 +14,7 @@ import {
 import { COLORS } from '../../utils/constants';
 
 export const CustomCard = styled(Card)({
-  width: '80%',
+  width: '70%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
@@ -29,7 +29,6 @@ export const CustomCardImage = styled(CardMedia)({
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
   objectFit: 'cover',
   marginRight: '16px',
-  backgroundColor: COLORS.yellow
 });
 
 export const CustomCardContent = styled(CardContent)({
@@ -38,5 +37,23 @@ export const CustomCardContent = styled(CardContent)({
   flexWrap: 'wrap',
   alignItems: 'center',
   padding: '16px',
-  backgroundColor: COLORS.red
 });
+
+export const QuantityButton = styled(Button)({
+  variant : 'outlined',
+  fontWeight: 'bold',
+  fontSize: '16px' ,
+  color: 'black'
+});
+
+export const QuantityBox = styled(Box)({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent : 'center',
+  justifyItems: 'center',
+  alignItems: 'center',
+  padding: '8px',
+  margin: '5px' ,
+  border: '1px solid black'
+});
+
