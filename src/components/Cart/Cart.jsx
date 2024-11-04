@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Typography } from '@mui/material';
 import cartService from '../../services/cartService';
 import ItemCard from './ItemCard';
-import ProductCard from '../Product/ProductCard';
 import ItemGrid from './ItemGrid.styles';
+import { useCart } from '../../context/CartContext';
 
 const Cart = () => {
-  const [items, setItems] = useState([]);
+  const { cart, setCart } = useCart();
 
-  const refreshItems = () => {
+  const refreshCart = () => {
     cartService.getItems().then(data => {
-      setItems(data.items);
+      setCart(data);
     });
   };
-
+  
   useEffect(() => {
-    refreshItems();
-      
+    console.log(cart);
+    refreshCart();
   }, []);
 
   return (
     <ItemGrid>
-        {items.map(item => (
-            <ItemCard key={item.id} item={item} />
-        ))}
+      {cart.items.map(item => (
+        <ItemCard key={item.id} item={item} />
+      ))}
     </ItemGrid>
   );
 };
 
 export default Cart;
-

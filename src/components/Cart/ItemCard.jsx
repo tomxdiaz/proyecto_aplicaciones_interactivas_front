@@ -1,16 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Typography,
-  Button,
-  Container,
-  Box,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardMedia,
-  IconButton,
-  CardContent
-} from '@mui/material';
+import { Typography, Box, CardActionArea, IconButton } from '@mui/material';
 import {
   CustomCard,
   CustomCardImage,
@@ -22,11 +11,21 @@ import { COLORS } from '../../utils/constants';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import cartService from '../../services/cartService';
+import { useCart } from '../../context/CartContext';
 
 const ItemCard = ({ item }) => {
+  const { setCart } = useCart();
   const [count, setCount] = useState(item.quantity);
+  const { product } = item;
+
+  const refreshCart = () => {
+    cartService.getItems().then(data => {
+      setCart(data);
+    });
+  };
+
   const handleIncrement = () => {
-    if (count === item.product.stock) {
+    if (count === product.stock) {
       return;
     }
     setCount(count + 1);
@@ -39,28 +38,33 @@ const ItemCard = ({ item }) => {
   };
 
   const removeItemFromCart = () => {
-      cartService.removeItemFromCart(item.product)
-      };
+    cartService.removeItemFromCart(product).then(res => {
+      refreshCart();
+    });
+  };
 
   const modifyItem = () => {
-    cartService.modifyItem(item)
+    const itemData = {
+      product: product,
+      quantity: count
     };
-    
+    cartService.modifyItem(itemData);
+  };
 
   console.log(item);
   return (
     <CustomCard>
       <CardActionArea>
         <CustomCardContent>
-          <CustomCardImage image={item.product.images[0]} />
+          <CustomCardImage image={product.images[0]} />
           <Box style={{ margin: '0 20px', minWidth: '500px' }}>
             <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
-              {item.product.title}
+              {product.title}
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              {item.product.description}
+              {product.description}
             </Typography>
-            <Typography variant='h6'>${item.product.price}</Typography>
+            <Typography variant='h6'>${product.price}</Typography>
           </Box>
           <QuantityBox>
             <QuantityButton onClick={handleDecrement}>-</QuantityButton>
@@ -70,7 +74,7 @@ const ItemCard = ({ item }) => {
           <Box style={{ minWidth: '100px', justifyItems: 'center' }}>
             <Typography>subTotal</Typography>
             <Typography variant='h6'>
-              ${(item.product.price * count).toFixed(2)}
+              ${(product.price * count).toFixed(2)}
             </Typography>
           </Box>
           <IconButton
@@ -78,9 +82,7 @@ const ItemCard = ({ item }) => {
             onClick={removeItemFromCart}>
             <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
           </IconButton>
-          <IconButton
-            onMouseDown={e => e.stopPropagation()}
-            onClick={modifyItem}>
+          <IconButton onMouseDown={e => e.stopPropagation()} onClick={modifyItem}>
             <CheckCircleIcon style={{ fill: COLORS.green }} fontSize='large' />
           </IconButton>
         </CustomCardContent>

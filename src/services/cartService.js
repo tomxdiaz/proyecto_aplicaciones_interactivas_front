@@ -7,12 +7,14 @@ const cartService = {
   }
 ,
 
-  modifyItem: async item => {
-    const response = await authApi.put(`/cart/item`, item.product , item.cartId);
+  modifyItem: async itemData => {
+    console.log(itemData);
+    const response = await authApi.put(`/cart/item`, itemData);
     return response.data.data;
   },
   
   removeItemFromCart: async product => {
+
     console.log(product);
     const response = await authApi.put(`/cart/item/${product.id}`);
     console.log(response.data.ok);
