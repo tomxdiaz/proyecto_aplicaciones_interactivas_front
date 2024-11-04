@@ -9,6 +9,7 @@ import {
 import { ProductDetailPage } from './ProductDetailPage';
 import { MyWishListPage } from './MyWishListPage';
 import { ProfilePage } from './ProfilePage';
+import { LastSearchesPage } from './LastSearchesPage';
 
 export const getRoute = (route, params) => {
   let path = route.path;
@@ -84,6 +85,13 @@ const ROUTES = {
     element: <RegisterPage />,
     title: 'Registrarse',
     inNavMenu: false,
+    adminOnly: false
+  },
+  LASTSEARCHES: {
+    path: '/last-searches',
+    element: <LastSearchesPage />,
+    title: 'Busquedas recientes',
+    inNavMenu: true,
     adminOnly: false
   }
 };
