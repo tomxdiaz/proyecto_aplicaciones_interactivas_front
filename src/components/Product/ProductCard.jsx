@@ -17,22 +17,22 @@ import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
 import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
+import ROUTES, { getRoute } from '../../pages/routes';
+import searchService from '../../services/searchService';
+import { useUser } from '../../context/UserContext';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
+  const { user } = useUser();
   const { wishList, setWishList } = useWishList();
   const { cart, setCart } = useCart();
 
-  const refreshCart = () => {
-    cartService.getItems().then(data => {
-      setCart(data);
-    });
-  };
+  const navigate = useNavigate();
 
-  const [amountInCart, setAmountInCart] = React.useState(
-    cart.items.find(item => item.product.id === product.id)?.quantity || 0
-  );
+  const amountInCart =
+    cart.items.find(item => item.product.id === product.id)?.quantity || 0;
 
   const isInWishList = wishList.some(
     wishListItem => wishListItem.product.id === product.id
@@ -57,27 +57,33 @@ const ProductCard = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    setAmountInCart(amountInCart => amountInCart + 1);
-    const itemData = {
-      product: product,
-      quantity: amountInCart + 1
-    };
-    cartService.modifyItem(itemData).then(res => {
+    cartService.addProductToCart(product).then(res => {
       refreshCart();
     });
   };
 
+  const refreshCart = () => {
+    cartService.getItems().then(data => {
+      setCart(data);
+    });
+  };
+
+  const goToProductDetail = () => {
+    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
+    if (user) {
+      searchService.addSearch(product);
+    }
+  };
+
   return (
     <CustomCard>
-      <CustomCardActionArea>
+      <CustomCardActionArea onClick={goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
         <CustomCardContent>
           <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
             {product.title}
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            {product.description}
-          </Typography>
+          <Typography>{product.description}</Typography>
         </CustomCardContent>
       </CustomCardActionArea>
       <CustomCardIconsSection>

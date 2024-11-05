@@ -10,5 +10,3 @@ export const CustomItemGrid = styled(Grid2)({
   gap: '20px',
   padding: '2rem'
 });
-
-export default CustomItemGrid;

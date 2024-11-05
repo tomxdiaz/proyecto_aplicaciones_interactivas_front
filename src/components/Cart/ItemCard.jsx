@@ -15,7 +15,6 @@ import { useCart } from '../../context/CartContext';
 
 const ItemCard = ({ item }) => {
   const { setCart } = useCart();
-  const [count, setCount] = useState(item.quantity);
   const { product } = item;
 
   const refreshCart = () => {
@@ -24,17 +23,16 @@ const ItemCard = ({ item }) => {
     });
   };
 
-  const handleIncrement = () => {
-    if (count === product.stock) {
-      return;
-    }
-    setCount(count + 1);
+  const addProductToCart = () => {
+    cartService.addProductToCart(product).then(res => {
+      refreshCart();
+    });
   };
-  const handleDecrement = () => {
-    if (count === 1) {
-      return;
-    }
-    setCount(count - 1);
+
+  const removeProductFromCart = () => {
+    cartService.removeProductFromCart(product).then(res => {
+      refreshCart();
+    });
   };
 
   const removeItemFromCart = () => {
@@ -43,52 +41,56 @@ const ItemCard = ({ item }) => {
     });
   };
 
-  const modifyItem = () => {
-    const itemData = {
-      product: product,
-      quantity: count
-    };
-    cartService.modifyItem(itemData).then(res => {
-      refreshCart();
-    });
-  };
-
   console.log(item);
   return (
     <CustomCard>
-      <CardActionArea>
-        <CustomCardContent>
-          <CustomCardImage image={product.images[0]} />
-          <Box style={{ margin: '0 20px', minWidth: '500px' }}>
-            <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
-              {product.title}
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              {product.description}
-            </Typography>
-            <Typography variant='h6'>${product.price}</Typography>
-          </Box>
-          <QuantityBox>
-            <QuantityButton onClick={handleDecrement}>-</QuantityButton>
-            <QuantityButton>{count}</QuantityButton>
-            <QuantityButton onClick={handleIncrement}>+</QuantityButton>
-          </QuantityBox>
-          <Box style={{ minWidth: '100px', justifyItems: 'center' }}>
-            <Typography>subTotal</Typography>
-            <Typography variant='h6'>
-              ${(product.price * count).toFixed(2)}
-            </Typography>
-          </Box>
-          <IconButton
+      {/* <CardActionArea> */}
+      <CustomCardContent>
+        <CustomCardImage image={product.images[0]} />
+        <Box
+          style={{
+            display: 'flex',
+            gap: '20px',
+            margin: '0 20px',
+            minWidth: '500px'
+          }}>
+          <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
+            {product.title}
+          </Typography>
+          <Typography sx={{ color: 'text.secondary' }}>
+            {product.description}
+          </Typography>
+          <Typography variant='h6'>${product.price}</Typography>
+        </Box>
+        <QuantityBox>
+          <QuantityButton
             onMouseDown={e => e.stopPropagation()}
-            onClick={removeItemFromCart}>
-            <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
-          </IconButton>
-          <IconButton onMouseDown={e => e.stopPropagation()} onClick={modifyItem}>
-            <CheckCircleIcon style={{ fill: COLORS.green }} fontSize='large' />
-          </IconButton>
-        </CustomCardContent>
-      </CardActionArea>
+            onClick={removeProductFromCart}>
+            {'-'}
+          </QuantityButton>
+          <Typography>{item.quantity}</Typography>
+          <QuantityButton
+            onMouseDown={e => e.stopPropagation()}
+            onClick={addProductToCart}>
+            {'+'}
+          </QuantityButton>
+        </QuantityBox>
+        <Box style={{ minWidth: '100px', justifyItems: 'center' }}>
+          <Typography>Sub Total</Typography>
+          <Typography variant='h6'>
+            ${(product.price * item.quantity).toFixed(2)}
+          </Typography>
+        </Box>
+        <IconButton
+          onMouseDown={e => e.stopPropagation()}
+          onClick={removeItemFromCart}>
+          <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
+        </IconButton>
+        {/* <IconButton onMouseDown={e => e.stopPropagation()} onClick={modifyItem}>
+          <CheckCircleIcon style={{ fill: COLORS.green }} fontSize='large' />
+        </IconButton> */}
+      </CustomCardContent>
+      {/* </CardActionArea> */}
     </CustomCard>
   );
 };

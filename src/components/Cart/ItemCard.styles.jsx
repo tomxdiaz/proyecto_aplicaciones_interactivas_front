@@ -19,8 +19,7 @@ export const CustomCard = styled(Card)({
   flexDirection: 'column',
   justifyContent: 'space-around',
   flexWrap: 'nowrap',
-  backgroundColor : COLORS.grey
-  
+  backgroundColor: COLORS.grey
 });
 
 export const CustomCardImage = styled(CardMedia)({
@@ -28,7 +27,7 @@ export const CustomCardImage = styled(CardMedia)({
   aspectRatio: '1',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
   objectFit: 'cover',
-  marginRight: '16px',
+  marginRight: '16px'
 });
 
 export const CustomCardContent = styled(CardContent)({
@@ -36,24 +35,23 @@ export const CustomCardContent = styled(CardContent)({
   flexDirection: 'row',
   flexWrap: 'wrap',
   alignItems: 'center',
-  padding: '16px',
+  padding: '16px'
 });
 
 export const QuantityButton = styled(Button)({
-  variant : 'outlined',
+  variant: 'outlined',
   fontWeight: 'bold',
-  fontSize: '16px' ,
+  fontSize: '16px',
   color: 'black'
 });
 
 export const QuantityBox = styled(Box)({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent : 'center',
+  justifyContent: 'center',
   justifyItems: 'center',
   alignItems: 'center',
   padding: '8px',
-  margin: '5px' ,
+  margin: '5px',
   border: '1px solid black'
 });
-
