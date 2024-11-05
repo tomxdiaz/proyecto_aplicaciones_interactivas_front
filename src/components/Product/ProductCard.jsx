@@ -17,9 +17,15 @@ import Typography from '@mui/material/Typography';
 import { COLORS } from '../../utils/constants';
 import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
+import { useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
+import searchService from '../../services/searchService';
+import { useUser } from '../../context/UserContext';
 
 const ProductCard = ({ product }) => {
+  const { user } = useUser();
   const { wishList, setWishList } = useWishList();
+  const navigate = useNavigate();
 
   const [amountInCart, setAmountInCart] = React.useState(0);
 
@@ -49,17 +55,22 @@ const ProductCard = ({ product }) => {
     setAmountInCart(amountInCart => amountInCart + 1);
   };
 
+  const goToProductDetail = () => {
+    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
+    if (user) {
+      searchService.addSearch(product);
+    }
+  };
+
   return (
     <CustomCard>
-      <CustomCardActionArea>
+      <CustomCardActionArea onClick={goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
         <CustomCardContent>
           <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
             {product.title}
           </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            {product.description}
-          </Typography>
+          <Typography>{product.description}</Typography>
         </CustomCardContent>
       </CustomCardActionArea>
       <CustomCardIconsSection>

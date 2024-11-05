@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  Avatar,
-  Menu,
-  MenuItem,
-  Typography,
-  useMediaQuery,
-  useTheme
-} from '@mui/material';
+import { Menu, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useUser } from '../../context/UserContext';
-import { useWishList } from '../../context/WishListContext';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { CustomAvatar, CustomLink, CustomNavBarButton } from './NavBar.styles';
-import { Link } from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
 
 const ProfileMenu = () => {
@@ -65,6 +55,9 @@ const ProfileMenu = () => {
         </CustomLink>
         <CustomLink to={getRoute(ROUTES.CREATEPRODUCT)}>
           <MenuItem onClick={handleClose}>Crear producto</MenuItem>
+        </CustomLink>
+        <CustomLink to={getRoute(ROUTES.LASTSEARCHES)}>
+          <MenuItem onClick={handleClose}>Busquedas recientes</MenuItem>
         </CustomLink>
       </Menu>
     </>

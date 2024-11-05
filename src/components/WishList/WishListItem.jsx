@@ -11,8 +11,14 @@ import {
 } from './MyWishList.styles';
 import { COLORS } from '../../utils/constants';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ROUTES, { getRoute } from '../../pages/routes';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
+import searchService from '../../services/searchService';
 
 const WishListItem = ({ item }) => {
+  const navigate = useNavigate();
+  const { user } = useUser();
   const { setWishList } = useWishList();
 
   const { product } = item;
@@ -29,9 +35,16 @@ const WishListItem = ({ item }) => {
     });
   };
 
+  const goToProductDetail = () => {
+    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
+    if (user) {
+      searchService.addSearch(product);
+    }
+  };
+
   return (
     <CustomCard>
-      <CustomCardActionArea>
+      <CustomCardActionArea onClick={goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
         <CustomCardContent>
           <Typography variant='h6'>{product.title}</Typography>

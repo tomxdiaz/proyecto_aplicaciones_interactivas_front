@@ -1,4 +1,4 @@
-import { Divider, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
@@ -12,7 +12,6 @@ import {
   CustomToolbar,
   NavBarMenu
 } from './NavBar.styles';
-import { NavRoutes } from './NavRoute/NavRoutes';
 import ProfileMenu from './ProfileMenu';
 
 const NavBar = () => {
@@ -29,7 +28,7 @@ const NavBar = () => {
     <CustomAppBar>
       <CustomToolbar>
         <CustomLink to={getRoute(ROUTES.HOME)}>
-          <CustomLogo src={'../../../public/logo.jpg'} />
+          <CustomLogo src={'../../../public/logo.png'} />
         </CustomLink>
         <CustomProfileMenuContainer>
           {user ? (
