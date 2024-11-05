@@ -15,7 +15,6 @@ import { useNavigate } from 'react-router-dom';
 
 const MyWishList = () => {
   const { wishList, setWishList } = useWishList();
-  const navigate = useNavigate();
 
   const refreshWishList = () => {
     wishListService.getUserWishList().then(userWishList => {

@@ -13,14 +13,17 @@ import {
   NavBarMenu
 } from './NavBar.styles';
 import ProfileMenu from './ProfileMenu';
+import { useCart } from '../../context/CartContext';
 
 const NavBar = () => {
   const { user, setUser } = useUser();
   const { wishList, setWishList } = useWishList();
+  const { cart, setCart } = useCart();
 
   const logout = () => {
     setUser(null);
     setWishList([]);
+    setCart({ items: [] });
     sessionStorage.removeItem('token');
   };
 

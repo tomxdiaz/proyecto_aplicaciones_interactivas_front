@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import searchService from '../../services/searchService';
 import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
 
 const LastSearches = () => {
   const [lastSearches, setLastSearches] = useState([]);
+  const navigate = useNavigate();
 
   const clearSearches = () => {
     searchService.emptySearches().then(() => {
@@ -35,7 +38,7 @@ const LastSearches = () => {
           <Button
             key={search.id}
             onClick={() => {
-              console.log(search);
+              navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: search.product.id }));
             }}>
             <Box>{search.product.title}</Box>
             <Box>{search.date}</Box>

@@ -4,7 +4,8 @@ import {
   LoginPage,
   RegisterPage,
   CreateProductPage,
-  EditProductPage
+  EditProductPage,
+  CartPage
 } from './index';
 import { ProductDetailPage } from './ProductDetailPage';
 import { MyWishListPage } from './MyWishListPage';
@@ -60,8 +61,7 @@ const ROUTES = {
   },
   CART: {
     path: '/cart',
-    // element: <CartPage />
-    element: <div></div>,
+  element: <CartPage />,
     title: 'Carrito',
     inNavMenu: true,
     adminOnly: false
