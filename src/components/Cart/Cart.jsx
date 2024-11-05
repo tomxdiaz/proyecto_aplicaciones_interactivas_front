@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import cartService from '../../services/cartService';
 import ItemCard from './ItemCard';
 import { Box } from '@mui/material';
@@ -10,7 +10,7 @@ const Cart = () => {
   const { cart, setCart } = useCart();
 
   const refreshCart = () => {
-    cartService.getItems().then(data => {
+    cartService.getUserCart().then(data => {
       setCart(data);
     });
   };

@@ -9,7 +9,6 @@ import {
 } from './ItemCard.styles';
 import { COLORS } from '../../utils/constants';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
 
@@ -18,7 +17,7 @@ const ItemCard = ({ item }) => {
   const { product } = item;
 
   const refreshCart = () => {
-    cartService.getItems().then(data => {
+    cartService.getUserCart().then(data => {
       setCart(data);
     });
   };
@@ -41,7 +40,6 @@ const ItemCard = ({ item }) => {
     });
   };
 
-  console.log(item);
   return (
     <CustomCard>
       {/* <CardActionArea> */}

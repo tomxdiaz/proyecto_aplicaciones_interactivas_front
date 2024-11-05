@@ -1,16 +1,5 @@
 import { styled } from '@mui/material/styles';
-import {
-  Typography,
-  Button,
-  Container,
-  Box,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardMedia,
-  IconButton,
-  CardContent
-} from '@mui/material';
+import { Button, Box, Card, CardMedia, CardContent } from '@mui/material';
 import { COLORS } from '../../utils/constants';
 
 export const CustomCard = styled(Card)({

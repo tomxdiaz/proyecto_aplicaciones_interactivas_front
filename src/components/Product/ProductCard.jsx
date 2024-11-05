@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
   };
 
   const refreshCart = () => {
-    cartService.getItems().then(data => {
+    cartService.getUserCart().then(data => {
       setCart(data);
     });
   };
