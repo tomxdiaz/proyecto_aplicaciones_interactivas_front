@@ -1,10 +1,8 @@
 import React from 'react';
 import cartService from '../../services/cartService';
-import ItemCard from './ItemCard';
 import { Box } from '@mui/material';
 import { useCart } from '../../context/CartContext';
-import { Card } from '@mui/material';
-import { CustomItemGrid } from './ItemGrid.styles';
+import CartItemCard from './CartItemCard';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -29,28 +27,16 @@ const Cart = () => {
 
   return (
     <Box>
-      <CustomItemGrid>
+      <Box>
         {cart.items.map(item => (
-          <ItemCard key={item.id} item={item} />
+          <CartItemCard key={item.id} item={item} />
         ))}
-      </CustomItemGrid>
-      <Card
-        style={{
-          display: 'flex',
-          minWidth: '50%',
-          alignContent: 'center',
-          alignSelf: 'center',
-          justifyContent: 'center',
-          justifyItems: 'center',
-          alignItems: 'center',
-          justifySelf: 'center'
-        }}>
+      </Box>
+      <Box>
         <button onClick={emptyCart}>Empty Cart</button>
-        <h2 style={{ marginInline: '1px' }}>
-          Total: ${Number(cart.totalPrice).toFixed(2)}
-        </h2>
+        <h2>Total: ${Number(cart.totalPrice).toFixed(2)}</h2>
         <button onClick={confirmCart}>Confirm Cart</button>
-      </Card>
+      </Box>
     </Box>
   );
 };

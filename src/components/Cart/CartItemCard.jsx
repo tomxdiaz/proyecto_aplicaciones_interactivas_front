@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Typography, Box, CardActionArea, IconButton } from '@mui/material';
+import React from 'react';
+import { Typography, Box, IconButton } from '@mui/material';
 import {
   CustomCard,
   CustomCardImage,
   CustomCardContent,
   QuantityButton,
   QuantityBox
-} from './ItemCard.styles';
+} from './CartItemCard.styles';
 import { COLORS } from '../../utils/constants';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import cartService from '../../services/cartService';
