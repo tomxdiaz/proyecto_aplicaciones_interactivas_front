@@ -35,6 +35,7 @@ const UserCheckWrapper = ({ children }) => {
       } catch (error) {
         setUser(null);
         setWishList([]);
+        setCart({ items: [] });
         sessionStorage.removeItem('token');
       }
     }
