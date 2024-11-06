@@ -10,34 +10,44 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export const CustomContainer = styled(Box)({
-  width: '90%',
+export const CustomListContainer = styled(Box)({
+  width: '100%',
   maxWidth: '800px',
   display: 'flex',
   flexDirection: 'column',
-  margin: '2rem 0'
+  gap: '20px'
 });
 
-export const CustomWishListBar = styled(Box)({
+export const CustomListBar = styled(Box)({
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-around'
 });
 
-export const WishListContainer = styled(Box)({
+export const CustomList = styled(Box)({
   width: '100%',
+  flex: 1,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '1rem',
-  margin: '1rem 0'
+  gap: '20px'
 });
 
 export const CustomLink = styled(Link)({
   textDecoration: 'none'
 });
 
+export const CustomButton = styled(Button)(({ theme }) => ({
+  textTransform: 'none'
+}));
+
+export const CustomEmptyList = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}));
+
 export const CustomCard = styled(Card)(({ theme }) => ({
-  height: '200px',
+  height: '300px',
   width: '100%',
   display: 'flex',
   flexDirection: 'row',
@@ -53,16 +63,30 @@ export const CustomCardActionArea = styled(CardActionArea)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  position: 'relative',
-  flex: 1,
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column'
   }
 }));
 
 export const CustomCardContent = styled(CardContent)({
-  flex: 1
+  height: '100%',
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '4px 20px'
 });
+
+export const CustomDeleteButton = styled(IconButton)(({ theme }) => ({
+  alignSelf: 'flex-end'
+}));
+
+export const CustomProductInfo = styled(Box)(({ theme }) => ({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'start',
+  gap: '10px'
+}));
 
 export const CustomCardImage = styled(CardMedia)(({ theme }) => ({
   height: '100%',
@@ -74,15 +98,13 @@ export const CustomCardImage = styled(CardMedia)(({ theme }) => ({
   }
 }));
 
-export const CustomIconButton = styled(IconButton)(({ theme }) => ({
-  alignSelf: 'flex-start',
+export const CustomActions = styled(Box)(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
   [theme.breakpoints.down('md')]: {
-    alignSelf: 'flex-end'
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 }));
-
-export const CustomButton = styled(Button)(({ theme }) => ({
-  textTransform: 'none'
-}));
-
-CustomButton;

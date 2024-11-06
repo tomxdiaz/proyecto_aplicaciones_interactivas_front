@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import searchService from '../../services/searchService';
-import { Box, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import ROUTES, { getRoute } from '../../pages/routes';
-import {
-  CustomButton,
-  CustomContainer,
-  LastSearchesActions
-} from './LastSearches.styles';
+import { Box } from '@mui/material';
+import MyList from '../CustomList/MyList';
+import LastSearchesItem from './LastSearchesItem';
+import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 
 const LastSearches = () => {
   const [lastSearches, setLastSearches] = useState([]);
-  const navigate = useNavigate();
 
-  const clearSearches = () => {
+  const emptySearches = () => {
     searchService.emptySearches().then(() => {
       refreshSearches();
     });
@@ -32,23 +27,27 @@ const LastSearches = () => {
   });
 
   return (
-    <CustomContainer>
-      <LastSearchesActions>
-        <CustomButton onClick={clearSearches}>Borrar busquedas</CustomButton>
-      </LastSearchesActions>
-      {lastSearches.map((search, i) => {
-        return (
-          <Button
-            key={search.id}
-            onClick={() => {
-              navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: search.product.id }));
-            }}>
-            <Box>{search.product.title}</Box>
-            <Box>{search.date}</Box>
-          </Button>
-        );
-      })}
-    </CustomContainer>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      width={'100%'}
+      alignItems={'center'}
+      paddingTop={'2rem'}
+      paddingBottom={'4rem'}
+      gap={'2rem'}>
+      {lastSearches.length ? (
+        <MyList title={'Busquedas recientes'} onEmpty={emptySearches}>
+          {lastSearches.map(search => (
+            <LastSearchesItem key={search.id} search={search} />
+          ))}
+        </MyList>
+      ) : (
+        <CustomEmptyListMessage
+          message={'Oops, parece que no tienes busquedas recientes'}
+          buttonMessage={'Explorar productos'}
+        />
+      )}
+    </Box>
   );
 };
 
