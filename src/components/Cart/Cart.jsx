@@ -6,6 +6,7 @@ import CartItem from './CartItem';
 import { CustomCartActions } from './Cart.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import MyList from '../CustomList/MyList';
+import { ListContainer } from '../CustomList/MyList.styles';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -29,14 +30,7 @@ const Cart = () => {
   };
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      width={'100%'}
-      alignItems={'center'}
-      paddingTop={'2rem'}
-      paddingBottom={'4rem'}
-      gap={'2rem'}>
+    <ListContainer>
       {cart.items.length ? (
         <>
           <MyList title={'Carrito'} onEmpty={emptyCart}>
@@ -57,7 +51,7 @@ const Cart = () => {
           buttonMessage={'Explorar productos'}
         />
       )}
-    </Box>
+    </ListContainer>
   );
 };
 

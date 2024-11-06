@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import MyList from '../CustomList/MyList';
 import LastSearchesItem from './LastSearchesItem';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
+import { ListContainer } from '../CustomList/MyList.styles';
 
 const LastSearches = () => {
   const [lastSearches, setLastSearches] = useState([]);
@@ -27,14 +28,7 @@ const LastSearches = () => {
   });
 
   return (
-    <Box
-      display={'flex'}
-      flexDirection={'column'}
-      width={'100%'}
-      alignItems={'center'}
-      paddingTop={'2rem'}
-      paddingBottom={'4rem'}
-      gap={'2rem'}>
+    <ListContainer>
       {lastSearches.length ? (
         <MyList title={'Busquedas recientes'} onEmpty={emptySearches}>
           {lastSearches.map(search => (
@@ -47,7 +41,7 @@ const LastSearches = () => {
           buttonMessage={'Explorar productos'}
         />
       )}
-    </Box>
+    </ListContainer>
   );
 };
 

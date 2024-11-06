@@ -10,6 +10,16 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+export const ListContainer = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '100%',
+  alignItems: 'center',
+  paddingTop: '2rem',
+  paddingBottom: '4rem',
+  gap: '2rem'
+});
+
 export const CustomListContainer = styled(Box)({
   width: '100%',
   maxWidth: '800px',

@@ -10,7 +10,8 @@ import {
   CustomLink,
   CustomList,
   CustomListBar,
-  CustomListContainer
+  CustomListContainer,
+  ListContainer
 } from '../CustomList/MyList.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import MyList from '../CustomList/MyList';
@@ -31,7 +32,7 @@ const MyWishList = () => {
   };
 
   return (
-    <Box
+    <ListContainer
       display={'flex'}
       flexDirection={'column'}
       width={'100%'}
@@ -51,7 +52,7 @@ const MyWishList = () => {
           buttonMessage={'Explorar productos'}
         />
       )}
-    </Box>
+    </ListContainer>
   );
 };
 
