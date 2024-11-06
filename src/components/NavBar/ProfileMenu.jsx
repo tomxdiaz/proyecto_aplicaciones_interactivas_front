@@ -9,6 +9,10 @@ const ProfileMenu = () => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const theme = useTheme();
+
+  const desktop = useMediaQuery(theme.breakpoints.up('md'));
+
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -17,9 +21,7 @@ const ProfileMenu = () => {
     setAnchorEl(null);
   };
 
-  const theme = useTheme();
-
-  const desktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isAdmin = user && user.role === 'ADMIN';
 
   return (
     <>
@@ -44,7 +46,7 @@ const ProfileMenu = () => {
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}>
-        <CustomLink to={getRoute(ROUTES.PROFILE)}>
+        {/* <CustomLink to={getRoute(ROUTES.PROFILE)}>
           <MenuItem onClick={handleClose}>Perfil</MenuItem>
         </CustomLink>
         <CustomLink to={getRoute(ROUTES.CART)}>
@@ -58,7 +60,17 @@ const ProfileMenu = () => {
         </CustomLink>
         <CustomLink to={getRoute(ROUTES.LASTSEARCHES)}>
           <MenuItem onClick={handleClose}>Busquedas recientes</MenuItem>
-        </CustomLink>
+        </CustomLink> */}
+        {Object.entries(ROUTES)
+          .filter(([key, value]) => value.inNavMenu)
+          .filter(([key, value]) => (value.adminOnly ? isAdmin : true))
+          .map(([key, value]) => {
+            return (
+              <CustomLink key={key} to={getRoute(value)}>
+                <MenuItem onClick={handleClose}>{value.title}</MenuItem>
+              </CustomLink>
+            );
+          })}
       </Menu>
     </>
   );
