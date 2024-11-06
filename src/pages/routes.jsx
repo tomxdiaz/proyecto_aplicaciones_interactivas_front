@@ -38,6 +38,27 @@ const ROUTES = {
     inNavMenu: true,
     adminOnly: false
   },
+  CART: {
+    path: '/cart',
+    element: <CartPage />,
+    title: 'Carrito',
+    inNavMenu: true,
+    adminOnly: false
+  },
+  LASTSEARCHES: {
+    path: '/last-searches',
+    element: <LastSearchesPage />,
+    title: 'Busquedas recientes',
+    inNavMenu: true,
+    adminOnly: false
+  },
+  PROFILE: {
+    path: '/profile',
+    element: <ProfilePage />,
+    title: 'Perfil',
+    inNavMenu: false,
+    adminOnly: false
+  },
   PRODUCTDETAIL: {
     path: `/product/:id`,
     element: <ProductDetailPage />,
@@ -56,22 +77,8 @@ const ROUTES = {
     path: `/edit-product/:id`,
     element: <EditProductPage />,
     title: 'Editar producto',
-    inNavMenu: true,
-    adminOnly: true
-  },
-  CART: {
-    path: '/cart',
-  element: <CartPage />,
-    title: 'Carrito',
-    inNavMenu: true,
-    adminOnly: false
-  },
-  PROFILE: {
-    path: '/profile',
-    element: <ProfilePage />,
-    title: 'Perfil',
     inNavMenu: false,
-    adminOnly: false
+    adminOnly: true
   },
   LOGIN: {
     path: '/login',
@@ -85,13 +92,6 @@ const ROUTES = {
     element: <RegisterPage />,
     title: 'Registrarse',
     inNavMenu: false,
-    adminOnly: false
-  },
-  LASTSEARCHES: {
-    path: '/last-searches',
-    element: <LastSearchesPage />,
-    title: 'Busquedas recientes',
-    inNavMenu: true,
     adminOnly: false
   }
 };
