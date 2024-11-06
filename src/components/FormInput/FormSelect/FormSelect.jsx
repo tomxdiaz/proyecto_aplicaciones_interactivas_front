@@ -1,5 +1,5 @@
 import { MenuItem } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputContainer, Label } from '../FormInput.styles';
 import { EmptyMenuItem, Select } from './FormSelect.styles';
 
@@ -8,21 +8,28 @@ export const FormSelect = ({
   state,
   handleChange,
   defaultMsg = null,
-  options
+  options,
+  value = ''
 }) => {
-  const [value, setvalue] = useState('');
+  const [inputValue, setInputvalue] = useState(value);
 
   const handleSelectChange = event => {
-    setvalue(event.target.value);
+    setInputvalue(event.target.value);
     handleChange(state, event.target.value);
   };
+
+  useEffect(() => setInputvalue(value), [value]);
 
   return (
     <InputContainer>
       <Label>{label}</Label>
-      <Select disableUnderline onChange={handleSelectChange} value={value}>
+      <Select onChange={handleSelectChange} value={inputValue}>
         {options.length ? (
-          options.map(option => <MenuItem value={option}>{option}</MenuItem>)
+          options.map((option, index) => (
+            <MenuItem value={option} key={`FormInput-Select-${label}-${index}`}>
+              {option}
+            </MenuItem>
+          ))
         ) : (
           <EmptyMenuItem value={'null'}>
             {`--- ${defaultMsg ?? 'No se encontraron opciones'} ---`}
