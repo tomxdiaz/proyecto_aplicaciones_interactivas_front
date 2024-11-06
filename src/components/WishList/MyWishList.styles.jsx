@@ -18,6 +18,11 @@ export const CustomContainer = styled(Box)({
   margin: '2rem 0'
 });
 
+export const CustomWishListBar = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between'
+});
+
 export const WishListContainer = styled(Box)({
   width: '100%',
   display: 'flex',
@@ -25,11 +30,6 @@ export const WishListContainer = styled(Box)({
   alignItems: 'center',
   gap: '1rem',
   margin: '1rem 0'
-});
-
-export const CustomWishListBar = styled(Box)({
-  display: 'flex',
-  justifyContent: 'space-between'
 });
 
 export const CustomLink = styled(Link)({

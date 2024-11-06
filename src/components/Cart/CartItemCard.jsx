@@ -1,20 +1,26 @@
 import React from 'react';
-import { Typography, Box, IconButton } from '@mui/material';
-import {
-  CustomCard,
-  CustomCardImage,
-  CustomCardContent,
-  QuantityButton,
-  QuantityBox
-} from './CartItemCard.styles';
+import { Typography, Box, IconButton, Button } from '@mui/material';
 import { COLORS } from '../../utils/constants';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
+import ROUTES, { getRoute } from '../../pages/routes';
+import { useNavigate } from 'react-router-dom';
+import {
+  ActionsBox,
+  CustomCard,
+  CustomCardActionArea,
+  CustomCardContent,
+  CustomCardImage,
+  DeleteButton,
+  QuantityBox
+} from './CartItemCard.styles';
 
 const ItemCard = ({ item }) => {
   const { setCart } = useCart();
   const { product } = item;
+
+  const navigate = useNavigate();
 
   const refreshCart = () => {
     cartService.getUserCart().then(data => {
@@ -40,38 +46,36 @@ const ItemCard = ({ item }) => {
     });
   };
 
+  const goToProductDetail = () => {
+    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
+  };
+
   return (
     <CustomCard>
-      {/* <CardActionArea> */}
-      <CustomCardContent>
+      <CustomCardActionArea onClick={goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
-        <Box
-          style={{
-            display: 'flex',
-            gap: '20px',
-            margin: '0 20px',
-            minWidth: '500px'
-          }}>
-          <Typography gutterBottom variant='h6' sx={{ color: 'text.primary' }}>
-            {product.title}
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            {product.description}
-          </Typography>
-          <Typography variant='h6'>${product.price}</Typography>
-        </Box>
+        <CustomCardContent>
+          <Typography variant='h6'>{product.title}</Typography>
+          <Typography>{product.description}</Typography>
+          <Typography variant='h5'>${product.price}</Typography>
+        </CustomCardContent>
+      </CustomCardActionArea>
+      <ActionsBox>
+        <DeleteButton
+          onMouseDown={e => e.stopPropagation()}
+          onClick={removeItemFromCart}>
+          <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
+        </DeleteButton>
         <QuantityBox>
-          <QuantityButton
+          <Button
             onMouseDown={e => e.stopPropagation()}
             onClick={removeProductFromCart}>
             {'-'}
-          </QuantityButton>
-          <Typography>{item.quantity}</Typography>
-          <QuantityButton
-            onMouseDown={e => e.stopPropagation()}
-            onClick={addProductToCart}>
+          </Button>
+          <Typography variant='h6'>{item.quantity}</Typography>
+          <Button onMouseDown={e => e.stopPropagation()} onClick={addProductToCart}>
             {'+'}
-          </QuantityButton>
+          </Button>
         </QuantityBox>
         <Box style={{ minWidth: '100px', justifyItems: 'center' }}>
           <Typography>Sub Total</Typography>
@@ -79,16 +83,7 @@ const ItemCard = ({ item }) => {
             ${(product.price * item.quantity).toFixed(2)}
           </Typography>
         </Box>
-        <IconButton
-          onMouseDown={e => e.stopPropagation()}
-          onClick={removeItemFromCart}>
-          <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
-        </IconButton>
-        {/* <IconButton onMouseDown={e => e.stopPropagation()} onClick={modifyItem}>
-          <CheckCircleIcon style={{ fill: COLORS.green }} fontSize='large' />
-        </IconButton> */}
-      </CustomCardContent>
-      {/* </CardActionArea> */}
+      </ActionsBox>
     </CustomCard>
   );
 };
