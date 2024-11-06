@@ -32,11 +32,10 @@ export const ManageProduct = ({ id = null }) => {
     const newProd = { ...product };
     newProd[prop] = value;
     setProduct(newProd);
-    console.log('newProd: ', newProd);
   };
 
   const getProductData = async () => {
-    const productData = await productService.get(id);
+    const productData = await productService.getProductById(id);
     productData.category = productData.category.name;
     setProduct(productData);
     return productData;
@@ -101,7 +100,7 @@ export const ManageProduct = ({ id = null }) => {
       ...product,
       category: categories.find(categories => categories.name === product.category)
     };
-    console.log('product: ', formatedProduct);
+
     if (id) await productService.update(formatedProduct);
     else await productService.add(formatedProduct);
 

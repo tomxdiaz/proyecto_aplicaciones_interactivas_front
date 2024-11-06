@@ -24,7 +24,6 @@ export const ImageInput = ({ state, handleChange, images = [] }) => {
         });
       })
     );
-    console.log('nreImage: ', newImages);
 
     setInputImage(prevImages => [...prevImages, ...newImages]);
     handleChange(state, [...images, ...newImages]);
@@ -40,7 +39,6 @@ export const ImageInput = ({ state, handleChange, images = [] }) => {
     newImages.splice(index, 1);
     setInputImage(newImages);
     handleChange(state, newImages);
-    console.log('newImages: ', newImages);
   };
 
   useEffect(() => setInputImage(images), [images]);

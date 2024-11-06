@@ -1,4 +1,4 @@
-import { Divider, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import React from 'react';
 import { useUser } from '../../context/UserContext';
 import { useWishList } from '../../context/WishListContext';
@@ -12,16 +12,18 @@ import {
   CustomToolbar,
   NavBarMenu
 } from './NavBar.styles';
-import { NavRoutes } from './NavRoute/NavRoutes';
 import ProfileMenu from './ProfileMenu';
+import { useCart } from '../../context/CartContext';
 
 const NavBar = () => {
   const { user, setUser } = useUser();
   const { wishList, setWishList } = useWishList();
+  const { cart, setCart } = useCart();
 
   const logout = () => {
     setUser(null);
     setWishList([]);
+    setCart({ items: [] });
     sessionStorage.removeItem('token');
   };
 
@@ -29,7 +31,7 @@ const NavBar = () => {
     <CustomAppBar>
       <CustomToolbar>
         <CustomLink to={getRoute(ROUTES.HOME)}>
-          <CustomLogo src={'../../../public/logo.jpg'} />
+          <CustomLogo src={'../../../public/logo.png'} />
         </CustomLink>
         <CustomProfileMenuContainer>
           {user ? (

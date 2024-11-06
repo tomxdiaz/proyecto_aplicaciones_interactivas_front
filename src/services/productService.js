@@ -6,7 +6,7 @@ const productService = {
     const response = await api.get(`/product`);
     return response.data.data;
   },
-  get: async id => {
+  getProductById: async id => {
     const response = await api.get(`/product/${id}`);
     return response.data.data;
   },

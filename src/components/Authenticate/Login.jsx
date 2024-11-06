@@ -12,11 +12,14 @@ import {
   CustomForm,
   CustomFormActions
 } from './Authenticate.styles';
+import cartService from '../../services/cartService';
+import { useCart } from '../../context/CartContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();
   const { setWishList } = useWishList();
+  const { setCart } = useCart();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,12 +30,15 @@ const Login = () => {
       await authService.login(username, password);
 
       userService.getUserData().then(userData => {
-        console.log('userData: ', userData);
         setUser(userData);
       });
 
       wishListService.getUserWishList().then(userWishList => {
         setWishList(userWishList);
+      });
+
+      cartService.getUserCart().then(userCart => {
+        setCart(userCart);
       });
 
       navigate(getRoute(ROUTES.HOME));

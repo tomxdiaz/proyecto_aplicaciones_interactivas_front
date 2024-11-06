@@ -3,6 +3,8 @@ import userService from '../../services/userService';
 import { useUser } from '../../context/UserContext';
 import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
+import cartService from '../../services/cartService';
+import { useCart } from '../../context/CartContext';
 
 // interface UserCheckWrapperProps {
 //   children: React.ReactNode;
@@ -12,6 +14,7 @@ import { useWishList } from '../../context/WishListContext';
 const UserCheckWrapper = ({ children }) => {
   const { setUser } = useUser();
   const { setWishList } = useWishList();
+  const { setCart } = useCart();
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
@@ -25,13 +28,18 @@ const UserCheckWrapper = ({ children }) => {
         wishListService.getUserWishList().then(userWishList => {
           setWishList(userWishList);
         });
+
+        cartService.getUserCart().then(userCart => {
+          setCart(userCart);
+        });
       } catch (error) {
         setUser(null);
         setWishList([]);
+        setCart({ items: [] });
         sessionStorage.removeItem('token');
       }
     }
-  }, [setUser, setWishList]);
+  }, [setUser, setWishList, setCart]);
 
   return <>{children}</>;
 };
