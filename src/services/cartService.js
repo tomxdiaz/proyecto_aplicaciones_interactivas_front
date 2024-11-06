@@ -7,17 +7,17 @@ const cartService = {
   },
 
   addProductToCart: async product => {
-    const response = await authApi.put(`/cart/product`, product);
-    return response.data.data;
-  },
-
-  removeProductFromCart: async product => {
     const response = await authApi.put(`/cart/product/${product.id}`);
     return response.data.data;
   },
 
+  removeProductFromCart: async product => {
+    const response = await authApi.put(`/cart/product/${product.id}/remove`);
+    return response.data.data;
+  },
+
   removeItemFromCart: async product => {
-    const response = await authApi.put(`/cart/item/${product.id}`);
+    const response = await authApi.put(`/cart/item/${product.id}/remove`);
     return response.data.data;
   },
 
