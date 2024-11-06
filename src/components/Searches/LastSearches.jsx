@@ -3,6 +3,11 @@ import searchService from '../../services/searchService';
 import { Box, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
+import {
+  CustomButton,
+  CustomContainer,
+  LastSearchesActions
+} from './LastSearches.styles';
 
 const LastSearches = () => {
   const [lastSearches, setLastSearches] = useState([]);
@@ -27,12 +32,10 @@ const LastSearches = () => {
   });
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-      <Button onClick={clearSearches}>Clear</Button>
+    <CustomContainer>
+      <LastSearchesActions>
+        <CustomButton onClick={clearSearches}>Borrar busquedas</CustomButton>
+      </LastSearchesActions>
       {lastSearches.map((search, i) => {
         return (
           <Button
@@ -45,7 +48,7 @@ const LastSearches = () => {
           </Button>
         );
       })}
-    </Box>
+    </CustomContainer>
   );
 };
 

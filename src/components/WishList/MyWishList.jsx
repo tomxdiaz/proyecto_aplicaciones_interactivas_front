@@ -41,7 +41,7 @@ const MyWishList = () => {
           ))
         ) : (
           <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Typography variant='h4'>
+            <Typography textAlign={'center'} variant='h4'>
               Oops, parece que no tienes favoritos
             </Typography>
             <CustomLink to={getRoute(ROUTES.HOME)}>
