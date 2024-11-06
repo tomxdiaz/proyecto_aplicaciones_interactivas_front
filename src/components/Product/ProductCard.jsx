@@ -21,6 +21,7 @@ import { useWishList } from '../../context/WishListContext';
 const ProductCard = ({ product }) => {
   const { wishList, setWishList } = useWishList();
 
+  console.log('CardProduct: ', product);
   const [amountInCart, setAmountInCart] = React.useState(0);
 
   const isInWishList = wishList.some(

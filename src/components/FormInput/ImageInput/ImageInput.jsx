@@ -11,12 +11,20 @@ import {
 export const ImageInput = ({ state, handleChange, images = [] }) => {
   const [inputImage, setInputImage] = useState(images);
 
-  const handleImageChange = event => {
+  const handleImageChange = async event => {
     const files = Array.from(event.target.files);
 
-    const newImages = files.map(file => {
-      return URL.createObjectURL(file);
-    });
+    const newImages = await Promise.all(
+      files.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+        });
+      })
+    );
+    console.log('nreImage: ', newImages);
 
     setInputImage(prevImages => [...prevImages, ...newImages]);
     handleChange(state, [...images, ...newImages]);
@@ -32,6 +40,7 @@ export const ImageInput = ({ state, handleChange, images = [] }) => {
     newImages.splice(index, 1);
     setInputImage(newImages);
     handleChange(state, newImages);
+    console.log('newImages: ', newImages);
   };
 
   useEffect(() => setInputImage(images), [images]);

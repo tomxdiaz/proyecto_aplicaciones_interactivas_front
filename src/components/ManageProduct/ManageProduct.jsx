@@ -32,6 +32,7 @@ export const ManageProduct = ({ id = null }) => {
     const newProd = { ...product };
     newProd[prop] = value;
     setProduct(newProd);
+    console.log('newProd: ', newProd);
   };
 
   const getProductData = async () => {
