@@ -1,17 +1,20 @@
 import React from 'react';
-import {
-  CustomButton,
-  CustomContainer,
-  CustomLink,
-  CustomWishListBar,
-  WishListContainer
-} from './MyWishList.styles';
 import { useWishList } from '../../context/WishListContext';
 import WishListItem from './WishListItem';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import ROUTES, { getRoute } from '../../pages/routes';
 import wishListService from '../../services/wishListService';
-import { useNavigate } from 'react-router-dom';
+import {
+  CustomButton,
+  CustomEmptyList,
+  CustomLink,
+  CustomList,
+  CustomListBar,
+  CustomListContainer,
+  ListContainer
+} from '../CustomList/MyList.styles';
+import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
+import MyList from '../CustomList/MyList';
 
 const MyWishList = () => {
   const { wishList, setWishList } = useWishList();
@@ -29,30 +32,27 @@ const MyWishList = () => {
   };
 
   return (
-    <CustomContainer>
-      <CustomWishListBar>
-        <Typography variant='h4'>Mis favoritos</Typography>
-        <CustomButton onClick={emptyWishList}>Vaciar</CustomButton>
-      </CustomWishListBar>
-      <WishListContainer>
-        {wishList.length ? (
-          wishList.map(wishListItem => (
-            <WishListItem key={wishListItem.id} item={wishListItem} />
-          ))
-        ) : (
-          <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Typography textAlign={'center'} variant='h4'>
-              Oops, parece que no tienes favoritos
-            </Typography>
-            <CustomLink to={getRoute(ROUTES.HOME)}>
-              <CustomButton>
-                <Typography>Explorar productos</Typography>
-              </CustomButton>
-            </CustomLink>
-          </Box>
-        )}
-      </WishListContainer>
-    </CustomContainer>
+    <ListContainer
+      display={'flex'}
+      flexDirection={'column'}
+      width={'100%'}
+      alignItems={'center'}
+      paddingTop={'2rem'}
+      paddingBottom={'4rem'}
+      gap={'2rem'}>
+      {wishList.length ? (
+        <MyList title={'Favoritos'} onEmpty={emptyWishList}>
+          {wishList.map(wishListItem => (
+            <WishListItem key={wishListItem.id} wishListItem={wishListItem} />
+          ))}
+        </MyList>
+      ) : (
+        <CustomEmptyListMessage
+          message={'Oops, parece que no tienes items en favoritos'}
+          buttonMessage={'Explorar productos'}
+        />
+      )}
+    </ListContainer>
   );
 };
 
