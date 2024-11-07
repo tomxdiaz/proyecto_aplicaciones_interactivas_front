@@ -18,9 +18,10 @@ authApi.interceptors.request.use(config => {
 authApi.interceptors.response.use(
   response => response,
   error => {
-    console.log(error);
+    console.error(error);
+    const currentRoute = window.location.pathname;
     if (error.response.status === 403) {
-      window.location.href = getRoute(ROUTES.LOGIN);
+      window.location.href = `${getRoute(ROUTES.LOGIN)}?redirectURL=${currentRoute}`;
     }
     return Promise.reject(error);
   }

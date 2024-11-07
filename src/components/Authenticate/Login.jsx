@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams
+} from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
@@ -20,6 +26,9 @@ const Login = () => {
   const { setUser } = useUser();
   const { setWishList } = useWishList();
   const { setCart } = useCart();
+  const [searchParams] = useSearchParams();
+
+  const redirectURL = searchParams.get('redirectURL');
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,7 +50,7 @@ const Login = () => {
         setCart(userCart);
       });
 
-      navigate(getRoute(ROUTES.HOME));
+      navigate(redirectURL);
     } catch (error) {
       console.log(error);
     }

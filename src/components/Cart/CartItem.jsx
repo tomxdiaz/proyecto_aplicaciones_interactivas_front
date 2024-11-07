@@ -1,7 +1,5 @@
 import React from 'react';
-import { Typography, Box, IconButton, Button } from '@mui/material';
-import { COLORS } from '../../utils/constants';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { Typography, Box, Button } from '@mui/material';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -49,6 +47,9 @@ const ItemCard = ({ cartItem }) => {
         </Box>
         <QuantityBox>
           <Button
+            style={{
+              minWidth: '40px'
+            }}
             onMouseDown={e => e.stopPropagation()}
             onClick={e => {
               e.stopPropagation();
@@ -58,6 +59,9 @@ const ItemCard = ({ cartItem }) => {
           </Button>
           <Typography variant='h6'>{cartItem.quantity}</Typography>
           <Button
+            style={{
+              minWidth: '40px'
+            }}
             onMouseDown={e => e.stopPropagation()}
             onClick={e => {
               e.stopPropagation();

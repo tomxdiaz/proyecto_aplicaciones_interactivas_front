@@ -1,6 +1,7 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
 
 const CustomContainer = styled(Box)({
   display: 'flex',
@@ -12,6 +13,7 @@ const CustomContainer = styled(Box)({
 
 const MustLogin = ({ user, children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return user ? (
     children
@@ -20,7 +22,7 @@ const MustLogin = ({ user, children }) => {
       <Typography variant='h4'>
         Tenes que iniciar sesion para ver esta pagina.
       </Typography>
-      <Button onClick={() => navigate('/login')} variant='contained'>
+      <Button onClick={() => navigate(getRoute(ROUTES.LOGIN))} variant='contained'>
         Iniciar sesion
       </Button>
     </CustomContainer>

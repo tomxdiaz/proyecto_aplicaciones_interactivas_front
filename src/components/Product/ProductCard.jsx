@@ -107,9 +107,6 @@ const ProductCard = ({ product }) => {
           </CustomCardIconButton>
           <CustomCardIconButton
             onMouseDown={e => e.stopPropagation()}
-            style={{
-              padding: '10px'
-            }}
             onClick={handleAddToCart}>
             <ShoppingCartIcon fontSize='large' />
             <Badge badgeContent={amountInCart} color='primary' />
