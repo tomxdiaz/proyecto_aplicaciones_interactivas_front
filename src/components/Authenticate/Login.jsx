@@ -20,9 +20,12 @@ import {
 } from './Authenticate.styles';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { openSnackbar } = useSnackbar();
+
   const { setUser } = useUser();
   const { setWishList } = useWishList();
   const { setCart } = useCart();
@@ -38,21 +41,18 @@ const Login = () => {
     try {
       await authService.login(username, password);
 
-      userService.getUserData().then(userData => {
-        setUser(userData);
-      });
+      const userData = await userService.getUserData();
+      setUser(userData);
 
-      wishListService.getUserWishList().then(userWishList => {
-        setWishList(userWishList);
-      });
+      const userWishList = await wishListService.getUserWishList();
+      setWishList(userWishList);
 
-      cartService.getUserCart().then(userCart => {
-        setCart(userCart);
-      });
+      const userCart = cartService.getUserCart();
+      setCart(userCart);
 
-      navigate(redirectURL);
-    } catch (error) {
-      console.log(error);
+      redirectURL ? navigate(redirectURL) : navigate(getRoute(ROUTES.HOME));
+    } catch (e) {
+      openSnackbar('Error al iniciar sesion', 'error');
     }
   };
 

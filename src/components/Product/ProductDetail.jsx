@@ -35,7 +35,6 @@ const ProductDetail = ({ id }) => {
   const cartItem = cart.items.find(item => item.product?.id === product?.id);
 
   const addProductToCart = () => {
-    console.log(product.stock);
     cartService.addProductToCart(product).then(res => {
       refreshCart();
     });
@@ -89,7 +88,6 @@ const ProductDetail = ({ id }) => {
         setLoading(false);
       });
     } catch (e) {
-      console.error(e);
       setLoading(false);
     }
   }, [id]);
