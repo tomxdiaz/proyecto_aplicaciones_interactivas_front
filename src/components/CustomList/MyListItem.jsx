@@ -44,6 +44,7 @@ const MyListItem = ({ product, onRemove, children }) => {
           <CustomProductInfo>
             <Typography variant='h6'>{product.title}</Typography>
             <Typography>{product.description}</Typography>
+            <Typography variant='h6'>Stock: {product.stock}</Typography>
             <Typography variant='h5'>${product.price}</Typography>
           </CustomProductInfo>
 
