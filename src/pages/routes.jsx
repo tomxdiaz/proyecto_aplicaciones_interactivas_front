@@ -31,6 +31,13 @@ const ROUTES = {
     inNavMenu: false,
     adminOnly: false
   },
+  PROFILE: {
+    path: '/profile',
+    element: <ProfilePage />,
+    title: 'Perfil',
+    inNavMenu: true,
+    adminOnly: false
+  },
   MYWISHLIST: {
     path: '/my-wishlist',
     element: <MyWishListPage />,
@@ -50,13 +57,6 @@ const ROUTES = {
     element: <LastSearchesPage />,
     title: 'Busquedas recientes',
     inNavMenu: true,
-    adminOnly: false
-  },
-  PROFILE: {
-    path: '/profile',
-    element: <ProfilePage />,
-    title: 'Perfil',
-    inNavMenu: false,
     adminOnly: false
   },
   PRODUCTDETAIL: {

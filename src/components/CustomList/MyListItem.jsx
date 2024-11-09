@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import ROUTES, { getRoute } from '../../pages/routes';
 
-const MyListItem = ({ product, onRemove, children }) => {
+const MyListItem = ({ product, onRemove, children, small = false }) => {
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -27,24 +27,49 @@ const MyListItem = ({ product, onRemove, children }) => {
     }
   };
   return (
-    <CustomCard>
+    <CustomCard small={small}>
       <CustomCardActionArea onClick={goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
         <CustomCardContent>
-          {onRemove && (
+          {!small && onRemove && (
             <CustomDeleteButton
               onMouseDown={e => e.stopPropagation()}
               onClick={e => {
                 e.stopPropagation();
                 onRemove();
               }}>
-              <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
+              <DeleteForeverIcon
+                style={{ fill: COLORS.red }}
+                fontSize={small ? 'small' : 'large'}
+              />
             </CustomDeleteButton>
           )}
           <CustomProductInfo>
-            <Typography variant='h6'>{product.title}</Typography>
-            <Typography>{product.description}</Typography>
-            <Typography variant='h5'>${product.price}</Typography>
+            <Typography
+              variant={small ? 'subtitle1' : 'h6'}
+              sx={{ justifyContent: 'space-between', width: '100%' }}>
+              {product.title}
+              {small && onRemove && (
+                <CustomDeleteButton
+                  onMouseDown={e => e.stopPropagation()}
+                  onClick={e => {
+                    e.stopPropagation();
+                    onRemove();
+                  }}
+                  small>
+                  <DeleteForeverIcon
+                    style={{ fill: COLORS.red }}
+                    fontSize={small ? 'small' : 'large'}
+                  />
+                </CustomDeleteButton>
+              )}
+            </Typography>
+            <Typography variant={small ? 'subtitle2' : 'body1'}>
+              {product.description}
+            </Typography>
+            <Typography variant={small ? 'subtitle1' : 'h5'}>
+              ${product.price}
+            </Typography>
           </CustomProductInfo>
 
           {children && (

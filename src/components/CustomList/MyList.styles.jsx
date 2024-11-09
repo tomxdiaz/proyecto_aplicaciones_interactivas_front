@@ -56,9 +56,11 @@ export const CustomEmptyList = styled(Box)(({ theme }) => ({
   alignItems: 'center'
 }));
 
-export const CustomCard = styled(Card)(({ theme }) => ({
-  height: '300px',
-  width: '100%',
+export const CustomCard = styled(Card, {
+  shouldForwardProp: prop => prop !== 'small'
+})(({ theme, small = false }) => ({
+  height: small ? '9rem' : '300px',
+  width: small ? '30rem' : '100%',
   display: 'flex',
   flexDirection: 'row',
   position: 'relative',
@@ -86,8 +88,11 @@ export const CustomCardContent = styled(CardContent)({
   padding: '4px 20px'
 });
 
-export const CustomDeleteButton = styled(IconButton)(({ theme }) => ({
-  alignSelf: 'flex-end'
+export const CustomDeleteButton = styled(IconButton, {
+  shouldForwardProp: prop => prop !== 'small'
+})(({ theme, small }) => ({
+  alignSelf: 'flex-end',
+  float: small ? 'inline-end' : 'inherit'
 }));
 
 export const CustomProductInfo = styled(Box)(({ theme }) => ({

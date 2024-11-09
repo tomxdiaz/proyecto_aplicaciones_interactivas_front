@@ -1,6 +1,6 @@
 import { authApi } from './authApi';
 
-const productService = {
+const searchService = {
   getUserSearches: async () => {
     const response = await authApi.get(`/search`);
     return response.data.data;
@@ -17,4 +17,4 @@ const productService = {
   }
 };
 
-export default productService;
+export default searchService;
