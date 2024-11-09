@@ -4,3 +4,4 @@ export * from './RegisterPage';
 export * from './CreateProductPage';
 export * from './EditProductPage';
 export * from './CartPage';
+export * from './BuysPage';

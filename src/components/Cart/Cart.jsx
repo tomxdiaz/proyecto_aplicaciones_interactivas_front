@@ -1,7 +1,9 @@
 import React from 'react';
 import cartService from '../../services/cartService';
-import { Box, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useCart } from '../../context/CartContext';
+import ROUTES, { getRoute } from '../../pages/routes';
+import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import { CustomCartActions } from './Cart.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
@@ -12,6 +14,7 @@ import { useSnackbar } from '../../context/SnackbarContext';
 const Cart = () => {
   const { cart, setCart } = useCart();
   const { openSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const refreshCart = () => {
     cartService
@@ -40,6 +43,7 @@ const Cart = () => {
       .confirmCart()
       .then(res => {
         refreshCart();
+        navigate(getRoute(ROUTES.BUYS));
       })
       .catch(e => {
         openSnackbar('Error al confirmar el carrito', 'error');

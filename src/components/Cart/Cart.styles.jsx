@@ -20,5 +20,10 @@ export const CustomCartActions = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-around',
-  alignItems: 'center'
+  alignItems: 'center',
+  maxWidth: '800px',
+  [theme.breakpoints.down('md')]: {
+    height: 'auto',
+    flexDirection: 'column'
+  }
 }));
