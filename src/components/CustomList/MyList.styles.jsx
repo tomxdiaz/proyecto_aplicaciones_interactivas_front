@@ -90,7 +90,7 @@ export const CustomCardContent = styled(CardContent)({
 
 export const CustomDeleteButton = styled(IconButton, {
   shouldForwardProp: prop => prop !== 'small'
-})(({ theme, small }) => ({
+})(({ small }) => ({
   alignSelf: 'flex-end',
   float: small ? 'inline-end' : 'inherit'
 }));

@@ -11,10 +11,13 @@ export const ProfileContainer = styled(Box)(({ theme }) => ({
   }
 }));
 
-export const ProfileCard = styled(Card)({
+export const ProfileCard = styled(Card)(({ theme }) => ({
   height: '30rem',
-  width: '25rem'
-});
+  width: '25rem',
+  [theme.breakpoints.down('md')]: {
+    margin: 'auto'
+  }
+}));
 
 export const Avatar = styled(AvatarMui)({
   margin: 'auto',
@@ -23,7 +26,9 @@ export const Avatar = styled(AvatarMui)({
 });
 
 export const InfoContainer = styled(Box)({
-  flexDirection: 'column'
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '3rem'
 });
 
 export const LastBuys = styled(Box)({});
