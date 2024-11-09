@@ -9,6 +9,7 @@ export const LastSearches = ({ searches, refreshData }) => {
   const clearSearchList = () => {
     searchService.emptySearches().then(() => refreshData());
   };
+
   return (
     <Box>
       {searches.length ? (
