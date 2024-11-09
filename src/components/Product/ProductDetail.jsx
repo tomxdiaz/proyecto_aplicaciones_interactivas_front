@@ -33,7 +33,7 @@ const ProductDetail = ({ id }) => {
   const { cart, setCart } = useCart();
   const { wishList, setWishList } = useWishList();
 
-  const cartItem = cart.items.find(item => item.product?.id === product?.id);
+  const cartItem = cart.items?.find(item => item.product?.id === product?.id);
 
   const addProductToCart = () => {
     cartService

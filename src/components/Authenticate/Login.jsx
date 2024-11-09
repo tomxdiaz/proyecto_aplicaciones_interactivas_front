@@ -47,7 +47,7 @@ const Login = () => {
       const userWishList = await wishListService.getUserWishList();
       setWishList(userWishList);
 
-      const userCart = cartService.getUserCart();
+      const userCart = await cartService.getUserCart();
       setCart(userCart);
 
       redirectURL ? navigate(redirectURL) : navigate(getRoute(ROUTES.HOME));
