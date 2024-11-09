@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import productService from '../../services/productService';
-import { useUser } from '../../context/UserContext';
 import {
   ProductDetailActions,
   ProductDetailCartButton,
@@ -11,11 +10,9 @@ import {
   ProductDetailQuantityBox,
   ProductInfoContainer
 } from './ProductDetail.styles';
-import { Badge, Box, Button, IconButton, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { useCart } from '../../context/CartContext';
 import cartService from '../../services/cartService';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -25,6 +22,10 @@ import { useWishList } from '../../context/WishListContext';
 import wishListService from '../../services/wishListService';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useSnackbar } from '../../context/SnackbarContext';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import ROUTES, { getRoute } from '../../pages/routes';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
 
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState(null);
@@ -32,6 +33,11 @@ const ProductDetail = ({ id }) => {
   const { openSnackbar } = useSnackbar();
   const { cart, setCart } = useCart();
   const { wishList, setWishList } = useWishList();
+  const { user } = useUser();
+
+  const isAdmin = user && user.role === 'ADMIN';
+
+  const navigate = useNavigate();
 
   const cartItem = cart.items?.find(item => item.product?.id === product?.id);
 
@@ -138,11 +144,26 @@ const ProductDetail = ({ id }) => {
             <ProductDetailImage src={product.images[0]} />
           </ProductDetailImageContainer>
           <ProductInfoContainer>
-            {product.featured ? (
-              <StarIcon style={{ fill: COLORS.yellow }} fontSize='large' />
-            ) : (
-              <StarBorderIcon fontSize='large' />
-            )}
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'space-between'}>
+              {product.featured ? (
+                <StarIcon style={{ fill: COLORS.yellow }} fontSize='large' />
+              ) : (
+                <StarBorderIcon fontSize='large' />
+              )}
+
+              {isAdmin && (
+                <ProductDetailIconButton
+                  onClick={() => {
+                    navigate(getRoute(ROUTES.EDITPRODUCT, { id: product.id }));
+                  }}>
+                  <ModeEditIcon />
+                </ProductDetailIconButton>
+              )}
+            </Box>
+
             <Typography variant='h4'>{product.title}</Typography>
             <Typography variant='body1'>{product.description}</Typography>
             <Typography variant='h5'>${product.price}</Typography>
