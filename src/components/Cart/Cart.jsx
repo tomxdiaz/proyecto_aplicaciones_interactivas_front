@@ -13,10 +13,11 @@ import {
   CustomLink
 } from './Cart.styles';
 import ROUTES, { getRoute } from '../../pages/routes';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
-
+  const navigate = useNavigate();
   const refreshCart = () => {
     cartService.getUserCart().then(data => {
       setCart(data);
@@ -32,6 +33,7 @@ const Cart = () => {
   const confirmCart = () => {
     cartService.confirmCart().then(res => {
       refreshCart();
+      navigate(getRoute(ROUTES.BUYS));
     });
   };
 
@@ -63,7 +65,7 @@ const Cart = () => {
             </Typography>
             <CustomLink to={getRoute(ROUTES.HOME)}>
               <CustomButton>
-                <Typography>Explorar productos</Typography>
+                <Typography m={2}>Explorar productos</Typography>
               </CustomButton>
             </CustomLink>
           </Box>
