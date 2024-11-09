@@ -42,7 +42,7 @@ const Cart = () => {
               <CartItem key={cartItem.id} cartItem={cartItem} />
             ))}
           </MyList>
-          <CustomCartActions style={{ maxWidth: '800px' }}>
+          <CustomCartActions>
             <Typography variant='h6'>
               Total: ${Number(cart.totalPrice).toFixed(2)}
             </Typography>
