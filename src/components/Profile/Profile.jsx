@@ -8,11 +8,11 @@ import { LastSearches } from './LastSearches/LastSearches';
 import {
   Avatar,
   InfoContainer,
-  LastBuys,
   ProfileCard,
   ProfileContainer
 } from './Profile.styles';
 import buyService from '../../services/buyService';
+import { LastBuys } from './LastBuys/LastBuys';
 
 export const Profile = ({ user }) => {
   console.log(user);
@@ -46,11 +46,12 @@ export const Profile = ({ user }) => {
     const searchResponse = await searchService.getUserSearches();
     const buyResponse = await buyService.getUserBuy();
 
-    console.log('buys: ', buyResponse);
+    const lastBuys = buyResponse.reduce((acc, buy) => [...acc, ...buy.items], []);
+    console.log('items: ', lastBuys);
 
     setFavorites(favoritiesResponse.splice(0, 3));
     setSearches(searchResponse.splice(0, 3));
-    setBuys(buyResponse);
+    setBuys(lastBuys.splice(0, 3));
   };
 
   useEffect(() => {
@@ -72,9 +73,7 @@ export const Profile = ({ user }) => {
         </CardContent>
       </ProfileCard>
       <InfoContainer>
-        <LastBuys>
-          <Typography variant='h4'>Ultimas Compras</Typography>
-        </LastBuys>
+        <LastBuys buys={buys} />
         <LastFavorites favorites={favorites} refreshData={getInitialData} />
         <LastSearches searches={searches} refreshData={getInitialData} />
       </InfoContainer>

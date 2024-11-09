@@ -30,5 +30,3 @@ export const InfoContainer = styled(Box)({
   flexDirection: 'column',
   gap: '3rem'
 });
-
-export const LastBuys = styled(Box)({});
