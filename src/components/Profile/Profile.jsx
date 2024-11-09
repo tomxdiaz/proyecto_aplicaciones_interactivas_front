@@ -41,21 +41,29 @@ export const Profile = ({ user }) => {
     { label: 'Tipo de cuenta', value: accountType[user.role] }
   ];
 
-  const getInitialData = async () => {
-    const favoritiesResponse = await wishListService.getUserWishList();
-    const searchResponse = await searchService.getUserSearches();
-    const buyResponse = await buyService.getUserBuy();
+  const refreshFavorites = () => {
+    wishListService
+      .getUserWishList()
+      .then(favoritesData => setFavorites(favoritesData.splice(0, 3)));
+  };
 
-    const lastBuys = buyResponse.reduce((acc, buy) => [...acc, ...buy.items], []);
-    console.log('items: ', lastBuys);
-
-    setFavorites(favoritiesResponse.splice(0, 3));
-    setSearches(searchResponse.splice(0, 3));
-    setBuys(lastBuys.splice(0, 3));
+  const refreshSearches = () => {
+    searchService
+      .getUserSearches()
+      .then(searchData => setSearches(searchData.splice(0, 3)));
   };
 
   useEffect(() => {
-    getInitialData();
+    wishListService
+      .getUserWishList()
+      .then(favoritesData => setFavorites(favoritesData.splice(0, 3)))
+      .then(() => searchService.getUserSearches())
+      .then(searchData => setSearches(searchData.splice(0, 3)))
+      .then(() => buyService.getUserBuy())
+      .then(buyData => {
+        const lastBuys = buyData.reduce((acc, buy) => [...acc, ...buy.items], []);
+        setBuys(lastBuys.splice(0, 3));
+      });
   }, []);
 
   return (
@@ -74,8 +82,8 @@ export const Profile = ({ user }) => {
       </ProfileCard>
       <InfoContainer>
         <LastBuys buys={buys} />
-        <LastFavorites favorites={favorites} refreshData={getInitialData} />
-        <LastSearches searches={searches} refreshData={getInitialData} />
+        <LastFavorites favorites={favorites} refreshData={refreshFavorites} />
+        <LastSearches searches={searches} refreshData={refreshSearches} />
       </InfoContainer>
     </ProfileContainer>
   );
