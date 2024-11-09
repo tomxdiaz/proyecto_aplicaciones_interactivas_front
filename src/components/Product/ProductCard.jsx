@@ -42,20 +42,35 @@ const ProductCard = ({ product }) => {
 
   const handleToggleWishList = () => {
     if (!isInWishList) {
-      wishListService.addProductToWishList(product).then(res => {
-        refreshWishList();
-      });
+      wishListService
+        .addProductToWishList(product)
+        .then(res => {
+          refreshWishList();
+        })
+        .catch(e => {
+          openSnackbar('Error al agregar a favoritos', 'error');
+        });
     } else {
-      wishListService.removeProductFromWishList(product).then(res => {
-        refreshWishList();
-      });
+      wishListService
+        .removeProductFromWishList(product)
+        .then(res => {
+          refreshWishList();
+        })
+        .catch(e => {
+          openSnackbar('Error al quitar de favoritos', 'error');
+        });
     }
   };
 
   const refreshWishList = () => {
-    wishListService.getUserWishList().then(userWishList => {
-      setWishList(userWishList);
-    });
+    wishListService
+      .getUserWishList()
+      .then(userWishList => {
+        setWishList(userWishList);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar los favoritos', 'error');
+      });
   };
 
   const handleAddToCart = () => {
@@ -66,20 +81,27 @@ const ProductCard = ({ product }) => {
         openSnackbar('Producto agregado', 'success');
       })
       .catch(e => {
-        openSnackbar(e.response.data.error, 'error');
+        openSnackbar('Error al agregar al carrito', 'error');
       });
   };
 
   const refreshCart = () => {
-    cartService.getUserCart().then(data => {
-      setCart(data);
-    });
+    cartService
+      .getUserCart()
+      .then(data => {
+        setCart(data);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar el carrito', 'error');
+      });
   };
 
   const goToProductDetail = () => {
     navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
     if (user) {
-      searchService.addSearch(product);
+      searchService.addSearch(product).catch(e => {
+        openSnackbar('Error al guardar la busqueda', 'error');
+      });
     }
   };
 

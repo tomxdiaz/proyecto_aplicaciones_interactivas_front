@@ -5,6 +5,7 @@ import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 // interface UserCheckWrapperProps {
 //   children: React.ReactNode;
@@ -15,6 +16,7 @@ const UserCheckWrapper = ({ children }) => {
   const { setUser } = useUser();
   const { setWishList } = useWishList();
   const { setCart } = useCart();
+  const { openSnackbar } = useSnackbar();
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
@@ -37,9 +39,10 @@ const UserCheckWrapper = ({ children }) => {
         setWishList([]);
         setCart({ items: [] });
         sessionStorage.removeItem('token');
+        openSnackbar('Error al obtener el usuario y sus datos', 'error');
       }
     }
-  }, [setUser, setWishList, setCart]);
+  }, [setUser, setWishList, setCart, openSnackbar]);
 
   return <>{children}</>;
 };

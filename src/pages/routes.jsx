@@ -5,7 +5,8 @@ import {
   RegisterPage,
   CreateProductPage,
   EditProductPage,
-  CartPage
+  CartPage,
+  BuysPage
 } from './index';
 import { ProductDetailPage } from './ProductDetailPage';
 import { MyWishListPage } from './MyWishListPage';
@@ -49,6 +50,13 @@ const ROUTES = {
     path: '/cart',
     element: <CartPage />,
     title: 'Carrito',
+    inNavMenu: true,
+    adminOnly: false
+  },
+  BUYS: {
+    path: '/buy',
+    element: <BuysPage />,
+    title: 'Compras',
     inNavMenu: true,
     adminOnly: false
   },

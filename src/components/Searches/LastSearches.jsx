@@ -5,26 +5,43 @@ import MyList from '../CustomList/MyList';
 import LastSearchesItem from './LastSearchesItem';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import { ListContainer } from '../CustomList/MyList.styles';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const LastSearches = () => {
   const [lastSearches, setLastSearches] = useState([]);
+  const { openSnackbar } = useSnackbar();
 
   const emptySearches = () => {
-    searchService.emptySearches().then(() => {
-      refreshSearches();
-    });
+    searchService
+      .emptySearches()
+      .then(() => {
+        refreshSearches();
+      })
+      .catch(e => {
+        openSnackbar('Error al vaciar las busquedas', 'error');
+      });
   };
 
   const refreshSearches = () => {
-    searchService.getUserSearches().then(searches => {
-      setLastSearches(searches);
-    });
+    searchService
+      .getUserSearches()
+      .then(searches => {
+        setLastSearches(searches);
+      })
+      .catch(e => {
+        openSnackbar('Error al obtener las busquedas', 'error');
+      });
   };
 
   useEffect(() => {
-    searchService.getUserSearches().then(searches => {
-      setLastSearches(searches);
-    });
+    searchService
+      .getUserSearches()
+      .then(searches => {
+        setLastSearches(searches);
+      })
+      .catch(e => {
+        openSnackbar('Error al obtener las busquedas', 'error');
+      });
   });
 
   return (
