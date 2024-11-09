@@ -13,7 +13,6 @@ const CustomContainer = styled(Box)({
 
 const MustLogin = ({ user, children }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return user ? (
     children
