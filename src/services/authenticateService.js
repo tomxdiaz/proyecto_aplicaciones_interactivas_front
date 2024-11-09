@@ -2,6 +2,7 @@ import { api } from './api';
 
 const authService = {
   // Método para autenticar al usuario (login)
+
   login: async (username, password) => {
     const response = await api.post(`/auth/authenticate`, {
       username,

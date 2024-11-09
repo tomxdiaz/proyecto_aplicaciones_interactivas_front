@@ -2,18 +2,14 @@ import React from 'react';
 import cartService from '../../services/cartService';
 import { Box, Button, Typography } from '@mui/material';
 import { useCart } from '../../context/CartContext';
-import CartItemCard from './CartItemCard';
-import {
-  CartActions,
-  CartContainer,
-  CustomButton,
-  CustomCartBar,
-  CustomCartBox,
-  CustomContainer,
-  CustomLink
-} from './Cart.styles';
+
 import ROUTES, { getRoute } from '../../pages/routes';
 import { useNavigate } from 'react-router-dom';
+import CartItem from './CartItem';
+import { CustomCartActions } from './Cart.styles';
+import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
+import MyList from '../CustomList/MyList';
+import { ListContainer } from '../CustomList/MyList.styles';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -38,40 +34,28 @@ const Cart = () => {
   };
 
   return (
-    <CustomContainer>
-      <CustomCartBar>
-        <Typography variant='h4'>Carrito</Typography>
-        <CustomButton onClick={emptyCart}>Vaciar</CustomButton>
-      </CustomCartBar>
-      <CustomCartBox>
-        {cart.items.length ? (
-          <>
-            <CartContainer>
-              {cart.items.map(item => (
-                <CartItemCard key={item.id} item={item} />
-              ))}
-            </CartContainer>
-            <CartActions>
-              <Typography variant='h6'>
-                Total: ${Number(cart.totalPrice).toFixed(2)}
-              </Typography>
-              <Button onClick={confirmCart}>Confirmar carrito</Button>
-            </CartActions>
-          </>
-        ) : (
-          <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-            <Typography textAlign={'center'} variant='h4'>
-              Oops, parece que no tienes productos en el carrito
+    <ListContainer>
+      {cart.items.length ? (
+        <>
+          <MyList title={'Carrito'} onEmpty={emptyCart}>
+            {cart.items.map(cartItem => (
+              <CartItem key={cartItem.id} cartItem={cartItem} />
+            ))}
+          </MyList>
+          <CustomCartActions>
+            <Typography variant='h6'>
+              Total: ${Number(cart.totalPrice).toFixed(2)}
             </Typography>
-            <CustomLink to={getRoute(ROUTES.HOME)}>
-              <CustomButton>
-                <Typography m={2}>Explorar productos</Typography>
-              </CustomButton>
-            </CustomLink>
-          </Box>
-        )}
-      </CustomCartBox>
-    </CustomContainer>
+            <Button onClick={confirmCart}>Confirmar carrito</Button>
+          </CustomCartActions>
+        </>
+      ) : (
+        <CustomEmptyListMessage
+          message={'Oops, parece que no tienes items en el carrito'}
+          buttonMessage={'Explorar productos'}
+        />
+      )}
+    </ListContainer>
   );
 };
 

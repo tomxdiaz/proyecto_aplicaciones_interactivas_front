@@ -23,16 +23,18 @@ import { useUser } from '../../context/UserContext';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const ProductCard = ({ product }) => {
   const { user } = useUser();
   const { wishList, setWishList } = useWishList();
   const { cart, setCart } = useCart();
+  const { openSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
 
   const amountInCart =
-    cart.items.find(item => item.product.id === product.id)?.quantity || 0;
+    cart.items?.find(item => item.product.id === product.id)?.quantity || 0;
 
   const isInWishList = wishList.some(
     wishListItem => wishListItem.product.id === product.id
@@ -57,9 +59,15 @@ const ProductCard = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    cartService.addProductToCart(product).then(res => {
-      refreshCart();
-    });
+    cartService
+      .addProductToCart(product)
+      .then(res => {
+        refreshCart();
+        openSnackbar('Producto agregado', 'success');
+      })
+      .catch(e => {
+        openSnackbar(e.response.data.error, 'error');
+      });
   };
 
   const refreshCart = () => {
@@ -107,9 +115,6 @@ const ProductCard = ({ product }) => {
           </CustomCardIconButton>
           <CustomCardIconButton
             onMouseDown={e => e.stopPropagation()}
-            style={{
-              padding: '10px'
-            }}
             onClick={handleAddToCart}>
             <ShoppingCartIcon fontSize='large' />
             <Badge badgeContent={amountInCart} color='primary' />

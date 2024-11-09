@@ -9,18 +9,19 @@ import {
   CustomForm,
   CustomFormActions
 } from './Authenticate.styles';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const Register = () => {
-  const parsedDate = new Date(Date.now()).toISOString().split('T')[0];
-
   const navigate = useNavigate();
+  const { openSnackbar } = useSnackbar();
+
+  const parsedDate = new Date(Date.now()).toISOString().split('T')[0];
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [birthDate, setBirthDate] = useState(parsedDate);
   const [emailAddress, setEmailAddress] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -37,8 +38,8 @@ const Register = () => {
       await authService.register(userData);
 
       navigate(getRoute(ROUTES.LOGIN));
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      openSnackbar('Error al crear la cuenta', 'error');
     }
   };
 

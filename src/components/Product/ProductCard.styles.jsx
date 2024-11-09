@@ -44,5 +44,6 @@ export const CustomCardIconsSection = styled(CardActions)({
 });
 
 export const CustomCardIconButton = styled(IconButton)({
-  backgroundColor: 'white'
+  backgroundColor: 'white',
+  padding: '10px'
 });

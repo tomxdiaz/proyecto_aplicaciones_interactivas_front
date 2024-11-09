@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, TextField, Button } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams
+} from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
 import authService from '../../services/authenticateService';
 import userService from '../../services/userService';
@@ -14,12 +20,18 @@ import {
 } from './Authenticate.styles';
 import cartService from '../../services/cartService';
 import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { openSnackbar } = useSnackbar();
+
   const { setUser } = useUser();
   const { setWishList } = useWishList();
   const { setCart } = useCart();
+  const [searchParams] = useSearchParams();
+
+  const redirectURL = searchParams.get('redirectURL');
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,21 +41,18 @@ const Login = () => {
     try {
       await authService.login(username, password);
 
-      userService.getUserData().then(userData => {
-        setUser(userData);
-      });
+      const userData = await userService.getUserData();
+      setUser(userData);
 
-      wishListService.getUserWishList().then(userWishList => {
-        setWishList(userWishList);
-      });
+      const userWishList = await wishListService.getUserWishList();
+      setWishList(userWishList);
 
-      cartService.getUserCart().then(userCart => {
-        setCart(userCart);
-      });
+      const userCart = cartService.getUserCart();
+      setCart(userCart);
 
-      navigate(getRoute(ROUTES.HOME));
-    } catch (error) {
-      console.log(error);
+      redirectURL ? navigate(redirectURL) : navigate(getRoute(ROUTES.HOME));
+    } catch (e) {
+      openSnackbar('Error al iniciar sesion', 'error');
     }
   };
 
