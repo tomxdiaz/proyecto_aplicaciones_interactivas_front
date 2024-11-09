@@ -2,20 +2,16 @@ import { CardContent, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import searchService from '../../services/searchService';
 import wishListService from '../../services/wishListService';
-import MyList from '../CustomList/MyList';
-import WishListItem from '../WishList/WishListItem';
 import { CardInfo } from './CardInfo/CardInfo';
+import { LastFavorites } from './LastFavorites/LastFavorites';
+import { LastSearches } from './LastSearches/LastSearches';
 import {
   Avatar,
   InfoContainer,
   LastBuys,
-  LastSearches,
   ProfileCard,
   ProfileContainer
 } from './Profile.styles';
-import LastSearchesItem from '../Searches/LastSearchesItem';
-import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
-import { LastFavorites } from './LastFavorites/LastFavorites';
 
 export const Profile = ({ user }) => {
   console.log(user);
@@ -56,10 +52,6 @@ export const Profile = ({ user }) => {
     getInitialData();
   }, []);
 
-  const clearSearchList = () => {
-    searchService.emptySearches().then(() => getInitialData());
-  };
-
   return (
     <ProfileContainer>
       <ProfileCard>
@@ -79,24 +71,7 @@ export const Profile = ({ user }) => {
           <Typography variant='h4'>Ultimas Compras</Typography>
         </LastBuys>
         <LastFavorites favorites={favorites} refreshData={getInitialData} />
-        <LastSearches>
-          {searches.length ? (
-            <MyList title={'Ultimas Búsquedas'} onEmpty={clearSearchList}>
-              {searches.map(search => (
-                <LastSearchesItem
-                  search={search}
-                  key={`profile-lastSearch-${search.product.id}`}
-                  small
-                />
-              ))}
-            </MyList>
-          ) : (
-            <CustomEmptyListMessage
-              message={'Parece que no tienes busquedas recientes'}
-              buttonMessage={'Explorar productos'}
-            />
-          )}
-        </LastSearches>
+        <LastSearches searches={searches} refreshData={getInitialData} />
       </InfoContainer>
     </ProfileContainer>
   );

@@ -1,20 +1,10 @@
 import React from 'react';
 import { useWishList } from '../../context/WishListContext';
-import WishListItem from './WishListItem';
-import { Box, Typography } from '@mui/material';
-import ROUTES, { getRoute } from '../../pages/routes';
 import wishListService from '../../services/wishListService';
-import {
-  CustomButton,
-  CustomEmptyList,
-  CustomLink,
-  CustomList,
-  CustomListBar,
-  CustomListContainer,
-  ListContainer
-} from '../CustomList/MyList.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import MyList from '../CustomList/MyList';
+import { ListContainer } from '../CustomList/MyList.styles';
+import WishListItem from './WishListItem';
 
 const MyWishList = () => {
   const { wishList, setWishList } = useWishList();
