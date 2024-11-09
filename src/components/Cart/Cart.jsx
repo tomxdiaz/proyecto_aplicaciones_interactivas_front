@@ -7,26 +7,43 @@ import { CustomCartActions } from './Cart.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import MyList from '../CustomList/MyList';
 import { ListContainer } from '../CustomList/MyList.styles';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
+  const { openSnackbar } = useSnackbar();
 
   const refreshCart = () => {
-    cartService.getUserCart().then(data => {
-      setCart(data);
-    });
+    cartService
+      .getUserCart()
+      .then(data => {
+        setCart(data);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar el carrito', 'error');
+      });
   };
 
   const emptyCart = () => {
-    cartService.emptyCart().then(res => {
-      refreshCart();
-    });
+    cartService
+      .emptyCart()
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al vaciar el carrito', 'error');
+      });
   };
 
   const confirmCart = () => {
-    cartService.confirmCart().then(res => {
-      refreshCart();
-    });
+    cartService
+      .confirmCart()
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al confirmar el carrito', 'error');
+      });
   };
 
   return (
