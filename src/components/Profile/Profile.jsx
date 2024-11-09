@@ -12,6 +12,7 @@ import {
   ProfileCard,
   ProfileContainer
 } from './Profile.styles';
+import buyService from '../../services/buyService';
 
 export const Profile = ({ user }) => {
   console.log(user);
@@ -43,9 +44,13 @@ export const Profile = ({ user }) => {
   const getInitialData = async () => {
     const favoritiesResponse = await wishListService.getUserWishList();
     const searchResponse = await searchService.getUserSearches();
+    const buyResponse = await buyService.getUserBuy();
+
+    console.log('buys: ', buyResponse);
 
     setFavorites(favoritiesResponse.splice(0, 3));
     setSearches(searchResponse.splice(0, 3));
+    setBuys(buyResponse);
   };
 
   useEffect(() => {
