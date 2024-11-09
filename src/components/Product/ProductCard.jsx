@@ -138,8 +138,11 @@ const ProductCard = ({ product }) => {
           <CustomCardIconButton
             onMouseDown={e => e.stopPropagation()}
             onClick={handleAddToCart}>
-            <ShoppingCartIcon fontSize='large' />
-            <Badge badgeContent={amountInCart} color='primary' />
+            <ShoppingCartIcon fontSize='large' color={amountInCart > product.stock ? 'disabled' : ''}/>
+            <Badge
+              badgeContent={amountInCart}
+              color={amountInCart > product.stock ? 'error' : 'success'}
+            />
           </CustomCardIconButton>
         </Box>
       </CustomCardIconsSection>

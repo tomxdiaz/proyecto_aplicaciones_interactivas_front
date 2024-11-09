@@ -145,6 +145,7 @@ const ProductDetail = ({ id }) => {
             )}
             <Typography variant='h4'>{product.title}</Typography>
             <Typography variant='body1'>{product.description}</Typography>
+            <Typography variant='h6'>Stock: {product.stock}</Typography>
             <Typography variant='h5'>${product.price}</Typography>
             <ProductDetailActions>
               <ProductDetailIconButton onClick={handleToggleWishList}>
@@ -154,15 +155,41 @@ const ProductDetail = ({ id }) => {
                   <FavoriteBorderIcon fontSize='large' />
                 )}
               </ProductDetailIconButton>
-              <ProductDetailQuantityBox>
+              <ProductDetailQuantityBox
+                style={{
+                  border: cartItem?.quantity > product.stock ? '1px solid red' : '',
+                  borderRadius: '5px'
+                }}>
                 {cartItem ? (
                   <>
-                    <Typography>En el carrito:</Typography>
-                    <ProductDetailCartButton onClick={removeProductFromCart}>
+                    <Typography
+                      style={{
+                        marginLeft: '10px',
+                        color: cartItem.quantity > product.stock ? 'red' : ''
+                      }}>
+                      En el carrito:
+                    </Typography>
+                    <ProductDetailCartButton
+                      onClick={removeProductFromCart}
+                      style={{
+                        minWidth: '40px',
+                        color: cartItem.quantity > product.stock ? 'red' : ''
+                      }}>
                       {'-'}
                     </ProductDetailCartButton>
-                    <Typography variant='h6'>{cartItem.quantity}</Typography>
-                    <ProductDetailCartButton onClick={addProductToCart}>
+                    <Typography
+                      variant='h6'
+                      style={{
+                        color: cartItem.quantity > product.stock ? 'red' : 'black'
+                      }}>
+                      {cartItem.quantity}
+                    </Typography>
+                    <ProductDetailCartButton
+                      onClick={addProductToCart}
+                      style={{
+                        minWidth: '40px',
+                        color: cartItem.quantity > product.stock ? 'red' : ''
+                      }}>
                       {'+'}
                     </ProductDetailCartButton>
                     <IconButton onClick={removeItemFromCart}>
