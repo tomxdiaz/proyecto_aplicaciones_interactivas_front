@@ -45,10 +45,15 @@ const ItemCard = ({ cartItem }) => {
             ${(product.price * cartItem.quantity).toFixed(2)}
           </Typography>
         </Box>
-        <QuantityBox>
+        <QuantityBox
+          style={{
+            border: cartItem.quantity > product.stock ? '1px solid red' : '',
+            borderRadius: '5px'
+          }}>
           <Button
             style={{
-              minWidth: '40px'
+              minWidth: '40px',
+              color: cartItem.quantity > product.stock ? 'red' : ''
             }}
             onMouseDown={e => e.stopPropagation()}
             onClick={e => {
@@ -57,10 +62,17 @@ const ItemCard = ({ cartItem }) => {
             }}>
             {'-'}
           </Button>
-          <Typography variant='h6'>{cartItem.quantity}</Typography>
+          <Typography
+            variant='h6'
+            style={{
+              color: cartItem.quantity > product.stock ? 'red' : 'black'
+            }}>
+            {cartItem.quantity}
+          </Typography>
           <Button
             style={{
-              minWidth: '40px'
+              minWidth: '40px',
+              color: cartItem.quantity > product.stock ? 'red' : ''
             }}
             onMouseDown={e => e.stopPropagation()}
             onClick={e => {
