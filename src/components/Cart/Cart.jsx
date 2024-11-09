@@ -1,8 +1,7 @@
 import React from 'react';
 import cartService from '../../services/cartService';
-import { Box, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useCart } from '../../context/CartContext';
-
 import ROUTES, { getRoute } from '../../pages/routes';
 import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
@@ -10,32 +9,50 @@ import { CustomCartActions } from './Cart.styles';
 import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
 import MyList from '../CustomList/MyList';
 import { ListContainer } from '../CustomList/MyList.styles';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const Cart = () => {
   const { cart, setCart } = useCart();
+  const { openSnackbar } = useSnackbar();
   const navigate = useNavigate();
+
   const refreshCart = () => {
-    cartService.getUserCart().then(data => {
-      setCart(data);
-    });
+    cartService
+      .getUserCart()
+      .then(data => {
+        setCart(data);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar el carrito', 'error');
+      });
   };
 
   const emptyCart = () => {
-    cartService.emptyCart().then(res => {
-      refreshCart();
-    });
+    cartService
+      .emptyCart()
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al vaciar el carrito', 'error');
+      });
   };
 
   const confirmCart = () => {
-    cartService.confirmCart().then(res => {
-      refreshCart();
-      navigate(getRoute(ROUTES.BUYS));
-    });
+    cartService
+      .confirmCart()
+      .then(res => {
+        refreshCart();
+        navigate(getRoute(ROUTES.BUYS));
+      })
+      .catch(e => {
+        openSnackbar('Error al confirmar el carrito', 'error');
+      });
   };
 
   return (
     <ListContainer>
-      {cart.items.length ? (
+      {cart.items?.length ? (
         <>
           <MyList title={'Carrito'} onEmpty={emptyCart}>
             {cart.items.map(cartItem => (

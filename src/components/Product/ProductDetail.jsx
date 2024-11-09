@@ -24,38 +24,59 @@ import { COLORS } from '../../utils/constants';
 import { useWishList } from '../../context/WishListContext';
 import wishListService from '../../services/wishListService';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useUser();
+  const { openSnackbar } = useSnackbar();
   const { cart, setCart } = useCart();
   const { wishList, setWishList } = useWishList();
 
-  const cartItem = cart.items.find(item => item.product?.id === product?.id);
+  const cartItem = cart.items?.find(item => item.product?.id === product?.id);
 
   const addProductToCart = () => {
-    cartService.addProductToCart(product).then(res => {
-      refreshCart();
-    });
+    cartService
+      .addProductToCart(product)
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al agregar el producto al carrito', 'error');
+      });
   };
 
   const removeProductFromCart = () => {
-    cartService.removeProductFromCart(product).then(res => {
-      refreshCart();
-    });
+    cartService
+      .removeProductFromCart(product)
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al quitar el producto del carrito', 'error');
+      });
   };
 
   const removeItemFromCart = () => {
-    cartService.removeItemFromCart(product).then(res => {
-      refreshCart();
-    });
+    cartService
+      .removeItemFromCart(product)
+      .then(res => {
+        refreshCart();
+      })
+      .catch(e => {
+        openSnackbar('Error al quitar el item del carrito', 'error');
+      });
   };
 
   const refreshCart = () => {
-    cartService.getUserCart().then(data => {
-      setCart(data);
-    });
+    cartService
+      .getUserCart()
+      .then(data => {
+        setCart(data);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar el carrito', 'error');
+      });
   };
 
   const isInWishList = wishList.some(
@@ -64,20 +85,35 @@ const ProductDetail = ({ id }) => {
 
   const handleToggleWishList = () => {
     if (!isInWishList) {
-      wishListService.addProductToWishList(product).then(res => {
-        refreshWishList();
-      });
+      wishListService
+        .addProductToWishList(product)
+        .then(res => {
+          refreshWishList();
+        })
+        .catch(e => {
+          openSnackbar('Error al agregar a favoritos', 'error');
+        });
     } else {
-      wishListService.removeProductFromWishList(product).then(res => {
-        refreshWishList();
-      });
+      wishListService
+        .removeProductFromWishList(product)
+        .then(res => {
+          refreshWishList();
+        })
+        .catch(e => {
+          openSnackbar('Error al quitar de favoritos', 'error');
+        });
     }
   };
 
   const refreshWishList = () => {
-    wishListService.getUserWishList().then(userWishList => {
-      setWishList(userWishList);
-    });
+    wishListService
+      .getUserWishList()
+      .then(userWishList => {
+        setWishList(userWishList);
+      })
+      .catch(e => {
+        openSnackbar('Error al refrescar los favoritos', 'error');
+      });
   };
 
   useEffect(() => {
@@ -88,9 +124,9 @@ const ProductDetail = ({ id }) => {
         setLoading(false);
       });
     } catch (e) {
-      setLoading(false);
+      openSnackbar('Error obteniendo los datos del producto', 'error');
     }
-  }, [id]);
+  }, [id, openSnackbar]);
 
   return (
     <ProductDetailContainer>

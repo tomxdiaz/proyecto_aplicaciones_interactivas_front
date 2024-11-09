@@ -11,6 +11,7 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 export const ManageProduct = ({ id = null }) => {
   const [titles, setTitles] = useState([]);
@@ -27,6 +28,7 @@ export const ManageProduct = ({ id = null }) => {
   });
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const { openSnackbar } = useSnackbar();
 
   const handleChange = (prop, value) => {
     const newProd = { ...product };
@@ -34,19 +36,28 @@ export const ManageProduct = ({ id = null }) => {
     setProduct(newProd);
   };
 
-  const getProductData = async () => {
-    const productData = await productService.getProductById(id);
-    productData.category = productData.category.name;
-    setProduct(productData);
-    return productData;
-  };
-  const getCategories = async () => {
-    const categoriesData = await categoryService.getAll();
-    setCategories(categoriesData);
-    return categoriesData;
-  };
-
   useEffect(() => {
+    const getProductData = async () => {
+      try {
+        const productData = await productService.getProductById(id);
+        productData.category = productData.category.name;
+        setProduct(productData);
+        return productData;
+      } catch (e) {
+        openSnackbar('Error obteniendo los datos del producto', 'error');
+      }
+    };
+
+    const getCategories = async () => {
+      try {
+        const categoriesData = await categoryService.getAll();
+        setCategories(categoriesData);
+        return categoriesData;
+      } catch (e) {
+        openSnackbar('Error obteniendo las categorias', 'error');
+      }
+    };
+
     const updateData = async () => {
       const categoriesData = await getCategories();
       let productData = { ...product };
@@ -93,18 +104,22 @@ export const ManageProduct = ({ id = null }) => {
       ]);
     };
     updateData();
-  }, []);
+  }, [id, product, openSnackbar]);
 
   const handleSubmit = async () => {
-    const formatedProduct = {
-      ...product,
-      category: categories.find(categories => categories.name === product.category)
-    };
+    try {
+      const formatedProduct = {
+        ...product,
+        category: categories.find(categories => categories.name === product.category)
+      };
 
-    if (id) await productService.update(formatedProduct);
-    else await productService.add(formatedProduct);
+      if (id) await productService.update(formatedProduct);
+      else await productService.add(formatedProduct);
 
-    navigate(getRoute(ROUTES.HOME));
+      navigate(getRoute(ROUTES.HOME));
+    } catch (e) {
+      openSnackbar('Error guardando los datos del producto', 'error');
+    }
   };
 
   const handleDelete = async () => {
