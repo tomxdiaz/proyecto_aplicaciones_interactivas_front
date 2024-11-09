@@ -9,17 +9,18 @@ import {
   Avatar,
   InfoContainer,
   LastBuys,
-  LastFarorities,
   LastSearches,
   ProfileCard,
   ProfileContainer
 } from './Profile.styles';
 import LastSearchesItem from '../Searches/LastSearchesItem';
+import CustomEmptyListMessage from '../CustomList/CustomEmptyListMessage';
+import { LastFavorites } from './LastFavorites/LastFavorites';
 
 export const Profile = ({ user }) => {
   console.log(user);
   const [buys, setBuys] = useState([]);
-  const [favorities, setFavorities] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searches, setSearches] = useState([]);
 
   const accountType = {
@@ -47,7 +48,7 @@ export const Profile = ({ user }) => {
     const favoritiesResponse = await wishListService.getUserWishList();
     const searchResponse = await searchService.getUserSearches();
 
-    setFavorities(favoritiesResponse.splice(0, 3));
+    setFavorites(favoritiesResponse.splice(0, 3));
     setSearches(searchResponse.splice(0, 3));
   };
 
@@ -55,8 +56,8 @@ export const Profile = ({ user }) => {
     getInitialData();
   }, []);
 
-  const clearWishList = () => {
-    wishListService.emptyWishList().then(() => getInitialData());
+  const clearSearchList = () => {
+    searchService.emptySearches().then(() => getInitialData());
   };
 
   return (
@@ -77,27 +78,24 @@ export const Profile = ({ user }) => {
         <LastBuys>
           <Typography variant='h4'>Ultimas Compras</Typography>
         </LastBuys>
-        <LastFarorities>
-          <MyList title={'Ultimos favoritos guardados'} onEmpty={clearWishList}>
-            {favorities.map(favorite => (
-              <WishListItem
-                wishListItem={favorite}
-                key={`profile-wishList-${favorite.id}`}
-                small
-              />
-            ))}
-          </MyList>
-        </LastFarorities>
+        <LastFavorites favorites={favorites} refreshData={getInitialData} />
         <LastSearches>
-          <MyList title={'Ultimas Búsquedas'} onEmpty={clearWishList}>
-            {searches.map(search => (
-              <LastSearchesItem
-                search={search}
-                key={`profile-lastSearch-${search.product.id}`}
-                small
-              />
-            ))}
-          </MyList>
+          {searches.length ? (
+            <MyList title={'Ultimas Búsquedas'} onEmpty={clearSearchList}>
+              {searches.map(search => (
+                <LastSearchesItem
+                  search={search}
+                  key={`profile-lastSearch-${search.product.id}`}
+                  small
+                />
+              ))}
+            </MyList>
+          ) : (
+            <CustomEmptyListMessage
+              message={'Parece que no tienes busquedas recientes'}
+              buttonMessage={'Explorar productos'}
+            />
+          )}
         </LastSearches>
       </InfoContainer>
     </ProfileContainer>

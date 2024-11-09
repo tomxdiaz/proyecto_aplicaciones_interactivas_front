@@ -34,5 +34,3 @@ export const InfoContainer = styled(Box)({
 export const LastBuys = styled(Box)({});
 
 export const LastSearches = styled(Box)({});
-
-export const LastFarorities = styled(Box)({});
