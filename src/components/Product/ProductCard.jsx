@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
         .then(res => {
           refreshWishList();
         })
-        .then(e => {
+        .catch(e => {
           openSnackbar('Error al agregar a favoritos', 'error');
         });
     } else {
