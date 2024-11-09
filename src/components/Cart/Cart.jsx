@@ -48,7 +48,7 @@ const Cart = () => {
 
   return (
     <ListContainer>
-      {cart.items.length ? (
+      {cart.items?.length ? (
         <>
           <MyList title={'Carrito'} onEmpty={emptyCart}>
             {cart.items.map(cartItem => (
