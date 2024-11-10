@@ -47,13 +47,15 @@ export const Profile = ({ user }) => {
   const refreshFavorites = () => {
     wishListService
       .getUserWishList()
-      .then(favoritesData => setFavorites(favoritesData.splice(0, 3)));
+      .then(favoritesData => setFavorites(favoritesData.splice(0, 3)))
+      .catch(() => openSnackbar('Error al obtener los favoritos', 'error'));
   };
 
   const refreshSearches = () => {
     searchService
       .getUserSearches()
-      .then(searchData => setSearches(searchData.splice(0, 3)));
+      .then(searchData => setSearches(searchData.splice(0, 3)))
+      .catch(() => openSnackbar('Error al obtener las ultimas busquedas', 'error'));
   };
 
   useEffect(() => {
@@ -67,7 +69,9 @@ export const Profile = ({ user }) => {
         const lastBuys = buyData.reduce((acc, buy) => [...acc, ...buy.items], []);
         setBuys(lastBuys.splice(0, 3));
       })
-      .catch(() => openSnackbar('Error al quitar el producto del carrito', 'error'));
+      .catch(() =>
+        openSnackbar('Error al obtener las ultimas actividades', 'error')
+      );
   }, []);
 
   return (
