@@ -2,21 +2,19 @@ import { Avatar as AvatarMui, Box, Card, styled } from '@mui/material';
 
 export const ProfileContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   padding: '2rem',
-  gap: '5rem',
-  [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
-    gap: '3rem'
-  }
+  gap: '3rem'
 }));
+
+export const ProfileCardContainer = styled(Box)({
+  width: '30.8rem'
+});
 
 export const ProfileCard = styled(Card)(({ theme }) => ({
   height: '30rem',
   width: '25rem',
-  [theme.breakpoints.down('md')]: {
-    margin: 'auto'
-  }
+  margin: 'auto'
 }));
 
 export const Avatar = styled(AvatarMui)({
@@ -25,8 +23,11 @@ export const Avatar = styled(AvatarMui)({
   width: '5rem'
 });
 
-export const InfoContainer = styled(Box)({
+export const InfoContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'column',
-  gap: '3rem'
-});
+  flexDirection: 'raw',
+  gap: '3rem',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column'
+  }
+}));

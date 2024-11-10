@@ -9,6 +9,7 @@ import {
   Avatar,
   InfoContainer,
   ProfileCard,
+  ProfileCardContainer,
   ProfileContainer
 } from './Profile.styles';
 import buyService from '../../services/buyService';
@@ -68,20 +69,24 @@ export const Profile = ({ user }) => {
 
   return (
     <ProfileContainer>
-      <ProfileCard>
-        <CardContent>
-          <Avatar />
-          {profileContent.map((tag, index) => (
-            <CardInfo
-              label={tag.label}
-              value={tag.value}
-              key={`profileCard-user-${index}`}
-            />
-          ))}
-        </CardContent>
-      </ProfileCard>
       <InfoContainer>
+        <ProfileCardContainer>
+          <ProfileCard>
+            <CardContent>
+              <Avatar />
+              {profileContent.map((tag, index) => (
+                <CardInfo
+                  label={tag.label}
+                  value={tag.value}
+                  key={`profileCard-user-${index}`}
+                />
+              ))}
+            </CardContent>
+          </ProfileCard>
+        </ProfileCardContainer>
         <LastBuys buys={buys} />
+      </InfoContainer>
+      <InfoContainer>
         <LastFavorites favorites={favorites} refreshData={refreshFavorites} />
         <LastSearches searches={searches} refreshData={refreshSearches} />
       </InfoContainer>
