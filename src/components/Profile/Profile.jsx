@@ -61,12 +61,14 @@ export const Profile = ({ user }) => {
   useEffect(() => {
     wishListService
       .getUserWishList()
-      .then(favoritesData => setFavorites(favoritesData.splice(0, 3)))
+      .then(favoritesData => setFavorites(favoritesData.reverse().splice(0, 3)))
       .then(() => searchService.getUserSearches())
       .then(searchData => setSearches(searchData.splice(0, 3)))
       .then(() => buyService.getUserBuy())
       .then(buyData => {
-        const lastBuys = buyData.reduce((acc, buy) => [...acc, ...buy.items], []);
+        const lastBuys = buyData
+          .reverse()
+          .reduce((acc, buy) => [...acc, ...buy.items], []);
         setBuys(lastBuys.splice(0, 3));
       })
       .catch(() =>
