@@ -67,7 +67,7 @@ const MyListItem = ({ product, onRemove, children, small = false }) => {
             <Typography variant={small ? 'subtitle2' : 'body1'}>
               {product.description}
             </Typography>
-            <Typography variant='h6'>Stock: {product.stock}</Typography>
+            {!small && <Typography variant='h6'>Stock: {product.stock}</Typography>}
             <Typography variant={small ? 'subtitle1' : 'h5'}>
               ${product.price}
             </Typography>
