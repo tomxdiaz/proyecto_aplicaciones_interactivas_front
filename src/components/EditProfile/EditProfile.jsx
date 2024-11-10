@@ -22,7 +22,12 @@ export const EditProfile = ({ user }) => {
   const userInputs = [
     { label: 'Nombre', value: userData.name, state: 'name' },
     { label: 'Apellido', value: userData.lastName, state: 'lastName' },
-    { label: 'Usuario', value: userData.username, state: 'username' },
+    {
+      label: 'Usuario',
+      value: userData.username,
+      state: 'username',
+      disabled: true
+    },
     {
       label: 'Fecha de nacimiento',
       value: userData.birthDate,
