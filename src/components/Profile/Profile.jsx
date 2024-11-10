@@ -100,7 +100,7 @@ export const Profile = ({ user }) => {
                 <CardInfo
                   label={tag.label}
                   value={tag.value}
-                  key={`profileCard-user-${index}`}
+                  key={`profileCard-user-${tag.label}-${index}`}
                 />
               ))}
             </CardContent>
