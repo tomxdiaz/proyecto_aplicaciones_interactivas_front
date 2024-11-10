@@ -131,6 +131,7 @@ const ProductDetail = ({ id }) => {
       });
     } catch (e) {
       openSnackbar('Error obteniendo los datos del producto', 'error');
+      setLoading(false);
     }
   }, [id, openSnackbar]);
 

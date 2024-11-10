@@ -7,6 +7,5 @@ export const CustomProductGrid = styled(Grid2)({
   justifyContent: 'space-around',
   flexWrap: 'wrap',
   gap: '20px',
-  padding: '2rem',
-  height: '100%'
+  padding: '2rem'
 });
