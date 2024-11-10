@@ -12,10 +12,12 @@ import { Input } from './Input/Input';
 import { accountType } from '../../utils/constants';
 import { useSnackbar } from '../../context/SnackbarContext';
 import userService from '../../services/userService';
+import { useUser } from '../../context/UserContext';
 export const EditProfile = ({ user }) => {
   const [userData, setUserData] = useState(user);
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
+  const { setUser } = useUser();
 
   const userInputs = [
     { label: 'Nombre', value: userData.name, state: 'name' },
@@ -47,7 +49,10 @@ export const EditProfile = ({ user }) => {
     try {
       userService
         .updateUser(userData)
-        .then(() => navigate(getRoute(ROUTES.PROFILE)))
+        .then(newUserData => {
+          setUser(newUserData);
+          navigate(getRoute(ROUTES.PROFILE));
+        })
         .catch(() =>
           openSnackbar('Error al actualizar datos de la cuenta', 'error')
         );
