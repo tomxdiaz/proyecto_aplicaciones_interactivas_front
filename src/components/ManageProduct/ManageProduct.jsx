@@ -114,8 +114,6 @@ export const ManageProduct = ({ id = null }) => {
         category: categories.find(categories => categories.name === product.category)
       };
 
-      console.log(formatedProduct);
-
       if (id) await productService.update(formatedProduct);
       else await productService.add(formatedProduct);
 

@@ -19,6 +19,7 @@ import {
   ProfileCardContainer,
   ProfileContainer
 } from './Profile.styles';
+import { accountType } from '../../utils/constants';
 
 export const Profile = ({ user }) => {
   const [buys, setBuys] = useState([]);
@@ -26,11 +27,6 @@ export const Profile = ({ user }) => {
   const [searches, setSearches] = useState([]);
   const { openSnackbar } = useSnackbar();
   const navigate = useNavigate();
-
-  const accountType = {
-    ADMIN: 'Administrador',
-    USER: 'Cliente'
-  };
 
   const profileContent = [
     { label: 'Usuario', value: user.username },
