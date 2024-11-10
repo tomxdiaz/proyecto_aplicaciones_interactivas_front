@@ -17,11 +17,9 @@ export const EditProfile = ({ user }) => {
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
 
-  console.log('user: ', user);
-
   const userInputs = [
     { label: 'Nombre', value: userData.name, state: 'name' },
-    { label: 'Apellido', value: userData.lastName, state: 'lastName' },
+    { label: 'Apellido', value: userData.lastName, state: 'LastName' },
     { label: 'Usuario', value: userData.username, state: 'username' },
     {
       label: 'Fecha de nacimiento',
@@ -40,20 +38,19 @@ export const EditProfile = ({ user }) => {
 
   const handleChange = (state, value) => {
     const newUser = { ...userData };
-    userData[state] = value;
+    newUser[state] = value;
     setUserData(newUser);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     try {
-      console.log('userData: ', userData);
-      userService
+      /* userService
         .updateUser(userData)
         .then(() => navigate(getRoute(ROUTES.PROFILE)))
         .catch(() =>
           openSnackbar('Error al actualizar datos de la cuenta', 'error')
-        );
+        ); */
     } catch (error) {
       openSnackbar('Error al actualizar datos de la cuenta', 'error');
     }

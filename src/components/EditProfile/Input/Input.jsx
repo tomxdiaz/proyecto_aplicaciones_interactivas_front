@@ -11,9 +11,9 @@ export const Input = ({
 }) => {
   const [inputValue, setInputvalue] = useState(value ?? '');
 
-  const changeValue = (_, changeValue) => {
-    setInputvalue(changeValue);
-    handleChange(state, value);
+  const changeValue = event => {
+    setInputvalue(event.target.value);
+    handleChange(state, event.target.value);
   };
 
   return (
@@ -26,6 +26,7 @@ export const Input = ({
       margin='normal'
       onChange={changeValue}
       disabled={disabled}
+      autoComplete='new-password'
     />
   );
 };
