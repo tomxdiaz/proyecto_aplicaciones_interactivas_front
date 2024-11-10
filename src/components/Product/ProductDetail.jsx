@@ -1,5 +1,21 @@
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { Box, IconButton, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
+import { useUser } from '../../context/UserContext';
+import { useWishList } from '../../context/WishListContext';
+import ROUTES, { getRoute } from '../../pages/routes';
+import cartService from '../../services/cartService';
 import productService from '../../services/productService';
+import wishListService from '../../services/wishListService';
+import { COLORS } from '../../utils/constants';
 import {
   ProductDetailActions,
   ProductDetailCartButton,
@@ -10,22 +26,6 @@ import {
   ProductDetailQuantityBox,
   ProductInfoContainer
 } from './ProductDetail.styles';
-import { Box, Button, IconButton, Typography } from '@mui/material';
-import { useCart } from '../../context/CartContext';
-import cartService from '../../services/cartService';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { COLORS } from '../../utils/constants';
-import { useWishList } from '../../context/WishListContext';
-import wishListService from '../../services/wishListService';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useSnackbar } from '../../context/SnackbarContext';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import ROUTES, { getRoute } from '../../pages/routes';
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
 
 const ProductDetail = ({ id }) => {
   const [product, setProduct] = useState(null);

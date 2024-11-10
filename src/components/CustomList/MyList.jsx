@@ -7,12 +7,12 @@ import {
   CustomListContainer
 } from './MyList.styles';
 
-const MyList = ({ title, onEmpty, children }) => {
+const MyList = ({ title, onEmpty = null, children }) => {
   return (
     <CustomListContainer>
       <CustomListBar>
         <Typography variant='h4'>{title}</Typography>
-        <CustomButton onClick={onEmpty}>Vaciar</CustomButton>
+        {onEmpty && <CustomButton onClick={onEmpty}>Vaciar</CustomButton>}
       </CustomListBar>
       <CustomList>
         <>{children}</>

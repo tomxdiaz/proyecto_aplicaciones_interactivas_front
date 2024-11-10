@@ -15,9 +15,9 @@ const BuyCard = ({ buy }) => {
   );
   return (
     <Box>
-      <Divider sx={{ my: 1 ,borderBottomWidth: 1.5}} />
+      <Divider sx={{ my: 1, borderBottomWidth: 1.5 }} />
       {buy.items.map(item => (
-        <Box>
+        <Box key={`buyCard-${item.id}`}>
           <ItemBox>
             <CustomCardImage image={item.images[0]} />
             <Box>

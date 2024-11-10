@@ -36,75 +36,76 @@ export const ManageProduct = ({ id = null }) => {
     setProduct(newProd);
   };
 
+  const getProductData = async () => {
+    try {
+      const productData = await productService.getProductById(id);
+      productData.category = productData.category.name;
+      setProduct(productData);
+      return productData;
+    } catch (e) {
+      openSnackbar('Error obteniendo los datos del producto', 'error');
+    }
+  };
+
+  const getCategories = async () => {
+    try {
+      const categoriesData = await categoryService.getAll();
+      setCategories(categoriesData);
+      return categoriesData;
+    } catch (e) {
+      openSnackbar('Error obteniendo las categorias', 'error');
+    }
+  };
+
+  const updateData = async () => {
+    const categoriesData = await getCategories();
+    let productData = { ...product };
+    if (id) productData = await getProductData();
+    setTitles([
+      {
+        label: 'Imagen',
+        type: 'image',
+        state: 'images',
+        value: productData.images
+      },
+      { label: 'Titulo', state: 'title', value: productData.title },
+      {
+        label: 'Descripcion',
+        state: 'description',
+        value: productData.description
+      },
+      {
+        label: 'Precio',
+        type: 'number',
+        state: 'price',
+        value: productData.price
+      },
+      {
+        label: 'Informacion adicional',
+        state: 'additionalInfo',
+        value: productData.additionalInfo
+      },
+      { label: 'Stock', type: 'number', state: 'stock', value: productData.stock },
+      {
+        label: 'Destacado',
+        type: 'switch',
+        state: 'featured',
+        value: productData.featured
+      },
+      {
+        label: 'Categoria',
+        type: 'select',
+        state: 'category',
+        value: productData.category,
+        options: categoriesData.map(category => category.name),
+        defaultMsg: 'No se encontraron categorías'
+      }
+    ]);
+  };
+
   useEffect(() => {
-    const getProductData = async () => {
-      try {
-        const productData = await productService.getProductById(id);
-        productData.category = productData.category.name;
-        setProduct(productData);
-        return productData;
-      } catch (e) {
-        openSnackbar('Error obteniendo los datos del producto', 'error');
-      }
-    };
-
-    const getCategories = async () => {
-      try {
-        const categoriesData = await categoryService.getAll();
-        setCategories(categoriesData);
-        return categoriesData;
-      } catch (e) {
-        openSnackbar('Error obteniendo las categorias', 'error');
-      }
-    };
-
-    const updateData = async () => {
-      const categoriesData = await getCategories();
-      let productData = { ...product };
-      if (id) productData = await getProductData();
-      setTitles([
-        {
-          label: 'Imagen',
-          type: 'image',
-          state: 'images',
-          value: productData.images
-        },
-        { label: 'Titulo', state: 'title', value: productData.title },
-        {
-          label: 'Descripcion',
-          state: 'description',
-          value: productData.description
-        },
-        {
-          label: 'Precio',
-          type: 'number',
-          state: 'price',
-          value: productData.price
-        },
-        {
-          label: 'Informacion adicional',
-          state: 'additionalInfo',
-          value: productData.additionalInfo
-        },
-        { label: 'Stock', type: 'number', state: 'stock', value: productData.stock },
-        {
-          label: 'Destacado',
-          type: 'switch',
-          state: 'featured',
-          value: productData.featured
-        },
-        {
-          label: 'Categoria',
-          type: 'select',
-          state: 'category',
-          value: productData.category,
-          options: categoriesData.map(category => category.name),
-          defaultMsg: 'No se encontraron categorías'
-        }
-      ]);
-    };
     updateData();
-  }, [id, product, openSnackbar]);
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -112,6 +113,8 @@ export const ManageProduct = ({ id = null }) => {
         ...product,
         category: categories.find(categories => categories.name === product.category)
       };
+
+      console.log(formatedProduct);
 
       if (id) await productService.update(formatedProduct);
       else await productService.add(formatedProduct);
