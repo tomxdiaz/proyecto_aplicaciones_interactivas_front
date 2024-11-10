@@ -40,7 +40,9 @@ export const ProductInfoContainer = styled(Box)(({ theme }) => ({
 
 export const ProductDetailActions = styled(Box)({
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between' ,
+  marginTop: 'auto' ,
+  marginBottom: '1rem'  
 });
 
 export const ProductDetailIconButton = styled(IconButton)({
