@@ -20,7 +20,8 @@ authApi.interceptors.response.use(
   error => {
     const currentRoute = window.location.pathname;
     if (error.response.status === 403 && currentRoute !== getRoute(ROUTES.LOGIN)) {
-      window.location.href = `${getRoute(ROUTES.LOGIN)}?redirectURL=${currentRoute}`;
+      //window.location.href = `${getRoute(ROUTES.LOGIN)}?redirectURL=${currentRoute}`;
+      console.error(error);
     }
     return Promise.reject(error);
   }
