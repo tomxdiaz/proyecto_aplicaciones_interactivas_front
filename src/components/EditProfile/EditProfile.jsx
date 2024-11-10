@@ -1,5 +1,5 @@
 import { Button, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ROUTES, { getRoute } from '../../pages/routes';
 import {
@@ -45,12 +45,12 @@ export const EditProfile = ({ user }) => {
   const handleSubmit = event => {
     event.preventDefault();
     try {
-      /* userService
+      userService
         .updateUser(userData)
         .then(() => navigate(getRoute(ROUTES.PROFILE)))
         .catch(() =>
           openSnackbar('Error al actualizar datos de la cuenta', 'error')
-        ); */
+        );
     } catch (error) {
       openSnackbar('Error al actualizar datos de la cuenta', 'error');
     }
@@ -69,6 +69,7 @@ export const EditProfile = ({ user }) => {
             type={input.type}
             handleChange={handleChange}
             disabled={input.disabled}
+            key={`editProfile-input-${input.label}`}
           />
         ))}
         <FormActions>

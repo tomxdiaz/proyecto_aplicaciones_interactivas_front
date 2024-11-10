@@ -19,7 +19,6 @@ export const Input = ({
   return (
     <TextField
       label={label}
-      defaultValue={value}
       value={inputValue}
       type={type}
       fullWidth
