@@ -1,8 +1,14 @@
-import { CardActionArea, CardContent, CardHeader, Typography } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { CardContent, CardHeader } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from '../../context/SnackbarContext';
+import ROUTES, { getRoute } from '../../pages/routes';
+import buyService from '../../services/buyService';
 import searchService from '../../services/searchService';
 import wishListService from '../../services/wishListService';
 import { CardInfo } from './CardInfo/CardInfo';
+import { LastBuys } from './LastBuys/LastBuys';
 import { LastFavorites } from './LastFavorites/LastFavorites';
 import { LastSearches } from './LastSearches/LastSearches';
 import {
@@ -13,13 +19,6 @@ import {
   ProfileCardContainer,
   ProfileContainer
 } from './Profile.styles';
-import buyService from '../../services/buyService';
-import { LastBuys } from './LastBuys/LastBuys';
-import { useSnackbar } from '../../context/SnackbarContext';
-import { ProductDetailIconButton } from '../Product/ProductDetail.styles';
-import { Navigate, useNavigate } from 'react-router-dom';
-import ROUTES, { getRoute } from '../../pages/routes';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 export const Profile = ({ user }) => {
   const [buys, setBuys] = useState([]);
