@@ -6,7 +6,7 @@ export const CardInfo = ({ label, value }) => {
   return (
     <CardInfoContainer>
       <Typography variant='h6'>{label}</Typography>
-      <Typography>{value}</Typography>
+      <Typography sx={{ textIndent: '2rem' }}>{value}</Typography>
     </CardInfoContainer>
   );
 };

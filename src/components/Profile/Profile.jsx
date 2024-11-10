@@ -1,4 +1,4 @@
-import { CardContent, Typography } from '@mui/material';
+import { CardActionArea, CardContent, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import searchService from '../../services/searchService';
 import wishListService from '../../services/wishListService';
@@ -14,12 +14,14 @@ import {
 } from './Profile.styles';
 import buyService from '../../services/buyService';
 import { LastBuys } from './LastBuys/LastBuys';
+import { useSnackbar } from '../../context/SnackbarContext';
 
 export const Profile = ({ user }) => {
   console.log(user);
   const [buys, setBuys] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [searches, setSearches] = useState([]);
+  const { openSnackbar } = useSnackbar();
 
   const accountType = {
     ADMIN: 'Administrador',
@@ -64,7 +66,8 @@ export const Profile = ({ user }) => {
       .then(buyData => {
         const lastBuys = buyData.reduce((acc, buy) => [...acc, ...buy.items], []);
         setBuys(lastBuys.splice(0, 3));
-      });
+      })
+      .catch(() => openSnackbar('Error al quitar el producto del carrito', 'error'));
   }, []);
 
   return (

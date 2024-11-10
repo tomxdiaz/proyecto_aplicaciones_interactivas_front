@@ -1,10 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import searchService from '../../../services/searchService';
 import CustomEmptyListMessage from '../../CustomList/CustomEmptyListMessage';
 import MyList from '../../CustomList/MyList';
-import LastSearchesItem from '../../Searches/LastSearchesItem';
-import BuyCard from '../../Buys/BuyCard';
 import MyListItem from '../../CustomList/MyListItem';
 
 export const LastBuys = ({ buys }) => {
