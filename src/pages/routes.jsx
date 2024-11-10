@@ -12,6 +12,7 @@ import { ProductDetailPage } from './ProductDetailPage';
 import { MyWishListPage } from './MyWishListPage';
 import { ProfilePage } from './ProfilePage';
 import { LastSearchesPage } from './LastSearchesPage';
+import { EditProfilePage } from './EditProfilePage';
 
 export const getRoute = (route, params) => {
   let path = route.path;
@@ -37,6 +38,13 @@ const ROUTES = {
     element: <ProfilePage />,
     title: 'Perfil',
     inNavMenu: true,
+    adminOnly: false
+  },
+  EDIT_PROFILE: {
+    path: '/edit-profile',
+    element: <EditProfilePage />,
+    title: 'Editar Perfil',
+    inNavMenu: false,
     adminOnly: false
   },
   MYWISHLIST: {

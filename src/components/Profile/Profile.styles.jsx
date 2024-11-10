@@ -1,4 +1,4 @@
-import { Avatar as AvatarMui, Box, Card, styled } from '@mui/material';
+import { Avatar as AvatarMui, Box, Card, IconButton, styled } from '@mui/material';
 
 export const ProfileContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -31,3 +31,8 @@ export const InfoContainer = styled(Box)(({ theme }) => ({
     flexDirection: 'column'
   }
 }));
+
+export const EditButton = styled(IconButton)({
+  padding: '10px',
+  float: 'inline-end'
+});

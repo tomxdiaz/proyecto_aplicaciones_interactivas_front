@@ -1,4 +1,4 @@
-import { CardActionArea, CardContent, Typography } from '@mui/material';
+import { CardActionArea, CardContent, CardHeader, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import searchService from '../../services/searchService';
 import wishListService from '../../services/wishListService';
@@ -7,6 +7,7 @@ import { LastFavorites } from './LastFavorites/LastFavorites';
 import { LastSearches } from './LastSearches/LastSearches';
 import {
   Avatar,
+  EditButton,
   InfoContainer,
   ProfileCard,
   ProfileCardContainer,
@@ -15,13 +16,17 @@ import {
 import buyService from '../../services/buyService';
 import { LastBuys } from './LastBuys/LastBuys';
 import { useSnackbar } from '../../context/SnackbarContext';
+import { ProductDetailIconButton } from '../Product/ProductDetail.styles';
+import { Navigate, useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../pages/routes';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 export const Profile = ({ user }) => {
-  console.log(user);
   const [buys, setBuys] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [searches, setSearches] = useState([]);
   const { openSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const accountType = {
     ADMIN: 'Administrador',
@@ -79,7 +84,18 @@ export const Profile = ({ user }) => {
       <InfoContainer>
         <ProfileCardContainer>
           <ProfileCard>
-            <CardContent>
+            <CardHeader
+              action={
+                <EditButton
+                  onClick={() => {
+                    navigate(getRoute(ROUTES.EDIT_PROFILE, { id: 1 }));
+                  }}>
+                  <ModeEditIcon />
+                </EditButton>
+              }
+              sx={{ paddingBottom: '0' }}
+            />
+            <CardContent sx={{ paddingTop: '0' }}>
               <Avatar />
               {profileContent.map((tag, index) => (
                 <CardInfo
