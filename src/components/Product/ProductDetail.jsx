@@ -23,7 +23,11 @@ import {
   ProductDetailIconButton,
   ProductDetailImage,
   ProductDetailImageContainer,
+  ProductDetailImagesContainer,
   ProductDetailQuantityBox,
+  ProductDetailThumbnail,
+  ProductDetailThumbnailContainer,
+  ProductDetailThumbnailsList,
   ProductInfoContainer
 } from './ProductDetail.styles';
 
@@ -34,6 +38,7 @@ const ProductDetail = ({ id }) => {
   const { cart, setCart } = useCart();
   const { wishList, setWishList } = useWishList();
   const { user } = useUser();
+  const [selectedImage, setSelectedImage] = useState();
 
   const isAdmin = user && user.role === 'ADMIN';
 
@@ -142,9 +147,23 @@ const ProductDetail = ({ id }) => {
         <p>Cargando...</p>
       ) : product ? (
         <>
-          <ProductDetailImageContainer>
-            <ProductDetailImage src={product.images[0]} />
-          </ProductDetailImageContainer>
+          <ProductDetailImagesContainer>
+            <ProductDetailImageContainer>
+              <ProductDetailImage src={selectedImage ?? product.images[0]} />
+            </ProductDetailImageContainer>
+            <ProductDetailThumbnailsList>
+              {product.images?.map(image => {
+                return (
+                  <ProductDetailThumbnailContainer key={image}>
+                    <ProductDetailThumbnail
+                      onClick={() => setSelectedImage(image)}
+                      src={image}
+                    />
+                  </ProductDetailThumbnailContainer>
+                );
+              })}
+            </ProductDetailThumbnailsList>
+          </ProductDetailImagesContainer>
           <ProductInfoContainer>
             <Box
               display={'flex'}
@@ -215,12 +234,6 @@ const ProductDetail = ({ id }) => {
                       }}>
                       {'+'}
                     </ProductDetailCartButton>
-                    <IconButton onClick={removeItemFromCart}>
-                      <DeleteForeverIcon
-                        style={{ fill: COLORS.red }}
-                        fontSize='large'
-                      />
-                    </IconButton>
                   </>
                 ) : (
                   <ProductDetailCartButton onClick={addProductToCart}>
@@ -228,6 +241,11 @@ const ProductDetail = ({ id }) => {
                   </ProductDetailCartButton>
                 )}
               </ProductDetailQuantityBox>
+              {cartItem && (
+                <IconButton onClick={removeItemFromCart}>
+                  <DeleteForeverIcon style={{ fill: COLORS.red }} fontSize='large' />
+                </IconButton>
+              )}
             </ProductDetailActions>
           </ProductInfoContainer>
         </>
