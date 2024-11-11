@@ -9,10 +9,25 @@ export const CustomFooter = styled('footer')(({ theme }) => ({
   boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)'
 }));
 
-export const CustomFooterColumn = styled(Box)(({ theme }) => ({
+export const FooterGroup = styled(Box)(({ theme }) => ({
   width: '30%',
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row',
   alignItems: 'center',
-  textAlign: 'center'
+  textAlign: 'center',
+  gap: '1rem',
+  [theme.breakpoints.down('xl')]: {
+    flexDirection: 'column'
+  }
+}));
+
+export const CustomFooterColumn = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  textAlign: 'center',
+  gap: '1rem',
+  [theme.breakpoints.down('xl')]: {
+    flexDirection: 'column'
+  }
 }));
