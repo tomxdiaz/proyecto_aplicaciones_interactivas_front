@@ -1,9 +1,14 @@
+import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
+import { useWishList } from '../../context/WishListContext';
 import ROUTES, { getRoute } from '../../pages/routes';
+import cartService from '../../services/cartService';
 import categoryService from '../../services/categoryService';
 import productService from '../../services/productService';
-import { FormButton } from '../FormInput/FormButton/FormButton';
+import wishListService from '../../services/wishListService';
 import { FormDeleteButton } from '../FormInput/FormDeleteButton/FormDeleteButton';
 import { FormInput } from '../FormInput/FormInput';
 import {
@@ -11,11 +16,6 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
-import { useSnackbar } from '../../context/SnackbarContext';
-import { useWishList } from '../../context/WishListContext';
-import wishListService from '../../services/wishListService';
-import cartService from '../../services/cartService';
-import { useCart } from '../../context/CartContext';
 
 export const ManageProduct = ({ id = null }) => {
   const [titles, setTitles] = useState([]);
@@ -144,6 +144,9 @@ export const ManageProduct = ({ id = null }) => {
   return (
     <ManageProductContainer>
       <FormContainer>
+        <Typography variant='h4' sx={{ marginBottom: '1rem' }}>
+          {id ? 'Editar producto' : 'Crear producto'}
+        </Typography>
         {id && <FormDeleteButton text='Dar de baja' handleClick={handleDelete} />}
         {titles.map(({ label, state, type, defaultMsg, options, value }) => {
           return (
@@ -161,9 +164,13 @@ export const ManageProduct = ({ id = null }) => {
         })}
         <ButtonContainer>
           <Link to={getRoute(ROUTES.HOME)}>
-            <FormButton text='Cancelar' />
+            <Button variant='contained' color='primary'>
+              Cancelar
+            </Button>
           </Link>
-          <FormButton text='Guardar' handleClick={handleSubmit} />
+          <Button variant='contained' color='primary' onClick={handleSubmit}>
+            Guardar
+          </Button>
         </ButtonContainer>
       </FormContainer>
     </ManageProductContainer>

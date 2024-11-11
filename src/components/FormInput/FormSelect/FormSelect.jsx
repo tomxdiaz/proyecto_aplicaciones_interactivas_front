@@ -1,7 +1,7 @@
-import { MenuItem } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { InputContainer, Label } from '../FormInput.styles';
-import { EmptyMenuItem, Select } from './FormSelect.styles';
+import { EmptyMenuItem } from './FormSelect.styles';
 
 export const FormSelect = ({
   label,
@@ -11,7 +11,7 @@ export const FormSelect = ({
   options,
   value = ''
 }) => {
-  const [inputValue, setInputvalue] = useState(value);
+  const [inputValue, setInputvalue] = useState('');
 
   const handleSelectChange = event => {
     setInputvalue(event.target.value);
@@ -21,9 +21,13 @@ export const FormSelect = ({
   useEffect(() => setInputvalue(value), [value]);
 
   return (
-    <InputContainer>
-      <Label>{label}</Label>
-      <Select onChange={handleSelectChange} value={inputValue}>
+    <FormControl fullWidth>
+      <InputLabel id={`formInput-${label}`}>{label}</InputLabel>
+      <Select
+        labelId={`formInput-${label}`}
+        label={label}
+        onChange={handleSelectChange}
+        value={inputValue}>
         {options.length ? (
           options.map((option, index) => (
             <MenuItem value={option} key={`FormInput-Select-${label}-${index}`}>
@@ -36,6 +40,6 @@ export const FormSelect = ({
           </EmptyMenuItem>
         )}
       </Select>
-    </InputContainer>
+    </FormControl>
   );
 };

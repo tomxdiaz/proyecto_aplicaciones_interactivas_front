@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Switch } from './FormSwitch.styles';
 import { InputContainer, Label } from '../FormInput.styles';
+import { Switch, Typography } from '@mui/material';
 
 export const FormSwitch = ({ label, state, handleChange, value }) => {
   const [checked, setChecked] = useState(value);
@@ -12,8 +12,10 @@ export const FormSwitch = ({ label, state, handleChange, value }) => {
 
   return (
     <InputContainer>
-      <Label>{label}</Label>
-      <Switch checked={checked} onChange={handleChecked} />
+      <Typography>
+        {label}
+        <Switch checked={checked} onChange={handleChecked} />
+      </Typography>
     </InputContainer>
   );
 };
