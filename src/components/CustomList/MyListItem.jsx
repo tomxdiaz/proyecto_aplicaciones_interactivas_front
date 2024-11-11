@@ -16,19 +16,25 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import ROUTES, { getRoute } from '../../pages/routes';
 
-const MyListItem = ({ product, onRemove, children, small = false }) => {
+const MyListItem = ({
+  product,
+  onRemove,
+  children,
+  small = false,
+  handleOnClick = null
+}) => {
   const navigate = useNavigate();
   const { user } = useUser();
 
   const goToProductDetail = () => {
-    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
     if (user) {
       searchService.addSearch(product);
     }
+    navigate(getRoute(ROUTES.PRODUCTDETAIL, { id: product.id }));
   };
   return (
     <CustomCard small={small}>
-      <CustomCardActionArea onClick={goToProductDetail}>
+      <CustomCardActionArea onClick={handleOnClick ?? goToProductDetail}>
         <CustomCardImage image={product.images[0]} />
         <CustomCardContent>
           {!small && onRemove && (

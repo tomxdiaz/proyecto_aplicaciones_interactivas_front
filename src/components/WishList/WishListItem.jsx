@@ -3,7 +3,7 @@ import wishListService from '../../services/wishListService';
 import { useWishList } from '../../context/WishListContext';
 import MyListItem from '../CustomList/MyListItem';
 
-const WishListItem = ({ wishListItem, small = false }) => {
+const WishListItem = ({ wishListItem, small = false, handleOnClick = null }) => {
   const { setWishList } = useWishList();
 
   const { product } = wishListItem;
@@ -26,6 +26,7 @@ const WishListItem = ({ wishListItem, small = false }) => {
       onRemove={removeFromWishList}
       children={null}
       small={small}
+      handleOnClick={handleOnClick}
     />
   );
 };

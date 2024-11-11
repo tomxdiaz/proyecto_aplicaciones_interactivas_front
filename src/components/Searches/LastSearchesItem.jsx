@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import { es } from 'date-fns/locale';
 import { format } from 'date-fns';
 
-const LastSearchesItem = ({ search, small = false }) => {
+const LastSearchesItem = ({ search, small = false, handleOnClick = null }) => {
   const formattedDate = format(
     new Date(search.date),
     "dd 'de' MMMM 'de' yyyy 'a las' HH:mm:ss",
@@ -13,7 +13,11 @@ const LastSearchesItem = ({ search, small = false }) => {
     }
   );
   return (
-    <MyListItem product={search.product} onRemove={null} small={small}>
+    <MyListItem
+      product={search.product}
+      onRemove={null}
+      small={small}
+      handleOnClick={handleOnClick}>
       {!small && <Typography>{formattedDate}</Typography>}
     </MyListItem>
   );
