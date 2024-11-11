@@ -9,6 +9,7 @@ export const Main = styled('main')({
 });
 
 export const Section = styled('section')(({ theme }) => ({
+  flex: 1,
   width: '100%',
   display: 'flex',
   flexDirection: 'column',

@@ -124,15 +124,16 @@ const ProductDetail = ({ id }) => {
 
   useEffect(() => {
     setLoading(true);
-    try {
-      productService.getProductById(id).then(product => {
+    productService
+      .getProductById(id)
+      .then(product => {
         setProduct(product);
         setLoading(false);
+      })
+      .catch(e => {
+        openSnackbar('Error obteniendo los datos del producto', 'error');
+        setLoading(false);
       });
-    } catch (e) {
-      openSnackbar('Error obteniendo los datos del producto', 'error');
-      setLoading(false);
-    }
   }, [id, openSnackbar]);
 
   return (
