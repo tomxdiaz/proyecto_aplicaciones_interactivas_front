@@ -8,3 +8,8 @@ export const COLORS = {
   primary: '#b83c1d',
   green: '#009846'
 };
+
+export const accountType = {
+  ADMIN: 'Administrador',
+  USER: 'Cliente'
+};
