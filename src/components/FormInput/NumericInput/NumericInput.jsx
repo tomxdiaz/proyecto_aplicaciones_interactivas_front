@@ -1,6 +1,5 @@
+import { TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { InputContainer, Label } from '../FormInput.styles';
-import { Input } from './NumericInput.styles';
 
 export const NumericInput = ({ label, state, handleChange, value = 0 }) => {
   const [inputValue, setInputValue] = useState(value);
@@ -15,16 +14,14 @@ export const NumericInput = ({ label, state, handleChange, value = 0 }) => {
   useEffect(() => setInputValue(value), [value]);
 
   return (
-    <InputContainer>
-      <Label>{label}</Label>
-      <Input
-        disableUnderline
-        onChange={event => {
-          handleNumericChange(event.target.value);
-        }}
-        type='number'
-        value={inputValue}
-      />
-    </InputContainer>
+    <TextField
+      label={label}
+      value={inputValue}
+      onChange={event => handleNumericChange(event.target.value)}
+      fullWidth
+      type='numeric'
+      margin='normal'
+      autoComplete='new-password'
+    />
   );
 };
