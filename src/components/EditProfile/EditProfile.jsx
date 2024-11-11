@@ -53,7 +53,9 @@ export const EditProfile = ({ user }) => {
     setUserData(newUser);
   };
 
-  const updateData = () =>
+  const updateData = newPass => {
+    if (newPass) userData.password = newPass;
+    else userData.password = 'null';
     userService
       .updateUser(userData)
       .then(newUserData => {
@@ -61,6 +63,7 @@ export const EditProfile = ({ user }) => {
         navigate(getRoute(ROUTES.PROFILE));
       })
       .catch(() => openSnackbar('Error al actualizar datos de la cuenta', 'error'));
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -72,7 +75,7 @@ export const EditProfile = ({ user }) => {
         else
           authService
             .login(userData.username, pass)
-            .then(() => updateData())
+            .then(() => updateData(newPass1))
             .catch(() => openSnackbar('La contraseña es incorrecta', 'error'));
       } else updateData();
     } catch (error) {
