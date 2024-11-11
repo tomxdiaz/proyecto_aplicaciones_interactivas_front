@@ -1,9 +1,14 @@
+import { Button, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
+import { useSnackbar } from '../../context/SnackbarContext';
+import { useWishList } from '../../context/WishListContext';
 import ROUTES, { getRoute } from '../../pages/routes';
+import cartService from '../../services/cartService';
 import categoryService from '../../services/categoryService';
 import productService from '../../services/productService';
-import { FormButton } from '../FormInput/FormButton/FormButton';
+import wishListService from '../../services/wishListService';
 import { FormDeleteButton } from '../FormInput/FormDeleteButton/FormDeleteButton';
 import { FormInput } from '../FormInput/FormInput';
 import {
@@ -11,12 +16,6 @@ import {
   FormContainer,
   ManageProductContainer
 } from './ManageProduct.styles';
-import { useSnackbar } from '../../context/SnackbarContext';
-import { Button, Typography } from '@mui/material';
-import { useWishList } from '../../context/WishListContext';
-import wishListService from '../../services/wishListService';
-import cartService from '../../services/cartService';
-import { useCart } from '../../context/CartContext';
 
 export const ManageProduct = ({ id = null }) => {
   const [titles, setTitles] = useState([]);
