@@ -13,6 +13,10 @@ import {
 } from './ManageProduct.styles';
 import { useSnackbar } from '../../context/SnackbarContext';
 import { Button } from '@mui/material';
+import { useWishList } from '../../context/WishListContext';
+import wishListService from '../../services/wishListService';
+import cartService from '../../services/cartService';
+import { useCart } from '../../context/CartContext';
 
 export const ManageProduct = ({ id = null }) => {
   const [titles, setTitles] = useState([]);
@@ -30,6 +34,8 @@ export const ManageProduct = ({ id = null }) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
+  const { setWishList } = useWishList();
+  const { setCart } = useCart();
 
   const handleChange = (prop, value) => {
     const newProd = { ...product };
@@ -115,8 +121,6 @@ export const ManageProduct = ({ id = null }) => {
         category: categories.find(categories => categories.name === product.category)
       };
 
-      console.log(formatedProduct);
-
       if (id) await productService.update(formatedProduct);
       else await productService.add(formatedProduct);
 
@@ -126,9 +130,16 @@ export const ManageProduct = ({ id = null }) => {
     }
   };
 
-  const handleDelete = async () => {
-    await productService.delete(id);
-    navigate(getRoute(ROUTES.HOME));
+  const handleDelete = () => {
+    productService
+      .delete(id)
+      .then(() => wishListService.getUserWishList())
+      .then(wishList => setWishList(wishList))
+      .then(() => cartService.getUserCart())
+      .then(cart => {
+        setCart(cart);
+        navigate(getRoute(ROUTES.HOME));
+      });
   };
 
   return (
