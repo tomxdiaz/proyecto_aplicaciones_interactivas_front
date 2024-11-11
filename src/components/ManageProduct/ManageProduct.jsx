@@ -12,6 +12,7 @@ import {
   ManageProductContainer
 } from './ManageProduct.styles';
 import { useSnackbar } from '../../context/SnackbarContext';
+import { Button } from '@mui/material';
 
 export const ManageProduct = ({ id = null }) => {
   const [titles, setTitles] = useState([]);
@@ -150,9 +151,13 @@ export const ManageProduct = ({ id = null }) => {
         })}
         <ButtonContainer>
           <Link to={getRoute(ROUTES.HOME)}>
-            <FormButton text='Cancelar' />
+            <Button variant='contained' color='primary'>
+              Cancelar
+            </Button>
           </Link>
-          <FormButton text='Guardar' handleClick={handleSubmit} />
+          <Button variant='contained' color='primary' onClick={handleSubmit}>
+            Guardar
+          </Button>
         </ButtonContainer>
       </FormContainer>
     </ManageProductContainer>

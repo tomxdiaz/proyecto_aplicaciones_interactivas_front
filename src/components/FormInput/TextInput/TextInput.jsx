@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InputContainer, Label } from '../FormInput.styles';
-import { Input } from './TextInput.styles';
+import { TextField } from '@mui/material';
 
 export const TextInput = ({ label, state, handleChange, value }) => {
   const [inputValue, setInputValue] = useState(value);
@@ -13,7 +13,7 @@ export const TextInput = ({ label, state, handleChange, value }) => {
   return (
     <InputContainer>
       <Label>{label}</Label>
-      <Input disableUnderline value={inputValue} onChange={handleInputChange} />
+      <TextField value={inputValue} onChange={handleInputChange} />
     </InputContainer>
   );
 };
