@@ -12,7 +12,7 @@ import {
   ManageProductContainer
 } from './ManageProduct.styles';
 import { useSnackbar } from '../../context/SnackbarContext';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useWishList } from '../../context/WishListContext';
 import wishListService from '../../services/wishListService';
 import cartService from '../../services/cartService';
@@ -145,6 +145,9 @@ export const ManageProduct = ({ id = null }) => {
   return (
     <ManageProductContainer>
       <FormContainer>
+        <Typography variant='h4' sx={{ marginBottom: '1rem' }}>
+          {id ? 'Editar producto' : 'Crear producto'}
+        </Typography>
         {id && <FormDeleteButton text='Dar de baja' handleClick={handleDelete} />}
         {titles.map(({ label, state, type, defaultMsg, options, value }) => {
           return (
