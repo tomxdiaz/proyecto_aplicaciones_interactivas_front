@@ -11,9 +11,13 @@ export const TextInput = ({ label, state, handleChange, value }) => {
   };
 
   return (
-    <InputContainer>
-      <Label>{label}</Label>
-      <TextField value={inputValue} onChange={handleInputChange} />
-    </InputContainer>
+    <TextField
+      label={label}
+      value={inputValue}
+      onChange={handleInputChange}
+      fullWidth
+      margin='normal'
+      autoComplete='new-password'
+    />
   );
 };
