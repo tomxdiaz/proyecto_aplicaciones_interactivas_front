@@ -16,6 +16,7 @@ export const FooterGroup = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   textAlign: 'center',
   gap: '1rem',
+  justifyContent: 'center',
   [theme.breakpoints.down('xl')]: {
     flexDirection: 'column'
   }
