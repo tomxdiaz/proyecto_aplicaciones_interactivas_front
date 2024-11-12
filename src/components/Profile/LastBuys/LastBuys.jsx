@@ -3,8 +3,11 @@ import React from 'react';
 import CustomEmptyListMessage from '../../CustomList/CustomEmptyListMessage';
 import MyList from '../../CustomList/MyList';
 import MyListItem from '../../CustomList/MyListItem';
+import { Navigate, useNavigate } from 'react-router-dom';
+import ROUTES, { getRoute } from '../../../pages/routes';
 
 export const LastBuys = ({ buys }) => {
+  const navigate = useNavigate();
   return (
     <Box>
       {buys.length ? (
@@ -16,6 +19,7 @@ export const LastBuys = ({ buys }) => {
               children={null}
               key={`profile-lastBuys-${index}`}
               small
+              handleOnClick={() => navigate(getRoute(ROUTES.BUYS))}
             />
           ))}
         </MyList>
