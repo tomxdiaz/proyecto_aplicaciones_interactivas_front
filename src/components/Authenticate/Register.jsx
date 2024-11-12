@@ -65,7 +65,7 @@ const Register = () => {
       <Typography variant='h4'>Registrarse</Typography>
       <CustomForm onSubmit={formik.handleSubmit}>
         <TextField
-          label='Name'
+          label='Nombre'
           name='name'
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -76,7 +76,7 @@ const Register = () => {
           autoComplete='new-password'
         />
         <TextField
-          label='LastName'
+          label='Apellido'
           name='lastName'
           value={formik.values.lastName}
           onChange={formik.handleChange}
@@ -87,7 +87,7 @@ const Register = () => {
           autoComplete='new-password'
         />
         <TextField
-          label='Date of Birth'
+          label='Fecha de nacimiento'
           type='date'
           name='birthDate'
           value={formik.values.birthDate}
@@ -100,7 +100,7 @@ const Register = () => {
           autoComplete='new-password'
         />
         <TextField
-          label='Username'
+          label='Nombre de usuario'
           name='username'
           value={formik.values.username}
           onChange={formik.handleChange}
@@ -123,7 +123,7 @@ const Register = () => {
           autoComplete='new-password'
         />
         <TextField
-          label='Password'
+          label='Contraseña'
           type='password'
           name='password'
           value={formik.values.password}

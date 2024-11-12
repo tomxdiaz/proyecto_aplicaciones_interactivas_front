@@ -62,7 +62,7 @@ const Login = () => {
         <Typography variant='h4'>Iniciar sesion</Typography>
         <CustomForm onSubmit={handleSubmit}>
           <TextField
-            label='Username'
+            label='Nombre de usuario'
             fullWidth
             value={username}
             onChange={e => setUsername(e.target.value)}
@@ -70,7 +70,7 @@ const Login = () => {
             autoComplete='new-password'
           />
           <TextField
-            label='Password'
+            label='Contraseña'
             type='password'
             fullWidth
             value={password}
