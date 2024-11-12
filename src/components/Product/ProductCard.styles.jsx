@@ -25,7 +25,8 @@ export const CustomCardActionArea = styled(CardActionArea)({
 });
 
 export const CustomCardContent = styled(CardContent)({
-  flex: 1
+  flex: 1,
+  width: '100%'
 });
 
 export const CustomCardImage = styled(CardMedia)({
