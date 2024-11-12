@@ -38,7 +38,12 @@ export const EditProfile = ({ user }) => {
       state: 'birthDate',
       type: 'date'
     },
-    { label: 'Email', value: userData.emailAddress, state: 'emailAddress' },
+    {
+      label: 'Email',
+      value: userData.emailAddress,
+      state: 'emailAddress',
+      disabled: true
+    },
     {
       label: 'Tipo de cuenta',
       value: accountType[userData.role],
