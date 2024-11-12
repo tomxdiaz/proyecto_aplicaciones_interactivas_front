@@ -19,22 +19,19 @@ const Buys = () => {
   return (
     <CustomBuysBox>
       {buys.length ? (
-        <Card
-          style={{
-            width: '90%',
-            maxWidth: '800px',
-            display: 'flex',
-            flexDirection: 'column',
-            margin: '2rem 0'
-          }}>
+        <>
           <Typography variant='h4' textAlign={'center'} margin={'10px'}>
             Mis compras
           </Typography>
 
-          {buys.map(buy => (
-            <BuyCard key={buy.id} buy={buy} />
-          ))}
-        </Card>
+          {buys
+            .sort(
+              (a, b) => new Date(b.buyDate).getTime() - new Date(a.buyDate).getTime()
+            )
+            .map(buy => (
+              <BuyCard key={buy.id} buy={buy} />
+            ))}
+        </>
       ) : (
         <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
           <Typography textAlign={'center'} variant='h4' m={2}>

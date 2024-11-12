@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Divider } from '@mui/material';
+import { Typography, Box, Divider, Card } from '@mui/material';
 import { es } from 'date-fns/locale';
 import { format } from 'date-fns';
 
@@ -14,8 +14,7 @@ const BuyCard = ({ buy }) => {
     }
   );
   return (
-    <Box>
-      <Divider sx={{ my: 1, borderBottomWidth: 1.5 }} />
+    <Card sx={{ width: '100%', padding: '1rem' }}>
       {buy.items.map(item => (
         <Box key={`buyCard-${item.id}`}>
           <ItemBox>
@@ -26,14 +25,14 @@ const BuyCard = ({ buy }) => {
               <Typography>Cantidad: {item.quantity}</Typography>
             </Box>
             <Box style={{ marginLeft: 'auto' }}>
-              <Typography>subTotal</Typography>
+              <Typography>Sub Total</Typography>
               <Typography>${item.subTotal.toFixed(2)}</Typography>
             </Box>
           </ItemBox>
         </Box>
       ))}
       <Box padding='20px' display='flex' justifyContent='space-between'>
-        <Typography width={'auto'}>Compra hecha el dia : {formattedDate}</Typography>
+        <Typography width={'auto'}>Fecha: {formattedDate}</Typography>
         <Typography
           style={{
             textDecoration: 'underline'
@@ -41,7 +40,7 @@ const BuyCard = ({ buy }) => {
           Precio Total : ${buy.totalPrice.toFixed(2)}
         </Typography>
       </Box>
-    </Box>
+    </Card>
   );
 };
 export default BuyCard;
